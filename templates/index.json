@@ -96,7 +96,7 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
+                "padding-inline-start": 20,
                 "padding-inline-end": 0
               },
               "blocks": {}
@@ -104,7 +104,7 @@
             "cta": {
               "type": "button",
               "settings": {
-                "label": "Ver la lámpara →",
+                "label": "Ver lume →",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
