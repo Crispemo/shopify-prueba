@@ -59,7 +59,7 @@
               "name": "t:names.menu",
               "settings": {
                 "menu": "footer",
-                "heading": "Shop",
+                "heading": "Compra",
                 "menu_spacing": 4,
                 "show_as_accordion": false,
                 "accordion_icon": "caret",
@@ -80,28 +80,7 @@
               "name": "t:names.menu",
               "settings": {
                 "menu": "",
-                "heading": "Ask",
-                "menu_spacing": 4,
-                "show_as_accordion": false,
-                "accordion_icon": "caret",
-                "accordion_dividers": false,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "heading_preset": "h4",
-                "link_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "menu_n8zrAw": {
-              "type": "menu",
-              "name": "t:names.menu",
-              "settings": {
-                "menu": "",
-                "heading": "Connect",
+                "heading": "Contacto",
                 "menu_spacing": 4,
                 "show_as_accordion": false,
                 "accordion_icon": "caret",
@@ -120,8 +99,7 @@
           },
           "block_order": [
             "menu_k94JXn",
-            "menu_CY8HUp",
-            "menu_n8zrAw"
+            "menu_CY8HUp"
           ]
         },
         "email_signup_t3aAfi": {
@@ -131,14 +109,14 @@
             "width": "fill",
             "custom_width": 70,
             "inherit_color_scheme": true,
-            "heading": "We send tasty emails",
-            "heading_preset": "h4",
             "color_scheme": "",
-            "border_style": "underline",
+            "heading": "Únete a la comunidad",
+            "heading_preset": "h4",
+            "border_style": "all",
             "border_width": 1,
             "border_radius": 100,
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
+            "input_type_preset": "",
+            "style_class": "button-secondary",
             "display_type": "arrow",
             "label": "Sign Up",
             "integrated_button": false,
