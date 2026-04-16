@@ -370,18 +370,33 @@
       }
     },
     "editorial_story": {
-      "type": "media-with-content",
+      "type": "hero",
       "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "settings": { "media_type": "image" },
-          "blocks": {}
-        },
-        "content": {
-          "type": "_content-without-appearance",
+        "content_group": {
+          "type": "group",
           "settings": {
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center"
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20,
+            "width": "custom",
+            "custom_width": 46,
+            "width_mobile": "custom",
+            "custom_width_mobile": 90,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "eyebrow": {
@@ -389,6 +404,7 @@
               "settings": {
                 "text": "<p>El diseño</p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-accent--family)",
@@ -396,7 +412,12 @@
                 "line_height": "normal",
                 "letter_spacing": "0.2em",
                 "case": "uppercase",
-                "color": "var(--color-primary)"
+                "wrap": "pretty",
+                "color": "var(--color-primary)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -405,8 +426,14 @@
               "settings": {
                 "text": "<p>Cada curva de Lume Model 01 tiene una razón de ser. El brazo articulado de tres segmentos permite posicionar la luz exactamente donde la necesitas sin comprometer la estética del escritorio. No hay cables a la vista. No hay botones innecesarios.</p><p>Aluminio anodizado. Cable trenzado. Una sola junta de ajuste que aguanta décadas.</p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte"
+                "type_preset": "rte",
+                "wrap": "pretty",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -414,12 +441,21 @@
           "block_order": ["eyebrow", "body"]
         }
       },
-      "block_order": ["media", "content"],
+      "block_order": ["content_group"],
       "settings": {
-        "media_width": "wide",
-        "media_position": "right",
+        "media_type_1": "image",
+        "media_type_2": "none",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "gap": 16,
         "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 60,
         "color_scheme": "scheme-2",
+        "toggle_overlay": false,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
