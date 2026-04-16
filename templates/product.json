@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -168,8 +177,7 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {},
-              "block_order": []
+              "blocks": {}
             },
             "shipping_note": {
               "type": "text",
@@ -267,12 +275,6 @@
     },
     "specs": {
       "type": "product-specs",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "section_width": "full-width",
-        "padding_top": 32,
-        "padding_bottom": 32
-      },
       "blocks": {
         "spec_1": {
           "type": "spec",
@@ -296,17 +298,20 @@
           }
         }
       },
-      "block_order": ["spec_1", "spec_2", "spec_3"]
+      "block_order": [
+        "spec_1",
+        "spec_2",
+        "spec_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     },
     "pillars": {
       "type": "brand-pillars",
-      "settings": {
-        "heading": "Por qué Lume",
-        "color_scheme": "scheme-1",
-        "section_width": "page-width",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "pillar_1": {
           "type": "pillar",
@@ -330,12 +335,21 @@
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3"
+      ],
+      "settings": {
+        "heading": "Por qué Lume",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "lifestyle_image": {
       "type": "hero",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "media_type_1": "image",
         "media_type_2": "none",
@@ -360,7 +374,6 @@
         "content_group": {
           "type": "group",
           "settings": {
-            "open_in_new_tab": false,
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -378,6 +391,7 @@
             "color_scheme": "",
             "border": "none",
             "border_radius": 0,
+            "open_in_new_tab": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -423,10 +437,15 @@
               "blocks": {}
             }
           },
-          "block_order": ["eyebrow", "body"]
+          "block_order": [
+            "eyebrow",
+            "body"
+          ]
         }
       },
-      "block_order": ["content_group"],
+      "block_order": [
+        "content_group"
+      ],
       "settings": {
         "media_type_1": "image",
         "media_type_2": "none",
