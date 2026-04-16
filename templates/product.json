@@ -25,6 +25,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
             "thumbnail_width": 44,
+            "thumbnail_radius": 0,
             "aspect_ratio": "1",
             "constrain_to_viewport": false,
             "media_fit": "cover",
@@ -54,7 +55,12 @@
             "sticky_details_desktop": true,
             "inherit_color_scheme": true,
             "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
             "border_radius": 0,
             "padding-block-start": 24,
             "padding-block-end": 36,
@@ -78,6 +84,9 @@
                 "case": "uppercase",
                 "wrap": "pretty",
                 "color": "var(--color-primary)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 4,
                 "padding-inline-start": 0,
@@ -101,6 +110,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -124,6 +136,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-primary)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 4,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -177,7 +192,29 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button-secondary"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
             },
             "shipping_note": {
               "type": "text",
@@ -195,6 +232,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-primary)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 8,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -218,6 +258,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-primary)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 16,
                 "padding-block-end": 8,
                 "padding-inline-start": 0,
@@ -241,6 +284,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -268,6 +314,7 @@
         "equal_columns": false,
         "limit_details_width": false,
         "gap": 8,
+        "enable_sticky_add_to_cart": true,
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 0
@@ -348,127 +395,12 @@
         "padding_bottom": 56
       }
     },
-    "lifestyle_image": {
-      "type": "hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "gap": 0,
-        "section_width": "full-width",
-        "section_height": "large",
-        "section_height_custom": 60,
-        "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "editorial_story": {
-      "type": "hero",
-      "blocks": {
-        "content_group": {
-          "type": "group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
-            "width": "custom",
-            "custom_width": 46,
-            "width_mobile": "custom",
-            "custom_width_mobile": 90,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_radius": 0,
-            "open_in_new_tab": false,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "eyebrow": {
-              "type": "text",
-              "settings": {
-                "text": "<p>El diseño</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-accent--family)",
-                "font_size": "0.6875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.2em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Cada curva de Lume Model 01 tiene una razón de ser. El brazo articulado de tres segmentos permite posicionar la luz exactamente donde la necesitas sin comprometer la estética del escritorio. No hay cables a la vista. No hay botones innecesarios.</p><p>Aluminio anodizado. Cable trenzado. Una sola junta de ajuste que aguanta décadas.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "wrap": "pretty",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "eyebrow",
-            "body"
-          ]
-        }
-      },
-      "block_order": [
-        "content_group"
-      ],
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "gap": 16,
-        "section_width": "full-width",
-        "section_height": "medium",
-        "section_height_custom": 60,
-        "color_scheme": "scheme-2",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "cta_close": {
       "type": "product-cta-close",
       "settings": {
         "heading": "¿Listo para actualizar tu espacio?",
         "guarantees": "Envío en 48h · Devolución gratuita 30 días · Garantía 5 años",
+        "product": "",
         "button_label": "Añadir al carrito",
         "show_price": true,
         "button_url": "/cart",
@@ -482,8 +414,6 @@
     "main",
     "specs",
     "pillars",
-    "lifestyle_image",
-    "editorial_story",
     "cta_close"
   ]
 }
