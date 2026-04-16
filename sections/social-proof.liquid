@@ -1,0 +1,152 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="social-proof-section section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="padding-block-start: {{ section.settings.padding_top }}px; padding-block-end: {{ section.settings.padding_bottom }}px;">
+  <div class="social-proof-section__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="social-proof__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <div class="social-proof__grid">
+      {%- for block in section.blocks -%}
+        <div class="social-proof__item" {{ block.shopify_attributes }}>
+          <blockquote class="social-proof__quote">{{ block.settings.quote }}</blockquote>
+          <cite class="social-proof__author">
+            {%- if block.settings.author != blank -%}— {{ block.settings.author }}{%- endif -%}
+            {%- if block.settings.role != blank -%}, {{ block.settings.role }}{%- endif -%}
+          </cite>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .social-proof-section__inner {
+    padding-inline: var(--page-margin, 24px);
+  }
+
+  .social-proof__eyebrow {
+    font-family: var(--font-accent--family);
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+  }
+
+  .social-proof__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .social-proof__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .social-proof__item {
+    background: var(--color-background);
+    padding: 28px 32px;
+    border: 1px solid var(--color-border);
+  }
+
+  .social-proof__quote {
+    font-family: var(--font-primary--family);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-foreground);
+    margin: 0 0 1rem;
+  }
+
+  .social-proof__author {
+    font-family: var(--font-accent--family);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    font-style: normal;
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Testimonios",
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "limit": 4,
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Cita" },
+        { "type": "text", "id": "author", "label": "Nombre" },
+        { "type": "text", "id": "role", "label": "Rol" }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Lo que dicen"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Principal" },
+        { "value": "scheme-2", "label": "Secundario" }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Ancho",
+      "options": [
+        { "value": "page-width", "label": "Página" },
+        { "value": "full-width", "label": "Completo" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonios",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "La primera cosa de mi setup de la que alguien me ha preguntado la marca.",
+            "author": "Marc R.",
+            "role": "Diseñador UX"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Llevo 2 años buscando algo así. Finalmente.",
+            "author": "Ana V.",
+            "role": "Founder"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

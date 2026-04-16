@@ -1,0 +1,174 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="faq-section section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="padding-block-start: {{ section.settings.padding_top }}px; padding-block-end: {{ section.settings.padding_bottom }}px;">
+  <div class="faq-section__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="faq-section__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="faq-section__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="faq-section__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="faq-section__list">
+      {%- for block in section.blocks -%}
+        <details class="faq-item" {{ block.shopify_attributes }}>
+          <summary class="faq-item__question">
+            {{ block.settings.question }}
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-item__answer">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .faq-section__inner {
+    padding-inline: var(--page-margin, 24px);
+  }
+
+  .faq-section__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .faq-section__eyebrow {
+    font-family: var(--font-accent--family);
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-section__heading {
+    font-family: var(--font-primary--family);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-foreground-heading);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .faq-section__list {
+    max-width: 680px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    font-family: var(--font-body--family);
+    font-size: 0.9375rem;
+    color: var(--color-foreground);
+    list-style: none;
+    user-select: none;
+    gap: 16px;
+  }
+
+  .faq-item__question::-webkit-details-marker { display: none; }
+
+  .faq-item__icon {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  details[open] .faq-item__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-item__answer {
+    padding-bottom: 24px;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-foreground);
+    opacity: 0.8;
+    max-width: 600px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta" }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Preguntas frecuentes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Todo lo que necesitas saber"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Principal" },
+        { "value": "scheme-2", "label": "Secundario" }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Ancho",
+      "options": [
+        { "value": "page-width", "label": "Página" },
+        { "value": "full-width", "label": "Completo" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "¿Cuánto tiempo tarda el envío?", "answer": "<p>Los pedidos se envían en 48 horas laborables.</p>" } },
+        { "type": "faq_item", "settings": { "question": "¿Cuál es la política de devoluciones?", "answer": "<p>Aceptamos devoluciones en los primeros 30 días, sin preguntas.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
