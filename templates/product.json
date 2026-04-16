@@ -372,28 +372,49 @@
     "editorial_story": {
       "type": "media-with-content",
       "blocks": {
-        "eyebrow": {
-          "type": "_inline-text",
-          "settings": {
-            "text": "El diseño",
-            "type_preset": "custom",
-            "font": "var(--font-accent--family)",
-            "font_size": "0.6875rem",
-            "letter_spacing": "0.2em",
-            "case": "uppercase",
-            "color": "var(--color-primary)"
-          },
+        "media": {
+          "type": "_media-without-appearance",
+          "settings": { "media_type": "image" },
           "blocks": {}
         },
-        "body": {
-          "type": "_content",
+        "content": {
+          "type": "_content-without-appearance",
           "settings": {
-            "text": "<p>Cada curva de Lume Model 01 tiene una razón de ser. El brazo articulado de tres segmentos permite posicionar la luz exactamente donde la necesitas sin comprometer la estética del escritorio. No hay cables a la vista. No hay botones innecesarios.</p><p>Aluminio anodizado. Cable trenzado. Una sola junta de ajuste que aguanta décadas.</p>"
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center"
           },
-          "blocks": {}
+          "blocks": {
+            "eyebrow": {
+              "type": "text",
+              "settings": {
+                "text": "<p>El diseño</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "0.6875rem",
+                "line_height": "normal",
+                "letter_spacing": "0.2em",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "body": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Cada curva de Lume Model 01 tiene una razón de ser. El brazo articulado de tres segmentos permite posicionar la luz exactamente donde la necesitas sin comprometer la estética del escritorio. No hay cables a la vista. No hay botones innecesarios.</p><p>Aluminio anodizado. Cable trenzado. Una sola junta de ajuste que aguanta décadas.</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["eyebrow", "body"]
         }
       },
-      "block_order": ["eyebrow", "body"],
+      "block_order": ["media", "content"],
       "settings": {
         "media_width": "wide",
         "media_position": "right",

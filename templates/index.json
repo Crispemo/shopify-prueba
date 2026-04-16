@@ -114,41 +114,65 @@
     "brand_statement": {
       "type": "media-with-content",
       "blocks": {
-        "eyebrow": {
-          "type": "_inline-text",
+        "media": {
+          "type": "_media-without-appearance",
           "settings": {
-            "text": "Infraestructura, no decoración",
-            "type_preset": "custom",
-            "font": "var(--font-accent--family)",
-            "font_size": "0.6875rem",
-            "letter_spacing": "0.2em",
-            "case": "uppercase",
-            "color": "var(--color-primary)"
+            "media_type": "image"
           },
           "blocks": {}
         },
-        "body": {
-          "type": "_content",
+        "content": {
+          "type": "_content-without-appearance",
           "settings": {
-            "text": "<p>Una lámpara de escritorio para profesionales que trabajan desde casa y no hacen concesiones en su entorno. Luz precisa, materiales que envejecen bien, un diseño que no distrae.</p>"
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center"
           },
-          "blocks": {}
-        },
-        "link": {
-          "type": "_inline-text",
-          "settings": {
-            "text": "<a href='/collections/all'>Descubrir Lume →</a>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "0.8125rem",
-            "letter_spacing": "0.05em",
-            "case": "none",
-            "color": "var(--color-foreground)"
+          "blocks": {
+            "eyebrow": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Infraestructura, no decoración</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "0.6875rem",
+                "line_height": "normal",
+                "letter_spacing": "0.2em",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "body": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Una lámpara de escritorio para profesionales que trabajan desde casa y no hacen concesiones en su entorno. Luz precisa, materiales que envejecen bien, un diseño que no distrae.</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            },
+            "cta_link": {
+              "type": "button",
+              "settings": {
+                "label": "Descubrir Lume →",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
           },
-          "blocks": {}
+          "block_order": ["eyebrow", "body", "cta_link"]
         }
       },
-      "block_order": ["eyebrow", "body", "link"],
+      "block_order": ["media", "content"],
       "settings": {
         "media_width": "wide",
         "media_position": "left",
