@@ -1,0 +1,132 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="padding-block-start: {{ section.settings.padding_top }}px; padding-block-end: {{ section.settings.padding_bottom }}px;">
+  <div class="product-specs">
+    {%- for block in section.blocks -%}
+      <div class="product-specs__item" {{ block.shopify_attributes }}>
+        <span class="product-specs__value">{{ block.settings.value }}</span>
+        <span class="product-specs__label">{{ block.settings.label }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .product-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--color-border);
+  }
+
+  .product-specs__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 16px;
+    background-color: var(--color-background);
+    text-align: center;
+  }
+
+  .product-specs__value {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    line-height: 1;
+  }
+
+  .product-specs__label {
+    font-size: 0.75rem;
+    color: var(--color-foreground);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-specs {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .product-specs__value {
+      font-size: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Especificaciones",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Principal" },
+        { "value": "scheme-2", "label": "Secundario" }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Ancho",
+      "options": [
+        { "value": "page-width", "label": "Página" },
+        { "value": "full-width", "label": "Completo" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Especificación",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Valor",
+          "default": "2700–4000K"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta",
+          "default": "Temperatura de color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Especificaciones",
+      "blocks": [
+        { "type": "spec", "settings": { "value": "2700–4000K", "label": "Temperatura de color" } },
+        { "type": "spec", "settings": { "value": "500mm", "label": "Alcance del brazo" } },
+        { "type": "spec", "settings": { "value": "5W LED", "label": "Consumo eficiente" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
