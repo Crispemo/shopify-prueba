@@ -15,11 +15,11 @@
         "content_group": {
           "type": "group",
           "settings": {
-            "open_in_new_tab": false,
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
+            "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 20,
@@ -31,8 +31,20 @@
             "custom_height": 100,
             "inherit_color_scheme": true,
             "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
             "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
             "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -54,6 +66,9 @@
                 "case": "uppercase",
                 "wrap": "pretty",
                 "color": "var(--color-primary)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -76,6 +91,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -98,269 +116,50 @@
               "blocks": {}
             }
           },
-          "block_order": ["eyebrow", "headline", "cta"]
+          "block_order": [
+            "eyebrow",
+            "headline",
+            "cta"
+          ]
         }
       },
-      "block_order": ["content_group"],
+      "block_order": [
+        "content_group"
+      ],
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/Gemini_Generated_Image_wi8y4swi8y4swi8y.png",
         "media_type_2": "none",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
-        "gap": 16,
-        "section_width": "full-width",
-        "section_height": "large",
-        "section_height_custom": 80,
-        "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "brand_statement": {
-      "type": "hero",
-      "blocks": {
-        "content_group": {
-          "type": "group",
-          "settings": {
-            "open_in_new_tab": false,
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
-            "width": "custom",
-            "custom_width": 46,
-            "width_mobile": "custom",
-            "custom_width_mobile": 90,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "eyebrow": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Infraestructura, no decoración</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-accent--family)",
-                "font_size": "0.6875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.2em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Una lámpara de escritorio para profesionales que trabajan desde casa y no hacen concesiones en su entorno. Luz precisa, materiales que envejecen bien, un diseño que no distrae.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "wrap": "pretty",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "cta_link": {
-              "type": "button",
-              "settings": {
-                "label": "Descubrir Lume →",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": ["eyebrow", "body", "cta_link"]
-        }
-      },
-      "block_order": ["content_group"],
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "full-width",
         "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-2",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "product_teaser": {
-      "type": "hero",
-      "blocks": {
-        "content_group": {
-          "type": "group",
-          "settings": {
-            "open_in_new_tab": false,
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
-            "width": "custom",
-            "custom_width": 44,
-            "width_mobile": "custom",
-            "custom_width_mobile": 90,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "eyebrow": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Lume Model 01</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-accent--family)",
-                "font_size": "0.6875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.2em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "headline": {
-              "type": "text",
-              "settings": {
-                "text": "<h2>Una sola lámpara. Diseñada para durar décadas.</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground-heading)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Aluminio anodizado. Cable trenzado. Temperatura de luz ajustable 2700–4000K. Sin plástico visible. Garantía de 5 años.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "wrap": "pretty",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "cta": {
-              "type": "button",
-              "settings": {
-                "label": "Ver la lámpara →",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": ["eyebrow", "headline", "body", "cta"]
-        }
-      },
-      "block_order": ["content_group"],
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "gap": 16,
-        "section_width": "full-width",
-        "section_height": "large",
         "section_height_custom": 80,
         "color_scheme": "scheme-1",
         "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
     },
     "brand_pillars_home": {
       "type": "brand-pillars",
-      "settings": {
-        "heading": "Por qué Lume",
-        "color_scheme": "scheme-2",
-        "section_width": "page-width",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "pillar_1": {
           "type": "pillar",
@@ -384,17 +183,21 @@
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
-    },
-    "social_proof_home": {
-      "type": "social-proof",
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3"
+      ],
       "settings": {
-        "eyebrow": "Lo que dicen",
-        "color_scheme": "scheme-1",
+        "heading": "Por qué Lume",
+        "color_scheme": "scheme-2",
         "section_width": "page-width",
         "padding_top": 56,
         "padding_bottom": 56
-      },
+      }
+    },
+    "social_proof_home": {
+      "type": "social-proof",
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
@@ -413,18 +216,20 @@
           }
         }
       },
-      "block_order": ["testimonial_1", "testimonial_2"]
-    },
-    "faq_home": {
-      "type": "faq",
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2"
+      ],
       "settings": {
-        "eyebrow": "Preguntas frecuentes",
-        "heading": "Todo lo que necesitas saber",
-        "color_scheme": "scheme-2",
+        "eyebrow": "Lo que dicen",
+        "color_scheme": "scheme-1",
         "section_width": "page-width",
         "padding_top": 56,
         "padding_bottom": 56
-      },
+      }
+    },
+    "faq_home": {
+      "type": "faq",
       "blocks": {
         "faq_1": {
           "type": "faq_item",
@@ -455,13 +260,27 @@
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "eyebrow": "Preguntas frecuentes",
+        "heading": "Todo lo que necesitas saber",
+        "color_scheme": "scheme-2",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "cta_homepage": {
       "type": "product-cta-close",
       "settings": {
         "heading": "¿Listo para actualizar tu espacio?",
         "guarantees": "Envío en 48h · Devolución gratuita 30 días · Garantía 5 años",
+        "product": "",
         "button_label": "Ver la lámpara",
         "show_price": false,
         "button_url": "/collections/all",
@@ -473,8 +292,6 @@
   },
   "order": [
     "hero",
-    "brand_statement",
-    "product_teaser",
     "brand_pillars_home",
     "social_proof_home",
     "faq_home",
