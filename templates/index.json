@@ -10,14 +10,14 @@
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-end",
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-end",
             "gap": 20,
             "width": "custom",
-            "custom_width": 38,
+            "custom_width": 50,
             "width_mobile": "custom",
-            "custom_width_mobile": 70,
+            "custom_width_mobile": 85,
             "height": "fit",
             "custom_height": 100,
             "inherit_color_scheme": true,
@@ -25,15 +25,15 @@
             "border": "none",
             "border_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
+            "padding-block-end": 56,
+            "padding-inline-start": 56,
             "padding-inline-end": 0
           },
           "blocks": {
             "eyebrow": {
               "type": "text",
               "settings": {
-                "text": "<p>Lume — Model 01</p>",
+                "text": "<p>Artesanía de la Alpujarra · Pampaneira, Granada</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -55,7 +55,7 @@
             "headline": {
               "type": "text",
               "settings": {
-                "text": "<h1>El espacio donde trabajas dice quién eres.</h1>",
+                "text": "<h1>Decora tu hogar con lo que dura.</h1>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -77,7 +77,7 @@
             "cta": {
               "type": "button",
               "settings": {
-                "label": "Ver la lámpara →",
+                "label": "Ver persianas de esparto →",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -100,18 +100,18 @@
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
+        "vertical_alignment": "flex-end",
         "gap": 16,
         "section_width": "full-width",
         "section_height": "large",
         "section_height_custom": 80,
         "color_scheme": "scheme-1",
-        "toggle_overlay": false,
+        "toggle_overlay": true,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
     },
-    "brand_statement": {
+    "historia": {
       "type": "hero",
       "blocks": {
         "content_group": {
@@ -144,7 +144,7 @@
             "eyebrow": {
               "type": "text",
               "settings": {
-                "text": "<p>Infraestructura, no decoración</p>",
+                "text": "<p>Nuestra historia</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -163,10 +163,32 @@
               },
               "blocks": {}
             },
+            "headline": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Un legado de artesanía en la Alpujarra</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "body": {
               "type": "text",
               "settings": {
-                "text": "<p>Una lámpara de escritorio para profesionales que trabajan desde casa y no hacen concesiones en su entorno. Luz precisa, materiales que envejecen bien, un diseño que no distrae.</p>",
+                "text": "<p>En 1993, nuestro padre fundó un pequeño taller en Pampaneira, un encantador pueblo en la Alpujarra. Hoy seguimos su legado ofreciendo productos hechos a mano con materiales naturales como el algodón reciclado y el esparto.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -179,11 +201,11 @@
               },
               "blocks": {}
             },
-            "cta_link": {
+            "cta": {
               "type": "button",
               "settings": {
-                "label": "Descubrir Lume →",
-                "link": "shopify://collections/all",
+                "label": "Conoce nuestra historia →",
+                "link": "shopify://pages/nuestra-historia",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -194,7 +216,7 @@
               "blocks": {}
             }
           },
-          "block_order": ["eyebrow", "body", "cta_link"]
+          "block_order": ["eyebrow", "headline", "body", "cta"]
         }
       },
       "block_order": ["content_group"],
@@ -204,21 +226,139 @@
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "flex-end",
         "vertical_alignment": "center",
         "gap": 16,
         "section_width": "full-width",
         "section_height": "medium",
-        "section_height_custom": 50,
+        "section_height_custom": 60,
         "color_scheme": "scheme-2",
         "toggle_overlay": false,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "colecciones": {
+      "type": "collection-list",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "brand_pillars_home": {
+      "type": "brand-pillars",
+      "settings": {
+        "heading": "Comprometidos con el medio ambiente",
+        "color_scheme": "scheme-2",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales reciclados",
+            "body": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Producción artesanal",
+            "body": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Sostenibilidad y respeto",
+            "body": "El uso de materiales naturales como el esparto evita el uso de plásticos y materiales sintéticos."
+          }
+        }
+      },
+      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
+    },
+    "social_proof_home": {
+      "type": "social-proof",
+      "settings": {
+        "eyebrow": "Lo que dicen nuestros clientes",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Pedí una persiana a medida y llegó perfecta. La calidad del esparto es increíble y el servicio fue muy atento.",
+            "author": "María G.",
+            "role": "Madrid"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Llevo años buscando alfombras así. Naturales, bonitas y con historia detrás. Repetiré sin duda.",
+            "author": "Carlos M.",
+            "role": "Barcelona"
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "faq_home": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Preguntas frecuentes",
+        "heading": "Todo lo que necesitas saber",
+        "color_scheme": "scheme-2",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuánto tiempo tarda el envío?",
+            "answer": "<p>Los pedidos se envían en 24–72 horas laborables. Recibirás un email de confirmación con el número de seguimiento en cuanto salga del almacén.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo mido mi ventana para la persiana?",
+            "answer": "<p>Mide el ancho y el alto del hueco en centímetros. Usa nuestro calculador de precio para obtener el importe exacto al instante.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo pedir medidas personalizadas?",
+            "answer": "<p>Sí. Todas las persianas se fabrican a la medida exacta que introduzcas en el calculador. Medidas entre 30 y 700 cm.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuál es la política de devoluciones?",
+            "answer": "<p>Aceptamos devoluciones en los primeros 30 días desde la recepción del pedido, sin preguntas. El envío de vuelta corre de nuestra cuenta.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
     }
   },
   "order": [
     "hero",
-    "brand_statement"
+    "historia",
+    "colecciones",
+    "brand_pillars_home",
+    "social_proof_home",
+    "faq_home"
   ]
 }

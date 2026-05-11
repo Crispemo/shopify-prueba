@@ -8,15 +8,15 @@
           "static": true,
           "settings": {
             "media_presentation": "grid",
-            "media_columns": "two",
-            "image_gap": 1,
+            "media_columns": "one",
+            "image_gap": 4,
             "large_first_image": true,
             "icons_style": "none",
             "slideshow_controls_style": "counter",
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
-            "thumbnail_width": 44,
-            "aspect_ratio": "1",
+            "thumbnail_width": 52,
+            "aspect_ratio": "natural",
             "constrain_to_viewport": false,
             "media_fit": "cover",
             "media_radius": 0,
@@ -53,11 +53,11 @@
             "padding-inline-end": 12
           },
           "blocks": {
-            "eyebrow": {
+            "brand": {
               "type": "text",
-              "name": "Eyebrow",
+              "name": "Brand",
               "settings": {
-                "text": "<p>LUME — MODEL 01</p>",
+                "text": "<p>JARAPA HOME · ESPARTO</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -99,29 +99,6 @@
               },
               "blocks": {}
             },
-            "materials": {
-              "type": "text",
-              "name": "Materiales",
-              "settings": {
-                "text": "<p>{{ closest.product.metafields.descriptors.subtitle.value }}</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.8125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "price": {
               "type": "price",
               "settings": {
@@ -144,26 +121,13 @@
               },
               "blocks": {}
             },
-            "variant_picker": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": true,
-                "alignment": "left",
-                "padding-block-start": 16,
-                "padding-block-end": 24,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "buy_buttons": {
               "type": "buy-buttons",
               "settings": {
                 "stacking": false,
                 "show_pickup_availability": false,
                 "gift_card_form": false,
-                "padding-block-start": 0,
+                "padding-block-start": 16,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -173,9 +137,9 @@
             },
             "shipping_note": {
               "type": "text",
-              "name": "Nota de envío",
+              "name": "Envío",
               "settings": {
-                "text": "<p>IVA incluido · Envío gratis en pedidos +€80</p>",
+                "text": "<p>Envío Gratis en toda la Península · IVA incluido</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -189,29 +153,6 @@
                 "color": "var(--color-primary)",
                 "padding-block-start": 8,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "description_divider": {
-              "type": "text",
-              "name": "Separador",
-              "settings": {
-                "text": "<p>—</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 16,
-                "padding-block-end": 8,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -233,7 +174,7 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "",
-                "padding-block-start": 0,
+                "padding-block-start": 16,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -242,14 +183,11 @@
             }
           },
           "block_order": [
-            "eyebrow",
+            "brand",
             "title",
-            "materials",
             "price",
-            "variant_picker",
             "buy_buttons",
             "shipping_note",
-            "description_divider",
             "description"
           ]
         }
@@ -265,44 +203,11 @@
         "padding-block-end": 0
       }
     },
-    "specs": {
-      "type": "product-specs",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "section_width": "full-width",
-        "padding_top": 32,
-        "padding_bottom": 32
-      },
-      "blocks": {
-        "spec_1": {
-          "type": "spec",
-          "settings": {
-            "value": "2700–4000K",
-            "label": "Temperatura de color"
-          }
-        },
-        "spec_2": {
-          "type": "spec",
-          "settings": {
-            "value": "500mm",
-            "label": "Alcance del brazo"
-          }
-        },
-        "spec_3": {
-          "type": "spec",
-          "settings": {
-            "value": "5W LED",
-            "label": "Consumo eficiente"
-          }
-        }
-      },
-      "block_order": ["spec_1", "spec_2", "spec_3"]
-    },
-    "pillars": {
+    "brand_pillars_product": {
       "type": "brand-pillars",
       "settings": {
-        "heading": "Por qué Lume",
-        "color_scheme": "scheme-1",
+        "heading": "Comprometidos con el medio ambiente",
+        "color_scheme": "scheme-2",
         "section_width": "page-width",
         "padding_top": 56,
         "padding_bottom": 56
@@ -311,160 +216,41 @@
         "pillar_1": {
           "type": "pillar",
           "settings": {
-            "title": "Sin plástico visible",
-            "body": "Aluminio anodizado y cable trenzado. Materiales que envejecen bien."
+            "title": "Materiales reciclados",
+            "body": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
           }
         },
         "pillar_2": {
           "type": "pillar",
           "settings": {
-            "title": "Ajuste preciso",
-            "body": "Temperatura e intensidad desde el propio brazo. Sin apps, sin Bluetooth."
+            "title": "Producción artesanal",
+            "body": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
           }
         },
         "pillar_3": {
           "type": "pillar",
           "settings": {
-            "title": "Diseñada para durar",
-            "body": "Garantía de 5 años. Piezas de repuesto disponibles indefinidamente."
+            "title": "Sostenibilidad y respeto",
+            "body": "El uso de materiales naturales como el esparto evita el uso de plásticos y materiales sintéticos."
           }
         }
       },
       "block_order": ["pillar_1", "pillar_2", "pillar_3"]
     },
-    "lifestyle_image": {
-      "type": "hero",
-      "blocks": {},
-      "block_order": [],
+    "product_recommendations": {
+      "type": "product-recommendations",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "gap": 0,
-        "section_width": "full-width",
-        "section_height": "large",
-        "section_height_custom": 60,
+        "heading": "Otros productos",
         "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "editorial_story": {
-      "type": "hero",
-      "blocks": {
-        "content_group": {
-          "type": "group",
-          "settings": {
-            "open_in_new_tab": false,
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
-            "width": "custom",
-            "custom_width": 46,
-            "width_mobile": "custom",
-            "custom_width_mobile": 90,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "eyebrow": {
-              "type": "text",
-              "settings": {
-                "text": "<p>El diseño</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-accent--family)",
-                "font_size": "0.6875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.2em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-primary)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Cada curva de Lume Model 01 tiene una razón de ser. El brazo articulado de tres segmentos permite posicionar la luz exactamente donde la necesitas sin comprometer la estética del escritorio. No hay cables a la vista. No hay botones innecesarios.</p><p>Aluminio anodizado. Cable trenzado. Una sola junta de ajuste que aguanta décadas.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "wrap": "pretty",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": ["eyebrow", "body"]
-        }
-      },
-      "block_order": ["content_group"],
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "none",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "gap": 16,
-        "section_width": "full-width",
-        "section_height": "medium",
-        "section_height_custom": 60,
-        "color_scheme": "scheme-2",
-        "toggle_overlay": false,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "cta_close": {
-      "type": "product-cta-close",
-      "settings": {
-        "heading": "¿Listo para actualizar tu espacio?",
-        "guarantees": "Envío en 48h · Devolución gratuita 30 días · Garantía 5 años",
-        "button_label": "Añadir al carrito",
-        "show_price": true,
-        "button_url": "/cart",
-        "section_width": "full-width",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
     "main",
-    "specs",
-    "pillars",
-    "lifestyle_image",
-    "editorial_story",
-    "cta_close"
+    "brand_pillars_product",
+    "product_recommendations"
   ]
 }
