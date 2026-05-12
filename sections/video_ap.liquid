@@ -1,0 +1,30 @@
+<div class="container_ap">
+{{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+</div>
+
+<style>
+  .container_ap video{
+    width: 100%;
+    padding: 1%;
+  }
+</style>
+
+{% schema %}
+ {
+  "name": "Mp4 Video",
+  "settings": [
+      {
+         "type": "video",
+         "id": "video",
+         "label": "A Shopify-hosted video"
+      }
+
+  ],
+  "presets": [
+    {
+      "name": "Custom Mp4 Video",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

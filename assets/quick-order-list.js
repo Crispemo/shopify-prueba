@@ -1,556 +1,392 @@
-import { Component } from '@theme/component';
-import { CartAddEvent, QuantitySelectorUpdateEvent, ThemeEvents } from '@theme/events';
-import { debounce, fetchConfig, resetShimmer } from '@theme/utilities';
-import { morphSection, sectionRenderer } from '@theme/section-renderer';
+class QuickOrderListRemoveButton extends HTMLElement {
+  constructor() {
+    super();
+    this.addEventListener('click', (event) => {
+      event.preventDefault();
+      const quickOrderList = this.closest('quick-order-list');
+      quickOrderList.updateQuantity(this.dataset.index, 0);
+    });
+  }
+}
 
-/**
- * A custom element that manages the quick order list section.
- *
- * @typedef {object} QuickOrderListComponentRefs
- * @property {HTMLTableRowElement[]} variantRows - The variant row elements
- * @property {HTMLElement} confirmationPanel - The remove all confirmation dialog
- * @property {HTMLElement} totalInfo - The total info section element
- * @property {HTMLElement} errorContainer - The error message container
- * @property {HTMLElement} errorText - The error message text element
- * @property {HTMLElement} successContainer - The success message container
- * @property {HTMLElement} successText - The success message text element
- * @property {HTMLElement} [paginationNav] - The pagination navigation element
- *
- * @extends Component<QuickOrderListComponentRefs>
- */
-class QuickOrderListComponent extends Component {
-  requiredRefs = [
-    'variantRows',
-    'confirmationPanel',
-    'totalInfo',
-    'errorContainer',
-    'errorText',
-    'successContainer',
-    'successText',
-  ];
+customElements.define('quick-order-list-remove-button', QuickOrderListRemoveButton);
 
-  /** @type {AbortController|null} */
-  #abortController = null;
+class QuickOrderListRemoveAllButton extends HTMLElement {
+  constructor() {
+    super();
+    const allVariants = Array.from(document.querySelectorAll('[data-variant-id]'));
+    const items = {}
+    let hasVariantsInCart = false;
+    this.quickOrderList = this.closest('quick-order-list');
 
-  /** @type {(event: Event) => void} */
-  #debouncedHandleQuantityUpdate;
-
-  /** @type {(event: Event) => void} */
-  #boundHandleCartUpdate;
-
-  /** @type {HTMLElement|null} */
-  #confirmationTrigger = null;
-
-  /**
-   * Gets the current page number from pagination controls
-   * @returns {number}
-   */
-  get currentPage() {
-    if (this.refs.paginationNav && this.refs.paginationNav.dataset.current_page) {
-      const pageNum = parseInt(this.refs.paginationNav.dataset.current_page, 10);
-      if (!isNaN(pageNum)) {
-        return pageNum;
+    allVariants.forEach((variant) => {
+      const cartQty = parseInt(variant.dataset.cartQty);
+      if (cartQty > 0) {
+        hasVariantsInCart = true;
+        items[parseInt(variant.dataset.variantId)] = 0;
       }
+    });
+
+    if (!hasVariantsInCart) {
+      this.classList.add('hidden');
     }
-    return 1;
+
+    this.actions = {
+      confirm: 'confirm',
+      remove: 'remove',
+      cancel: 'cancel'
+    }
+
+    this.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (this.dataset.action === this.actions.confirm) {
+        this.toggleConfirmation(false, true);
+      } else if (this.dataset.action === this.actions.remove) {
+        this.quickOrderList.updateMultipleQty(items);
+        this.toggleConfirmation(true, false);
+      } else if (this.dataset.action === this.actions.cancel) {
+        this.toggleConfirmation(true, false);
+      }
+    });
   }
 
-  /**
-   * Gets all cart variant IDs for the product from the data attribute
-   * @returns {number[]}
-   */
-  get cartVariantIds() {
-    const data = this.dataset.cartVariantIds;
-    if (!data) return [];
+  toggleConfirmation(showConfirmation, showInfo) {
+    this.quickOrderList.querySelector('.quick-order-list-total__confirmation').classList.toggle('hidden', showConfirmation);
+    this.quickOrderList.querySelector('.quick-order-list-total__info').classList.toggle('hidden', showInfo)
+  }
+}
 
-    return JSON.parse(data);
+customElements.define('quick-order-list-remove-all-button', QuickOrderListRemoveAllButton);
+
+
+class QuickOrderList extends HTMLElement {
+  constructor() {
+    super();
+    this.cart = document.querySelector('cart-drawer');
+    this.actions = {
+      add: 'ADD',
+      update: 'UPDATE'
+    }
+    this.quickOrderListId = 'quick-order-list'
+    this.variantItemStatusElement = document.getElementById('shopping-cart-variant-item-status');
+    const form = this.querySelector('form');
+
+    form.addEventListener('submit', this.onSubmit.bind(this));
+
+    const debouncedOnChange = debounce((event) => {
+      this.onChange(event);
+    }, ON_CHANGE_DEBOUNCE_TIMER);
+    this.addEventListener('change', debouncedOnChange.bind(this));
+  }
+
+  cartUpdateUnsubscriber = undefined;
+
+  onSubmit(event) {
+    event.preventDefault();
   }
 
   connectedCallback() {
-    super.connectedCallback();
-
-    this.#debouncedHandleQuantityUpdate = debounce(this.#handleQuantityUpdate.bind(this), 300);
-    this.#boundHandleCartUpdate = this.#handleCartUpdate.bind(this);
-
-    this.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedHandleQuantityUpdate);
-    document.addEventListener(ThemeEvents.cartUpdate, this.#boundHandleCartUpdate);
-    this.addEventListener('keydown', this.#handleKeyDown, true);
-    this.addEventListener('keyup', this.#handleKeyup, true);
+    this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+      if (event.source === this.quickOrderListId) {
+        return;
+      }
+      // If its another section that made the update
+      this.onCartUpdate();
+    });
+    this.sectionId = this.dataset.id;
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
-
-    this.removeEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedHandleQuantityUpdate);
-    document.removeEventListener(ThemeEvents.cartUpdate, this.#boundHandleCartUpdate);
-    this.removeEventListener('keydown', this.#handleKeyDown, true);
-    this.removeEventListener('keyup', this.#handleKeyup, true);
-
-    this.#abortController?.abort();
-    this.#confirmationTrigger = null;
-  }
-
-  /**
-   * @param {EventTarget | null} target
-   * @returns {target is HTMLInputElement}
-   */
-  #isQuantityInput(target) {
-    return target instanceof HTMLInputElement && target.matches('input[type="number"][data-cart-quantity]');
-  }
-
-  /**
-   * Keyboard navigation:
-   * Enter key selects next quantity input
-   * Shift+Enter selects previous quantity input
-   * @param {KeyboardEvent} event
-   */
-  #handleKeyDown = (event) => {
-    if (event.key !== 'Enter' || !this.#isQuantityInput(event.target)) {
-      return;
-    }
-    event.preventDefault();
-
-    // Get all VISIBLE quantity inputs (exclude hidden mobile/desktop variants)
-    const allQuantityInputs = Array.from(this.querySelectorAll('input[type="number"][data-cart-quantity]')).filter(
-      (input) => {
-        return input instanceof HTMLElement && input.offsetParent !== null;
-      }
-    );
-
-    if (allQuantityInputs.length <= 1) {
-      return;
-    }
-
-    const currentIndex = allQuantityInputs.indexOf(event.target);
-    if (currentIndex === -1) {
-      return;
-    }
-
-    const offset = event.shiftKey ? -1 : 1;
-    const nextIndex = (currentIndex + offset + allQuantityInputs.length) % allQuantityInputs.length;
-    const nextInput = allQuantityInputs[nextIndex];
-
-    event.target.blur();
-    if (nextInput instanceof HTMLInputElement) {
-      nextInput.select();
-    }
-  };
-
-  /**
-   * @param {KeyboardEvent} event
-   */
-  #handleKeyup = (event) => {
-    if ((event.key === 'Tab' || event.key === 'Enter') && this.#isQuantityInput(event.target)) {
-      this.#scrollToCenter(event.target);
-    }
-  };
-
-  /**
-   * @param {HTMLElement} element
-   */
-  #scrollToCenter(element) {
-    element.scrollIntoView({
-      block: 'center',
-      behavior: 'smooth',
-    });
-  }
-
-  /**
-   * Handles pagination events
-   * @param {Object<string, string>} data - URL search params
-   * @param {Event} event - The click event
-   */
-  async onPaginationControlClick(data, event) {
-    event.preventDefault();
-    const sectionId = this.dataset.sectionId;
-
-    if (!this.dataset.url || !sectionId) return;
-
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
-
-    const newURL = new URL(this.dataset.url, window.location.origin);
-    for (const [key, value] of Object.entries(data)) {
-      newURL.searchParams.set(key, value);
-    }
-
-    await sectionRenderer.renderSection(sectionId, {
-      url: newURL,
-    });
-    this.#scrollToTopOfSection();
-    // Morph preserves focus on the pagination button — defer focus to override it
-    // after the morph and any MutationObserver callbacks have settled.
-    requestAnimationFrame(() => this.#focusFirstQuantityInput());
-  }
-
-  /**
-   * Handles removing a single variant item (sets quantity to 0)
-   * @param {string} variantId - The variant ID to remove
-   * @param {Event} event - The click event
-   */
-  async onLineItemRemove(variantId, event) {
-    event.preventDefault();
-
-    const targetRow = this.refs.variantRows.find((row) => row.dataset.variantId === String(variantId));
-    if (!(targetRow instanceof HTMLElement)) return;
-
-    const quantityInput = targetRow.querySelector('input[type="number"]');
-    if (quantityInput instanceof HTMLInputElement) {
-      quantityInput.value = '0';
-      quantityInput.dispatchEvent(new QuantitySelectorUpdateEvent(0, Number(quantityInput.dataset.cartLine)));
+    if (this.cartUpdateUnsubscriber) {
+      this.cartUpdateUnsubscriber();
     }
   }
 
-  /**
-   * Handles removing all items from the cart
-   * @param {Event} event - The click event
-   */
-  async onRemoveAll(event) {
-    event.preventDefault();
-    const idsToRemove = this.cartVariantIds;
+  onChange(event) {
+    const inputValue = parseInt(event.target.value);
+    const cartQuantity = parseInt(event.target.dataset.cartQuantity);
+    const index = event.target.dataset.index;
+    const name = document.activeElement.getAttribute('name');
 
-    this.#clearSuccessMessage();
-    this.#clearErrorMessage();
-    this.#applyShimmerEffects(idsToRemove);
+    const quantity = inputValue - cartQuantity;
 
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
+    if (cartQuantity > 0) {
+      this.updateQuantity(index, inputValue, name, this.actions.update);
+    } else {
+      this.updateQuantity(index, quantity, name, this.actions.add);
+    }
+  }
 
-    try {
-      /** @type {Record<string, number>} */
-      const updates = {};
-
-      if (idsToRemove.length > 0) {
-        for (const variantId of idsToRemove) {
-          updates[String(variantId)] = 0;
-        }
-      }
-
-      if (Object.keys(updates).length === 0) {
-        resetShimmer(this);
-        return;
-      }
-
-      const sectionIds = this.#getSectionIds();
-      const sectionsUrl = new URL(window.location.pathname, window.location.origin);
-      sectionsUrl.searchParams.set('page', this.currentPage.toString());
-
-      const body = JSON.stringify({
-        updates: updates,
-        sections: sectionIds.join(','),
-        sections_url: sectionsUrl.pathname + sectionsUrl.search,
+  onCartUpdate() {
+    fetch(`${window.location.pathname}?section_id=${this.sectionId}`)
+      .then((response) => response.text())
+      .then((responseText) => {
+        const html = new DOMParser().parseFromString(responseText, 'text/html');
+        const sourceQty = html.querySelector(this.quickOrderListId);
+        this.innerHTML = sourceQty.innerHTML;
+      })
+      .catch(e => {
+        console.error(e);
       });
-
-      const response = await fetch(Theme.routes.cart_update_url, {
-        ...fetchConfig('json', { body }),
-        signal: this.#abortController.signal,
-      });
-
-      const responseText = await response.text();
-      const data = JSON.parse(responseText);
-
-      resetShimmer(this);
-
-      if (data.errors) {
-        this.#showErrorMessage(data.errors);
-      } else {
-        this.#updateSectionHTML(data);
-        this.#toggleConfirmationPanel(false);
-        this.#confirmationTrigger = null;
-
-        document.dispatchEvent(
-          new CartAddEvent(data, this.id, {
-            source: 'quick-order-remove-all',
-            sections: data.sections,
-          })
-        );
-      }
-    } catch (error) {
-      if (error.name !== 'AbortError') {
-        resetShimmer(this);
-        throw error;
-      }
-    }
   }
 
-  /**
-   * Handles quantity selector updates
-   * @param {CustomEvent} event - The quantity update event
-   */
-  async #handleQuantityUpdate(event) {
-    if (!(event instanceof QuantitySelectorUpdateEvent)) return;
+  getSectionsToRender() {
+    return [
+      {
+        id: this.quickOrderListId,
+        section: document.getElementById(this.quickOrderListId).dataset.id,
+        selector: '.js-contents'
+      },
+      {
+        id: 'cart-icon-bubble',
+        section: 'cart-icon-bubble',
+        selector: '.shopify-section'
+      },
+      {
+        id: 'quick-order-list-live-region-text',
+        section: 'cart-live-region-text',
+        selector: '.shopify-section'
+      },
+      {
+        id: 'quick-order-list-total',
+        section: document.getElementById(this.quickOrderListId).dataset.id,
+        selector: '.quick-order-list__total'
+      },
+      {
+        id: 'CartDrawer',
+        selector: '#CartDrawer',
+        section: 'cart-drawer'
+      }
+    ];
+  }
 
-    // Only handle events from our own quantity selectors
-    if (!(event.target instanceof Node) || !this.contains(event.target)) return;
+  renderSections(parsedState) {
+    this.getSectionsToRender().forEach((section => {
+      const sectionElement = document.getElementById(section.id);
+      if (sectionElement && sectionElement.parentElement && sectionElement.parentElement.classList.contains('drawer')) {
+        parsedState.items.length > 0 ? sectionElement.parentElement.classList.remove('is-empty') : sectionElement.parentElement.classList.add('is-empty');
 
-    const { quantity } = event.detail;
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
+        setTimeout(() => {
+          document.querySelector('#CartDrawer-Overlay').addEventListener('click', this.cart.close.bind(this.cart));
+        });
+      }
+      const elementToReplace = sectionElement && sectionElement.querySelector(section.selector) ? sectionElement.querySelector(section.selector) : sectionElement;
+      if (elementToReplace) {
+        elementToReplace.innerHTML =
+          this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
+      }
+    }));
 
-    const variantRow = this.refs.variantRows.find((row) => {
-      return row.contains(target);
+  }
+
+  updateMultipleQty(items) {
+    this.querySelector('.variant-remove-total .loading-overlay').classList.remove('hidden');
+
+    const body = JSON.stringify({
+      updates: items,
+      sections: this.getSectionsToRender().map((section) => section.section),
+      sections_url: window.location.pathname
     });
 
-    if (!variantRow) return;
+    this.updateMessage();
+    this.setErrorMessage();
 
-    const variantId = variantRow.dataset.variantId;
-    if (!variantId) return;
+    fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
+      .then((response) => {
+        return response.text();
+      })
+      .then((state) => {
+        const parsedState = JSON.parse(state);
+        this.renderSections(parsedState);
+      }).catch(() => {
+        this.setErrorMessage(window.cartStrings.error);
+      })
+      .finally(() => {
+        this.querySelector('.variant-remove-total .loading-overlay').classList.add('hidden');
+      });
+  }
 
-    const quantityInput = /** @type {HTMLInputElement|null} */ (variantRow.querySelector('input[data-cart-quantity]'));
-    const currentCartQuantity = quantityInput ? parseInt(quantityInput.dataset.cartQuantity || '0') || 0 : 0;
+  updateQuantity(id, quantity, name, action) {
+    this.toggleLoading(id, true);
 
-    this.#clearSuccessMessage();
-    this.#clearErrorMessage();
-
-    if (currentCartQuantity === quantity) {
-      return;
+    let routeUrl = routes.cart_change_url;
+    let body = JSON.stringify({
+      quantity,
+      id,
+      sections: this.getSectionsToRender().map((section) => section.section),
+      sections_url: window.location.pathname
+    });
+    let fetchConfigType;
+    if (action === this.actions.add) {
+      fetchConfigType = 'javascript';
+      routeUrl = routes.cart_add_url;
+      body = JSON.stringify({
+        items: [
+          {
+            quantity: parseInt(quantity),
+            id: parseInt(id)
+          }
+        ],
+        sections: this.getSectionsToRender().map((section) => section.section),
+        sections_url: window.location.pathname
+      });
     }
 
-    this.#applyShimmerEffects([variantId]);
+    this.updateMessage();
+    this.setErrorMessage();
 
-    this.#disableQuickOrderListItems();
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
+    fetch(`${routeUrl}`, { ...fetchConfig(fetchConfigType), ...{ body } })
+      .then((response) => {
+        return response.text();
+      })
+      .then((state) => {
+        const parsedState = JSON.parse(state);
+        const quantityElement = document.getElementById(`Quantity-${id}`);
+        const items = document.querySelectorAll('.variant-item');
 
-    try {
-      /** @type {Record<string, number>} */
-      const updates = {};
-      updates[variantId] = quantity;
-
-      // Include page parameter in sections URL to maintain pagination state
-      const sectionsUrl = new URL(window.location.pathname, window.location.origin);
-      sectionsUrl.searchParams.set('page', this.currentPage.toString());
-
-      const body = JSON.stringify({
-        updates: updates,
-        sections: this.#getSectionIds().join(','),
-        sections_url: sectionsUrl.pathname + sectionsUrl.search,
-      });
-
-      const response = await fetch(Theme.routes.cart_update_url, {
-        ...fetchConfig('json', { body }),
-        signal: this.#abortController.signal,
-      });
-
-      const responseText = await response.text();
-      const data = JSON.parse(responseText);
-
-      resetShimmer(this);
-
-      if (data.errors) {
-        this.#showErrorMessage(data.errors);
-        if (this.dataset.sectionId) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('page', this.currentPage.toString());
-          await sectionRenderer.renderSection(this.dataset.sectionId, { cache: false, url });
-        }
-      } else {
-        this.#updateSectionHTML(data);
-
-        const quantityAdded = quantity - currentCartQuantity;
-        if (quantityAdded > 0) {
-          this.#showSuccessMessage(quantityAdded);
+        if (parsedState.description || parsedState.errors) {
+          const variantItem = document.querySelector(`[id^="Variant-${id}"] .variant-item__totals.small-hide .loading-overlay`);
+          variantItem.classList.add('loading-overlay--error');
+          this.resetQuantityInput(id, quantityElement);
+          if (parsedState.errors) {
+            this.updateLiveRegions(id, parsedState.errors);
+          } else {
+            this.updateLiveRegions(id, parsedState.description);
+          }
+          return;
         }
 
-        document.dispatchEvent(
-          new CartAddEvent(data, this.id, {
-            source: 'quick-order-quantity',
-            variantId: variantId,
-            sections: data.sections,
-          })
-        );
-      }
-    } catch (error) {
-      if (error.name !== 'AbortError') {
-        this.#enableQuickOrderListItems();
-        resetShimmer(this);
-        throw error;
-      }
-    }
-  }
+        this.classList.toggle('is-empty', parsedState.item_count === 0);
 
-  /**
-   * Handles cart update events from other components
-   * @param {CustomEvent} event - The cart update event
-   */
-  async #handleCartUpdate(event) {
-    // Don't process our own events to avoid double updates
-    // Check if this event came from our own quantity update
-    if (event.detail?.source === 'quick-order-quantity' && event.detail?.sourceId === this.id) {
-      return;
-    }
+        this.renderSections(parsedState);
 
-    this.#enableQuickOrderListItems();
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
+        let hasError = false;
 
-    if (event.detail?.data?.sections && this.dataset.sectionId) {
-      this.#updateSectionHTML(event.detail.data);
-      if (event.detail.data.sections[this.dataset.sectionId]) {
-        return;
-      }
-    }
+        const currentItem = parsedState.items.find((item) => item.variant_id === parseInt(id));
+        const updatedValue = currentItem ? currentItem.quantity : undefined;
+        if (updatedValue && updatedValue !== quantity) {
+          this.updateError(updatedValue, id);
+          hasError = true;
+        }
 
-    if (this.dataset.sectionId) {
-      const url = new URL(window.location.href);
-      url.searchParams.set('page', this.currentPage.toString());
+        const variantItem = document.getElementById(`Variant-${id}`);
+        if (variantItem && variantItem.querySelector(`[name="${name}"]`)) {
+          variantItem.querySelector(`[name="${name}"]`).focus();
+        }
+        publish(PUB_SUB_EVENTS.cartUpdate, { source: this.quickOrderListId, cartData: parsedState });
 
-      await sectionRenderer.renderSection(this.dataset.sectionId, {
-        cache: false,
-        url,
+        if (hasError) {
+          this.updateMessage();
+        } else if (action === this.actions.add) {
+          this.updateMessage(parseInt(quantity))
+        } else if (action === this.actions.update) {
+          this.updateMessage(parseInt(quantity - quantityElement.dataset.cartQuantity))
+        } else {
+          this.updateMessage(-parseInt(quantityElement.dataset.cartQuantity))
+        }
+      }).catch((error) => {
+        this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
+        this.resetQuantityInput(id);
+        console.error(error);
+        this.setErrorMessage(window.cartStrings.error);
+      })
+      .finally(() => {
+        this.toggleLoading(id);
       });
-    }
   }
 
-  #disableQuickOrderListItems() {
-    this.classList.add('quick-order-list-disabled');
+  resetQuantityInput(id, quantityElement) {
+    const input = quantityElement ?? document.getElementById(`Quantity-${id}`);
+    input.value = input.getAttribute('value');
   }
 
-  #enableQuickOrderListItems() {
-    this.classList.remove('quick-order-list-disabled');
-  }
+  setErrorMessage(message = null) {
+    this.errorMessageTemplate = this.errorMessageTemplate ?? document.getElementById(`QuickOrderListErrorTemplate-${this.sectionId}`).cloneNode(true);
+    const errorElements = document.querySelectorAll('.quick-order-list-error');
 
-  /**
-   * Shows the remove all confirmation dialog
-   * @param {Event} event - The click event
-   */
-  showRemoveAllConfirmation(event) {
-    event.preventDefault();
-    this.#confirmationTrigger = /** @type {HTMLElement} */ (event.target);
-    this.#toggleConfirmationPanel(true);
-  }
-
-  /**
-   * Hides the remove all confirmation
-   * @param {Event} event - The click event
-   */
-  hideRemoveAllConfirmation(event) {
-    event.preventDefault();
-    this.#toggleConfirmationPanel(false);
-    this.#confirmationTrigger?.focus();
-    this.#confirmationTrigger = null;
-  }
-
-  /**
-   * Toggles the confirmation panel visibility
-   * @param {boolean} show
-   */
-  #toggleConfirmationPanel(show) {
-    this.refs.confirmationPanel.classList.toggle('hidden', !show);
-    this.refs.totalInfo.classList.toggle('confirmation-visible', show);
-  }
-
-  /**
-   * Shows an error message in the error container
-   * @param {string} message - The error message to display
-   */
-  #showErrorMessage(message) {
-    this.refs.errorText.textContent = message;
-    this.refs.errorContainer.classList.remove('hidden');
-  }
-
-  /**
-   * Hides the error messages
-   */
-  #clearErrorMessage() {
-    this.refs.errorContainer.classList.add('hidden');
-  }
-
-  /**
-   * Shows success message in the success container
-   * @param {number} quantityAdded - The number of items added
-   */
-  #showSuccessMessage(quantityAdded) {
-    this.#clearErrorMessage();
-
-    const oneItemText = Theme?.translations?.items_added_to_cart_one || '1 item added to cart';
-    const itemsText = Theme?.translations?.items_added_to_cart_other || '{{ count }} items added to cart';
-
-    const message = quantityAdded === 1 ? oneItemText : itemsText.replace('{{ count }}', quantityAdded.toString());
-
-    this.refs.successText.textContent = message;
-    this.refs.successContainer.classList.remove('hidden');
-  }
-
-  #clearSuccessMessage() {
-    this.refs.successContainer.classList.add('hidden');
-  }
-
-  /**
-   * Applies shimmer effects to price elements
-   * @param {Array<string|number>} variantIds - Array of variant IDs to apply shimmer to
-   */
-  #applyShimmerEffects(variantIds) {
-    for (const variantId of variantIds) {
-      const variantRow = this.refs.variantRows.find((row) => row.dataset.variantId === String(variantId));
-      if (variantRow) {
-        const variantTotal = /** @type {import('./utilities').TextComponent|null} */ (
-          variantRow.querySelector('.variant-item__total-price')
-        );
-        variantTotal?.shimmer();
-      }
-    }
-
-    const totalPrice = /** @type {import('./utilities').TextComponent|null} */ (
-      this.querySelector('text-component[ref="totalPrice"]')
-    );
-    totalPrice?.shimmer();
-  }
-
-  #scrollToTopOfSection() {
-    // Defer layout read until scroll action to batch with other layout work
-    requestAnimationFrame(() => {
-      const top = this.getBoundingClientRect().top;
-      window.scrollTo({ top: top + window.scrollY, behavior: 'smooth' });
+    errorElements.forEach((errorElement) => {
+      errorElement.innerHTML = '';
+      if (!message) return;
+      const updatedMessageElement = this.errorMessageTemplate.cloneNode(true);
+      updatedMessageElement.content.querySelector('.quick-order-list-error-message').innerText = message;
+      errorElement.appendChild(updatedMessageElement.content);
     });
   }
 
-  #focusFirstQuantityInput() {
-    for (const input of this.querySelectorAll('input[type="number"][data-cart-quantity]')) {
-      if (input instanceof HTMLElement && input.offsetParent !== null) {
-        input.focus({ preventScroll: true });
-        return;
-      }
+  updateMessage(quantity = null) {
+    const messages = this.querySelectorAll('.quick-order-list__message-text');
+    const icons = this.querySelectorAll('.quick-order-list__message-icon');
+
+    if (quantity === null || isNaN(quantity)) {
+      messages.forEach(message => message.innerHTML = '');
+      icons.forEach(icon => icon.classList.add('hidden'));
+      return;
     }
+
+    const isQuantityNegative = quantity < 0;
+    const absQuantity = Math.abs(quantity);
+
+    const textTemplate = isQuantityNegative
+      ? (absQuantity === 1 ? window.quickOrderListStrings.itemRemoved : window.quickOrderListStrings.itemsRemoved)
+      : (quantity === 1 ? window.quickOrderListStrings.itemAdded : window.quickOrderListStrings.itemsAdded);
+
+    messages.forEach((msg) => msg.innerHTML = textTemplate.replace('[quantity]', absQuantity));
+
+    if (!isQuantityNegative) {
+      icons.forEach((i) => i.classList.remove('hidden'));
+    }
+
   }
 
-  /**
-   * Updates section HTML using morphSection
-   * @param {{ sections?: Record<string, string> }} data - Response data containing sections
-   */
-  #updateSectionHTML(data) {
-    if (data.sections && this.dataset.sectionId) {
-      const sectionHtml = data.sections[this.dataset.sectionId];
-      if (sectionHtml) {
-        morphSection(this.dataset.sectionId, sectionHtml);
-      }
+  updateError(updatedValue, id) {
+    let message = '';
+    if (typeof updatedValue === 'undefined') {
+      message = window.cartStrings.error;
+    } else {
+      message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
     }
+    this.updateLiveRegions(id, message);
   }
 
-  /**
-   * Gets the section IDs for updating
-   * @returns {string[]} Array of section IDs
-   */
-  #getSectionIds() {
-    const sectionIds = [];
-
-    if (this.dataset.sectionId) {
-      sectionIds.push(this.dataset.sectionId);
+  updateLiveRegions(id, message) {
+    const variantItemErrorDesktop = document.getElementById(`Quick-order-list-item-error-desktop-${id}`);
+    const variantItemErrorMobile = document.getElementById(`Quick-order-list-item-error-mobile-${id}`);
+    if (variantItemErrorDesktop) {
+      variantItemErrorDesktop.querySelector('.variant-item__error-text').innerHTML = message;
+      variantItemErrorDesktop.closest('tr').classList.remove('hidden');
     }
+    if (variantItemErrorMobile) variantItemErrorMobile.querySelector('.variant-item__error-text').innerHTML = message;
 
-    // Also include all cart-items-component sections (like cart drawer) for smooth updates
-    const cartItemsComponents = document.querySelectorAll('cart-items-component');
-    for (const component of cartItemsComponents) {
-      if (!(component instanceof HTMLElement)) continue;
-      if (component.dataset.sectionId && !sectionIds.includes(component.dataset.sectionId)) {
-        sectionIds.push(component.dataset.sectionId);
-      }
+    this.variantItemStatusElement.setAttribute('aria-hidden', true);
+
+    const cartStatus = document.getElementById('quick-order-list-live-region-text');
+    cartStatus.setAttribute('aria-hidden', false);
+
+    setTimeout(() => {
+      cartStatus.setAttribute('aria-hidden', true);
+    }, 1000);
+  }
+
+  getSectionInnerHTML(html, selector) {
+    return new DOMParser()
+      .parseFromString(html, 'text/html')
+      .querySelector(selector).innerHTML;
+  }
+
+  toggleLoading(id, enable) {
+    const quickOrderList = document.getElementById(this.quickOrderListId);
+    const quickOrderListItems = this.querySelectorAll(`#Variant-${id} .loading-overlay`);
+
+    if (enable) {
+      quickOrderList.classList.add('quick-order-list__container--disabled');
+      [...quickOrderListItems].forEach((overlay) => overlay.classList.remove('hidden'));
+      document.activeElement.blur();
+      this.variantItemStatusElement.setAttribute('aria-hidden', false);
+    } else {
+      quickOrderList.classList.remove('quick-order-list__container--disabled');
+      quickOrderListItems.forEach((overlay) => overlay.classList.add('hidden'));
     }
-
-    return sectionIds;
   }
 }
 
-if (!customElements.get('quick-order-list-component')) {
-  customElements.define('quick-order-list-component', QuickOrderListComponent);
-}
+customElements.define('quick-order-list', QuickOrderList);
