@@ -1,0 +1,112 @@
+{
+  "sections": {
+    "persiana_main": {
+      "type": "persiana-calculator",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "sistema_url": "",
+        "envio_url": "/pages/envios-y-pagos",
+        "caracteristicas": "<p>Persiana de esparto tejida artesanalmente en Pampaneira (Granada). Fabricada con fibra natural de esparto. Sistema de colocación incluido. Medidas mínimas: 30 × 30 cm. Medidas máximas: 700 × 700 cm.</p>",
+        "faq": "<p><strong>¿Cuánto tarda en llegar?</strong><br>24–72 horas laborables tras confirmar el pedido.</p><p><strong>¿Cómo la instalo?</strong><br>Con los ganchos incluidos, en menos de 10 minutos.</p><p><strong>¿Qué pasa si no me gusta?</strong><br>30 días de devolución gratuita.</p>"
+      }
+    },
+    "antes_despues": {
+      "type": "antes-despues",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Antes y Después (de clientes)",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "como_medidas": {
+      "type": "como-tomar-medidas",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Cómo tomar las medidas",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "label_porche": "Porche",
+        "video_porche": "",
+        "label_interna": "Ventana (parte interna)",
+        "video_interna": "",
+        "label_exterior": "Ventana (exterior)",
+        "video_exterior": ""
+      }
+    },
+    "como_instalar": {
+      "type": "como-instalar",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Cómo instalar las persianas de esparto",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "video_url": "",
+        "instrucciones": "<ol><li>Mide el hueco donde quieres colocar la persiana.</li><li>Coloca los ganchos incluidos en la parte superior del marco.</li><li>Cuelga la persiana de los ganchos. Listo.</li></ol>"
+      }
+    },
+    "como_fabricamos": {
+      "type": "como-fabricamos",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Cómo fabricamos las persianas de esparto",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "video_url": ""
+      }
+    },
+    "brand_pillars": {
+      "type": "brand-pillars",
+      "settings": {
+        "heading": "Comprometidos con el medio ambiente",
+        "color_scheme": "scheme-2",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales reciclados",
+            "body": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Producción artesanal",
+            "body": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Sostenibilidad y Respeto",
+            "body": "El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos."
+          }
+        }
+      },
+      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
+    },
+    "product_recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Otros productos",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": [
+    "persiana_main",
+    "antes_despues",
+    "como_medidas",
+    "como_instalar",
+    "como_fabricamos",
+    "brand_pillars",
+    "product_recommendations"
+  ]
+}
