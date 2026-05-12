@@ -1,0 +1,490 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<section
+  class="persiana-calc color-{{ section.settings.color_scheme }}"
+  data-persiana-calculator
+  id="persiana-calc-{{ section.id }}"
+>
+  <div class="persiana-calc__inner">
+
+    {%- comment -%} ── LEFT: Gallery ── {%- endcomment -%}
+    <div class="persiana-calc__gallery">
+      <div class="persiana-calc__main-wrap">
+        {%- if product.featured_image -%}
+          <img
+            data-gallery-main
+            src="{{ product.featured_image | image_url: width: 900 }}"
+            alt="{{ product.featured_image.alt | escape }}"
+            width="900"
+            height="{{ 900 | divided_by: product.featured_image.aspect_ratio | round }}"
+            loading="eager"
+            class="persiana-calc__main-img"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'persiana-calc__main-img' }}
+        {%- endif -%}
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div class="persiana-calc__thumbs">
+          {%- for image in product.images limit: 4 -%}
+            <button
+              type="button"
+              class="persiana-calc__thumb{% if forloop.first %} is-active{% endif %}"
+              data-gallery-thumb
+              data-image-src="{{ image | image_url: width: 900 }}"
+              data-image-alt="{{ image.alt | escape }}"
+              aria-label="{{ image.alt | default: product.title | escape }}"
+            >
+              <img
+                src="{{ image | image_url: width: 120 }}"
+                alt="{{ image.alt | escape }}"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT: Details + Calculator ── {%- endcomment -%}
+    <div class="persiana-calc__details">
+
+      <h1 class="persiana-calc__title">{{ product.title }}</h1>
+
+      {%- if section.settings.sistema_url != blank -%}
+        <a href="{{ section.settings.sistema_url }}" class="persiana-calc__sistema-link">
+          + Incluimos Sistema para Colocarlas
+        </a>
+      {%- endif -%}
+
+      <form
+        class="persiana-calc__form"
+        action="/cart/add"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        <input type="hidden" name="properties[_precio_calculado]" data-calc="hidden-price" value="">
+        <input type="hidden" name="properties[_m2]"              data-calc="hidden-m2"    value="">
+
+        <div class="persiana-calc__field">
+          <label class="persiana-calc__label" for="Ancho-{{ section.id }}">
+            Ancho de la persiana en centímetros
+            <span class="persiana-calc__info-icon" title="Mide el hueco donde colocarás la persiana, de izquierda a derecha.">&#9432;</span>
+          </label>
+          <input
+            type="number"
+            id="Ancho-{{ section.id }}"
+            name="properties[Ancho (cm)]"
+            class="persiana-calc__input"
+            data-calc="ancho"
+            min="30" max="700" step="1"
+            placeholder="100"
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="persiana-calc__field">
+          <label class="persiana-calc__label" for="Largo-{{ section.id }}">
+            Largo de la persiana en centímetros
+            <span class="persiana-calc__info-icon" title="Mide el hueco donde colocarás la persiana, de arriba a abajo.">&#9432;</span>
+          </label>
+          <input
+            type="number"
+            id="Largo-{{ section.id }}"
+            name="properties[Largo (cm)]"
+            class="persiana-calc__input"
+            data-calc="largo"
+            min="30" max="700" step="1"
+            placeholder="100"
+            autocomplete="off"
+          >
+        </div>
+
+        <a href="{{ section.settings.envio_url | default: '#' }}" class="persiana-calc__envio-link">
+          Envío Gratis en toda la Península
+        </a>
+
+        <div class="persiana-calc__qty-wrap">
+          <span class="persiana-calc__qty-label">Cantidad</span>
+          <div class="persiana-calc__qty-row">
+            <button type="button" class="persiana-calc__qty-btn" data-qty-action="dec" aria-label="Reducir cantidad">−</button>
+            <input
+              type="number"
+              name="quantity"
+              data-calc="qty"
+              class="persiana-calc__qty-input"
+              value="1"
+              min="1"
+              aria-label="Cantidad"
+            >
+            <button type="button" class="persiana-calc__qty-btn" data-qty-action="inc" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+
+        <div class="persiana-calc__price-box" data-calc="price-box" data-state="empty">
+          <span class="persiana-calc__price-label">Precio total</span>
+          <span class="persiana-calc__price-value" data-calc="price-value">Introduce tus medidas</span>
+        </div>
+
+        <p class="persiana-calc__error" data-calc="error" hidden>
+          No hacemos ese tamaño (mín. 30 cm · máx. 700 cm)
+        </p>
+
+        <button
+          type="submit"
+          class="persiana-calc__submit"
+          data-calc="submit"
+          disabled
+        >
+          Agregar al carrito
+        </button>
+      </form>
+
+      {%- if section.settings.caracteristicas != blank -%}
+        <details class="persiana-calc__accordion">
+          <summary class="persiana-calc__accordion-hd">
+            Características del producto
+            <span class="persiana-calc__accordion-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="persiana-calc__accordion-body">
+            {{ section.settings.caracteristicas }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if section.settings.faq != blank -%}
+        <details class="persiana-calc__accordion">
+          <summary class="persiana-calc__accordion-hd">
+            Preguntas frecuentes
+            <span class="persiana-calc__accordion-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="persiana-calc__accordion-body">
+            {{ section.settings.faq }}
+          </div>
+        </details>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .persiana-calc { background: var(--color-background); }
+
+  .persiana-calc__inner {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    min-height: 560px;
+  }
+
+  /* Gallery */
+  .persiana-calc__gallery {
+    display: flex;
+    flex-direction: column;
+    background: #f0e8de;
+  }
+  .persiana-calc__main-wrap {
+    flex: 1;
+    overflow: hidden;
+    min-height: 420px;
+  }
+  .persiana-calc__main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .persiana-calc__thumbs {
+    display: flex;
+    gap: 6px;
+    padding: 10px 12px;
+    background: #fff;
+    border-top: 1px solid #ece5db;
+    flex-shrink: 0;
+  }
+  .persiana-calc__thumb {
+    width: 56px;
+    height: 56px;
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+    flex-shrink: 0;
+    transition: border-color 0.15s;
+  }
+  .persiana-calc__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .persiana-calc__thumb.is-active,
+  .persiana-calc__thumb:hover { border-color: #3a2a1a; }
+
+  /* Details */
+  .persiana-calc__details {
+    padding: 36px 36px 40px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    overflow-y: auto;
+  }
+  .persiana-calc__title {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  .persiana-calc__sistema-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #c8824a;
+    text-decoration: underline;
+    margin-bottom: 20px;
+  }
+
+  /* Fields */
+  .persiana-calc__field { margin-bottom: 14px; }
+  .persiana-calc__label {
+    display: block;
+    font-size: 0.8125rem;
+    color: #3a2a1a;
+    margin-bottom: 6px;
+  }
+  .persiana-calc__info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    font-size: 10px;
+    cursor: help;
+    color: #888;
+    margin-left: 4px;
+    vertical-align: middle;
+    font-style: normal;
+  }
+  .persiana-calc__input {
+    display: block;
+    width: 100%;
+    height: 44px;
+    border: 1px solid #ddd0c0;
+    background: #fff;
+    padding: 0 14px;
+    font-size: 1rem;
+    color: #1a1a1a;
+    outline: none;
+    -moz-appearance: textfield;
+    transition: border-color 0.15s;
+  }
+  .persiana-calc__input::-webkit-inner-spin-button,
+  .persiana-calc__input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .persiana-calc__input:focus { border-color: #8b6f47; }
+  .persiana-calc__input.is-error { border-color: #c0392b; background: #fff8f8; }
+
+  .persiana-calc__envio-link {
+    display: block;
+    font-size: 0.875rem;
+    color: #c8824a;
+    text-decoration: underline;
+    margin-bottom: 18px;
+    margin-top: 2px;
+  }
+
+  /* Quantity */
+  .persiana-calc__qty-wrap { margin-bottom: 16px; }
+  .persiana-calc__qty-label {
+    display: block;
+    font-size: 0.9375rem;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .persiana-calc__qty-row {
+    display: flex;
+    border: 1px solid #ddd0c0;
+    width: 160px;
+  }
+  .persiana-calc__qty-btn {
+    width: 40px;
+    height: 44px;
+    background: #fff;
+    border: none;
+    font-size: 1.125rem;
+    cursor: pointer;
+    color: #3a2a1a;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .persiana-calc__qty-btn:hover { background: #f5ede3; }
+  .persiana-calc__qty-input {
+    flex: 1;
+    height: 44px;
+    border: none;
+    border-left: 1px solid #ddd0c0;
+    border-right: 1px solid #ddd0c0;
+    text-align: center;
+    font-size: 1rem;
+    color: #1a1a1a;
+    -moz-appearance: textfield;
+  }
+  .persiana-calc__qty-input::-webkit-inner-spin-button,
+  .persiana-calc__qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+  /* Price box */
+  .persiana-calc__price-box {
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: background 0.2s;
+  }
+  .persiana-calc__price-box[data-state="empty"]  { background: #ece5db; }
+  .persiana-calc__price-box[data-state="active"] { background: #e8977a; }
+  .persiana-calc__price-box[data-state="error"]  { background: #f8e0dd; }
+
+  .persiana-calc__price-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .persiana-calc__price-box[data-state="empty"] .persiana-calc__price-label { color: #7a5c3e; }
+  .persiana-calc__price-box[data-state="error"] .persiana-calc__price-label { color: #c0392b; }
+
+  .persiana-calc__price-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .persiana-calc__price-box[data-state="empty"] .persiana-calc__price-value {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #aaa;
+  }
+  .persiana-calc__price-box[data-state="error"] .persiana-calc__price-value {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #c0392b;
+  }
+
+  .persiana-calc__error {
+    font-size: 0.8125rem;
+    color: #c0392b;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+
+  /* Submit */
+  .persiana-calc__submit {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #3a2a1a;
+    color: #fff;
+    border: none;
+    font-size: 0.8125rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: background 0.2s;
+  }
+  .persiana-calc__submit:hover:not(:disabled) { background: #5a3e28; }
+  .persiana-calc__submit:disabled { background: #ccc; cursor: not-allowed; }
+
+  /* Accordions */
+  .persiana-calc__accordion { border-top: 1px solid #ece5db; }
+  .persiana-calc__accordion:last-child { border-bottom: 1px solid #ece5db; }
+  .persiana-calc__accordion-hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3a2a1a;
+    user-select: none;
+  }
+  .persiana-calc__accordion-hd::-webkit-details-marker { display: none; }
+  .persiana-calc__accordion-chevron {
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  details[open] .persiana-calc__accordion-chevron { transform: rotate(-135deg); }
+  .persiana-calc__accordion-body {
+    padding-bottom: 16px;
+    font-size: 0.875rem;
+    color: #7a5c3e;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 768px) {
+    .persiana-calc__inner { grid-template-columns: 1fr; }
+    .persiana-calc__title { font-size: 1.5rem; }
+    .persiana-calc__details { padding: 24px 20px 32px; }
+  }
+</style>
+
+<script src="{{ 'persiana-calculator.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Calculador Persiana",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "url",
+      "id": "sistema_url",
+      "label": "Enlace '+ Incluimos Sistema para Colocarlas'"
+    },
+    {
+      "type": "url",
+      "id": "envio_url",
+      "label": "Enlace 'Envío Gratis en toda la Península'"
+    },
+    {
+      "type": "richtext",
+      "id": "caracteristicas",
+      "label": "Características del producto",
+      "info": "Contenido del acordeón de características"
+    },
+    {
+      "type": "richtext",
+      "id": "faq",
+      "label": "Preguntas frecuentes",
+      "info": "Contenido del acordeón de FAQ"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calculador Persiana"
+    }
+  ]
+}
+{% endschema %}
