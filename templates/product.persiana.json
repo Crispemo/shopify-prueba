@@ -1,13 +1,88 @@
 {
   "sections": {
-    "persiana_main": {
-      "type": "persiana-calculator",
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": { "text": "{{ product.vendor }}", "text_style": "uppercase" }
+        },
+        "title": { "type": "title", "settings": {} },
+        "judge_me": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "calculator": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"margin:8px 0\"><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-ancho\">Ancho en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de izquierda a derecha\">&#9432;<\/span><\/label><div class=\"field\"><input type=\"number\" id=\"pc-ancho\" class=\"field__input\" name=\"properties[Ancho (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"><\/div><\/div><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-largo\">Largo en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de arriba a abajo\">&#9432;<\/span><\/label><div class=\"field\"><input type=\"number\" id=\"pc-largo\" class=\"field__input\" name=\"properties[Largo (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"><\/div><\/div><p id=\"pc-error\" style=\"display:none;color:rgb(192,57,43);font-size:.8125rem;margin:4px 0 8px\">No hacemos ese tamaño (mín. 30 cm · máx. 700 cm)<\/p><div id=\"pc-box\" style=\"padding:12px 16px;margin:12px 0;background:rgb(236,229,219);transition:background .2s\"><span style=\"display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:rgb(122,92,62)\">PRECIO TOTAL<\/span><span id=\"pc-val\" style=\"display:block;font-size:.875rem;color:#aaa;margin-top:4px\">Introduce tus medidas<\/span><\/div><input type=\"hidden\" name=\"properties[_precio_calculado]\" id=\"pc-hp\"><input type=\"hidden\" name=\"properties[_m2]\" id=\"pc-hm\"><\/div><script>(function(){var MIN=30,MAX=700;function rate(m2){return m2<1?150:m2<=3?105:95;}function up(){var aEl=document.getElementById('pc-ancho'),lEl=document.getElementById('pc-largo');if(!aEl||!lEl)return;var a=aEl.value?parseFloat(aEl.value):null,l=lEl.value?parseFloat(lEl.value):null;var err=document.getElementById('pc-error'),box=document.getElementById('pc-box'),val=document.getElementById('pc-val'),hp=document.getElementById('pc-hp'),hm=document.getElementById('pc-hm');var form=aEl.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));var inv=(a!==null&&(a<MIN||a>MAX))||(l!==null&&(l<MIN||l>MAX));aEl.style.borderColor=(a!==null&&(a<MIN||a>MAX))?'rgb(192,57,43)':'';lEl.style.borderColor=(l!==null&&(l<MIN||l>MAX))?'rgb(192,57,43)':'';if(inv){err.style.display='block';box.style.background='rgb(248,224,221)';val.style.cssText='display:block;font-size:.875rem;color:rgb(192,57,43);margin-top:4px';val.textContent='No hacemos ese tamaño';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}err.style.display='none';if(a===null||l===null){box.style.background='rgb(236,229,219)';val.style.cssText='display:block;font-size:.875rem;color:#aaa;margin-top:4px';val.textContent='Introduce tus medidas';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}var q=1,qEl=form&&form.querySelector('[name=quantity]');if(qEl)q=parseInt(qEl.value)||1;var m2=a*l\/10000,r=rate(m2),u=Math.ceil(m2*r*100)\/100,t=Math.ceil(u*q*100)\/100;box.style.background='rgb(232,151,122)';val.style.cssText='display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';val.textContent='€ '+t.toFixed(2).replace('.',',');if(btn)btn.disabled=false;hp.value=t.toFixed(2);hm.value=m2.toFixed(4);}document.addEventListener('DOMContentLoaded',function(){var a=document.getElementById('pc-ancho'),l=document.getElementById('pc-largo');if(!a||!l)return;var form=a.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));if(btn)btn.disabled=true;a.addEventListener('input',up);l.addEventListener('input',up);var q=form&&form.querySelector('[name=quantity]');if(q)q.addEventListener('change',up);});})();<\/script>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "klarna": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"border: 1px solid #ccc; padding: 10px; font-size: 12px; margin: 0; font-family: 'Arial', sans-serif; align-items: center; text-align: center; background-color: #f8f8f8;\">Paga en 3 plazos sin intereses (0% TAE) con <strong>Klarna.<\/strong><\/div>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": { "picker_type": "button" }
+        },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": { "show_dynamic_checkout": true, "show_gift_card_recipient": true }
+        },
+        "shipping_icons": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"mi-web-features-section\" style=\"display:flex;flex-wrap:wrap;justify-content:space-around;align-items:center;padding:10px;text-align:center\"><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/11_7.png?v=1728409474\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Envío Gratis en 24 - 72h<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/1_11.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Devoluciones Gratis 30 días<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/3_15.png?v=1728409472\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Pago 100% Fácil y Seguro<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/4_12.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Atención Personalizada<\/p><\/div><\/div>"
+          }
+        },
+        "caracteristicas_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "CARACTERÍSTICAS DEL PRODUCTO",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.caracteristicas | metafield_tag }}<\/p>",
+            "page": ""
+          }
+        },
+        "faq_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "PREGUNTAS FRECUENTES",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.preguntas_frecuentes | metafield_tag }}<\/p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor", "title", "judge_me", "calculator",
+        "price", "klarna", "variant_picker",
+        "quantity_selector", "buy_buttons",
+        "shipping_icons", "caracteristicas_tab", "faq_tab"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "sistema_url": "",
-        "envio_url": "/pages/envios-y-pagos",
-        "caracteristicas": "<p>Persiana de esparto tejida artesanalmente en Pampaneira (Granada). Fabricada con fibra natural de esparto. Sistema de colocación incluido. Medidas mínimas: 30 × 30 cm. Medidas máximas: 700 × 700 cm.</p>",
-        "faq": "<p><strong>¿Cuánto tarda en llegar?</strong><br>24–72 horas laborables tras confirmar el pedido.</p><p><strong>¿Cómo la instalo?</strong><br>Con los ganchos incluidos, en menos de 10 minutos.</p><p><strong>¿Qué pasa si no me gusta?</strong><br>30 días de devolución gratuita.</p>"
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "antes_despues": {
@@ -55,58 +130,101 @@
         "video_url": ""
       }
     },
-    "brand_pillars": {
-      "type": "brand-pillars",
-      "settings": {
-        "heading": "Comprometidos con el medio ambiente",
-        "color_scheme": "scheme-2",
-        "section_width": "page-width",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
+    "reviews_widget": {
+      "type": "apps",
       "blocks": {
-        "pillar_1": {
-          "type": "pillar",
+        "judge_me_widget": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "title": "Materiales reciclados",
-            "body": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
-          }
-        },
-        "pillar_2": {
-          "type": "pillar",
-          "settings": {
-            "title": "Producción artesanal",
-            "body": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
-          }
-        },
-        "pillar_3": {
-          "type": "pillar",
-          "settings": {
-            "title": "Sostenibilidad y Respeto",
-            "body": "El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos."
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
+      "block_order": ["judge_me_widget"],
+      "settings": { "include_margins": true }
     },
-    "product_recommendations": {
+    "related_products": {
       "type": "related-products",
       "settings": {
-        "heading": "Otros productos",
-        "color_scheme": "scheme-1",
-        "section_width": "page-width",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "heading": "Productos relacionados",
+        "heading_size": "h1",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "sustainability": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926471938.webp",
+            "title": "Materiales Reciclados",
+            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926429934.webp",
+            "title": "Producción Artesanal",
+            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926486395.webp",
+            "title": "Sostenibilidad y Respeto",
+            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["col_1", "col_2", "col_3"],
+      "settings": {
+        "title": "COMPROMETIDOS CON EL MEDIO AMBIENTE",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
-    "persiana_main",
+    "main",
     "antes_despues",
     "como_medidas",
     "como_instalar",
     "como_fabricamos",
-    "brand_pillars",
-    "product_recommendations"
+    "reviews_widget",
+    "related_products",
+    "sustainability"
   ]
 }
