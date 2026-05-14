@@ -90,7 +90,7 @@
       "block_order": ["pillar_1", "pillar_2", "pillar_3"]
     },
     "product_recommendations": {
-      "type": "product-recommendations",
+      "type": "related-products",
       "settings": {
         "heading": "Otros productos",
         "color_scheme": "scheme-1",
