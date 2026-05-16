@@ -117,11 +117,11 @@
     line-height: 1.65;
   }
 
-  /* Split layout */
+  /* Split layout — imagen toma 60% del espacio */
   .p-historia__split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    grid-template-columns: 3fr 2fr;
+    gap: 56px;
     align-items: center;
     text-align: left;
     margin-bottom: 48px;
@@ -129,15 +129,18 @@
 
   .p-historia__img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
+    min-height: 400px;
+    max-height: 560px;
     object-fit: cover;
-    border-radius: 8px;
+    object-position: center;
+    border-radius: 10px;
     display: block;
   }
   .p-historia__img-placeholder {
-    aspect-ratio: 4 / 3;
+    min-height: 400px;
     background: #e8e0d6;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,8 +148,8 @@
   .p-historia__img-placeholder svg { width: 60px; opacity: .4; }
 
   .p-historia__body {
-    font-size: 0.9375rem;
-    line-height: 1.75;
+    font-size: 1.0625rem;
+    line-height: 1.8;
     color: var(--color-foreground);
     margin-bottom: 32px;
   }

@@ -46,9 +46,9 @@
   .como-instalar__inner { padding: 0 24px; max-width: 1200px; margin: 0 auto; }
   .como-instalar__heading {
     text-align: center;
-    font-size: 1.625rem;
+    font-size: clamp(1.625rem, 4vw, 2.25rem);
     font-weight: 700;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     color: var(--color-foreground);
   }
   .como-instalar__split {
@@ -79,7 +79,7 @@
     color: #fff;
     font-size: 0.875rem;
   }
-  .como-instalar__rte { font-size: 0.9375rem; color: var(--color-foreground); line-height: 1.75; }
+  .como-instalar__rte { font-size: 1.0625rem; color: var(--color-foreground); line-height: 1.85; }
   @media (max-width: 640px) {
     .como-instalar__split { grid-template-columns: 1fr; }
   }

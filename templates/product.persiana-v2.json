@@ -49,20 +49,17 @@
             "custom_liquid": "<div class=\"mi-web-features-section\" style=\"display:flex;flex-wrap:wrap;justify-content:space-around;align-items:center;padding:10px;text-align:center\"><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/11_7.png?v=1728409474\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Envío en 7-10 días hábiles<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/1_11.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Devoluciones Gratis 30 días<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/3_15.png?v=1728409472\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Pago 100% Fácil y Seguro<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/4_12.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Atención Personalizada<\/p><\/div><\/div>"
           }
         },
-        "caracteristicas_tab": {
-          "type": "collapsible_tab",
+        "caracteristicas_inline": {
+          "type": "custom_liquid",
           "settings": {
-            "heading": "CARACTERÍSTICAS DEL PRODUCTO",
-            "icon": "none",
-            "content": "<p>{{ product.metafields.custom.caracteristicas | metafield_tag }}<\/p>",
-            "page": ""
+            "custom_liquid": "<div style=\"margin:16px 0;padding:16px 20px;background:#faf7f3;border-radius:6px;border-left:3px solid #c8824a\"><p style=\"font-weight:700;font-size:0.8125rem;margin:0 0 10px;color:#3a2a1a;text-transform:uppercase;letter-spacing:.07em\">Material: Esparto &nbsp;·&nbsp; Incluye tornillos para la colocación<\/p><ul style=\"margin:0;padding-left:18px;font-size:0.9375rem;line-height:2;color:inherit\"><li>Resistente a lluvia y al invierno<\/li><li>Perfecto tanto para interior como para exterior<\/li><li>Producto 100% artesanal, hecho en España<\/li><li>Elaborado con esparto natural<\/li><li>Materiales sostenibles &mdash; ¡Cuidamos del medio ambiente!<\/li><\/ul><\/div>"
           }
         }
       },
       "block_order": [
         "vendor", "title", "judge_me", "incluimos_sistema", "calculator",
         "envio_gratis_link", "price", "klarna", "variant_picker",
-        "quantity_selector", "buy_buttons", "shipping_icons", "caracteristicas_tab"
+        "quantity_selector", "buy_buttons", "shipping_icons", "caracteristicas_inline"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -134,10 +131,12 @@
       "type": "como-fabricamos",
       "settings": {
         "color_scheme": "scheme-1",
+        "eyebrow": "Artesanía tradicional",
         "heading": "Cómo fabricamos las persianas de esparto",
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "video_url": ""
+        "intro": "Cada persiana nace de nuestras manos. Te mostramos el proceso completo, desde la recogida del esparto hasta el producto final listo para tu hogar.",
+        "video_url": "",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
 
@@ -265,45 +264,45 @@
         "faq_1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "¿Cuánto tardan en llegar las persianas?",
+            "heading": "¿Se pueden hacer persianas a medida?",
             "icon": "none",
-            "content": "<p>El plazo de fabricación y envío es de 7 a 10 días hábiles desde la confirmación del pedido. Fabricamos cada persiana a medida, por eso necesitamos ese tiempo para hacerla correctamente.<\/p>",
+            "content": "<p>Sí. Todas nuestras persianas se fabrican a medida. Puedes contactarnos por WhatsApp o por email y nos pondremos en contacto contigo lo antes posible para asesorarte y darte el mejor presupuesto.<\/p>",
             "page": ""
           }
         },
         "faq_2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "¿Cómo calculo las medidas de mi persiana?",
+            "heading": "¿Cómo puedo colocar las persianas de esparto?",
             "icon": "none",
-            "content": "<p>Mide el hueco donde quieres colocar la persiana con una cinta métrica: el ancho de izquierda a derecha y el largo de arriba a abajo, siempre en centímetros. Introduce esas medidas en el calculador de la ficha de producto y verás el precio al momento.<\/p>",
+            "content": "<p>La persiana de esparto lleva incluidos todos los materiales necesarios para su colocación. Además, hemos preparado una guía paso a paso para que puedas verlo fácilmente. ¡Es muy sencillo!<\/p>",
             "page": ""
           }
         },
         "faq_3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "¿El sistema de colgar está incluido?",
+            "heading": "¿Cuánto tarda en llegarme el pedido?",
             "icon": "none",
-            "content": "<p>Sí. Incluimos el sistema de ganchos necesario para colgar la persiana. No necesitas comprar nada más.<\/p>",
+            "content": "<p>Es un producto hecho a mano, por lo que el plazo medio es de entre 3 y 7 días hábiles dependiendo de la época del año. Te informaremos del estado de tu pedido en todo momento.<\/p>",
             "page": ""
           }
         },
         "faq_4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "¿Puedo devolver la persiana si no me convence?",
+            "heading": "¿Se puede lavar?",
             "icon": "none",
-            "content": "<p>Al ser un producto fabricado a medida y de forma artesanal, la devolución solo es posible si hay un defecto de fabricación. Si tienes cualquier duda antes de hacer el pedido, escríbenos y te ayudamos a elegir las medidas correctas.<\/p>",
+            "content": "<p>Sí. Puedes limpiarla con agua, jabón y un cepillo suave. Después déjala al sol o al aire libre para que se seque bien antes de volver a colocarla.<\/p>",
             "page": ""
           }
         },
         "faq_5": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "¿Cómo se limpia una persiana de esparto?",
+            "heading": "¿Está hecha en España?",
             "icon": "none",
-            "content": "<p>Sacúdela suavemente para eliminar el polvo. Si necesita limpieza más profunda, pasa un paño húmedo con agua fría. Evita sumergirla en agua y déjala secar siempre a la sombra.<\/p>",
+            "content": "<p>Sí. Todos nuestros productos de esparto están hechos a mano en España. La fibra de esparto se recoge en campos españoles, apoyando la producción local y la artesanía tradicional.<\/p>",
             "page": ""
           }
         }
