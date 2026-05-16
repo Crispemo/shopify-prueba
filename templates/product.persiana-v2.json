@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,9 +14,15 @@
       "blocks": {
         "vendor": {
           "type": "text",
-          "settings": { "text": "{{ product.vendor }}", "text_style": "uppercase" }
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
         },
-        "title": { "type": "title", "settings": {} },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
         "judge_me": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
@@ -15,38 +30,54 @@
         "incluimos_sistema": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:6px 0 10px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">+ Incluimos Sistema para Colocarlas<\/a><\/div>"
+            "custom_liquid": "<div style=\"margin:6px 0 10px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">+ Incluimos Sistema para Colocarlas</a></div>"
           }
         },
         "calculator": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:8px 0\"><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-ancho\">Ancho en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de izquierda a derecha\">&#9432;<\/span><\/label><div class=\"field\"><input type=\"number\" id=\"pc-ancho\" class=\"field__input\" name=\"properties[Ancho (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"><\/div><\/div><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-largo\">Largo en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de arriba a abajo\">&#9432;<\/span><\/label><div class=\"field\"><input type=\"number\" id=\"pc-largo\" class=\"field__input\" name=\"properties[Largo (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"><\/div><\/div><p id=\"pc-error\" style=\"display:none;color:rgb(192,57,43);font-size:.8125rem;margin:4px 0 8px\">No hacemos ese tamaño (mín. 30 cm · máx. 700 cm)<\/p><div id=\"pc-box\" style=\"padding:12px 16px;margin:12px 0;background:rgb(236,229,219);transition:background .2s\"><span style=\"display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:rgb(122,92,62)\">PRECIO TOTAL<\/span><span id=\"pc-val\" style=\"display:block;font-size:.875rem;color:#aaa;margin-top:4px\">Introduce tus medidas<\/span><\/div><input type=\"hidden\" name=\"properties[_precio_calculado]\" id=\"pc-hp\"><input type=\"hidden\" name=\"properties[_m2]\" id=\"pc-hm\"><\/div><script>(function(){var MIN=30,MAX=700;function rate(m2){return m2<1?150:m2<=3?105:95;}function up(){var aEl=document.getElementById('pc-ancho'),lEl=document.getElementById('pc-largo');if(!aEl||!lEl)return;var a=aEl.value?parseFloat(aEl.value):null,l=lEl.value?parseFloat(lEl.value):null;var err=document.getElementById('pc-error'),box=document.getElementById('pc-box'),val=document.getElementById('pc-val'),hp=document.getElementById('pc-hp'),hm=document.getElementById('pc-hm');var form=aEl.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));var inv=(a!==null&&(a<MIN||a>MAX))||(l!==null&&(l<MIN||l>MAX));aEl.style.borderColor=(a!==null&&(a<MIN||a>MAX))?'rgb(192,57,43)':'';lEl.style.borderColor=(l!==null&&(l<MIN||l>MAX))?'rgb(192,57,43)':'';if(inv){err.style.display='block';box.style.background='rgb(248,224,221)';val.style.cssText='display:block;font-size:.875rem;color:rgb(192,57,43);margin-top:4px';val.textContent='No hacemos ese tamaño';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}err.style.display='none';if(a===null||l===null){box.style.background='rgb(236,229,219)';val.style.cssText='display:block;font-size:.875rem;color:#aaa;margin-top:4px';val.textContent='Introduce tus medidas';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}var q=1,qEl=form&&form.querySelector('[name=quantity]');if(qEl)q=parseInt(qEl.value)||1;var m2=a*l\/10000,r=rate(m2),u=Math.ceil(m2*r*100)\/100,t=Math.ceil(u*q*100)\/100;box.style.background='rgb(232,151,122)';val.style.cssText='display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';val.textContent='€ '+t.toFixed(2).replace('.',',');if(btn)btn.disabled=false;hp.value=t.toFixed(2);hm.value=m2.toFixed(4);}document.addEventListener('DOMContentLoaded',function(){var a=document.getElementById('pc-ancho'),l=document.getElementById('pc-largo');if(!a||!l)return;var form=a.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));if(btn)btn.disabled=true;a.addEventListener('input',up);l.addEventListener('input',up);var q=form&&form.querySelector('[name=quantity]');if(q)q.addEventListener('change',up);});})();<\/script>"
+            "custom_liquid": "<div style=\"margin:8px 0\"><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-ancho\">Ancho en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de izquierda a derecha\">&#9432;</span></label><div class=\"field\"><input type=\"number\" id=\"pc-ancho\" class=\"field__input\" name=\"properties[Ancho (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"></div></div><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-largo\">Largo en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de arriba a abajo\">&#9432;</span></label><div class=\"field\"><input type=\"number\" id=\"pc-largo\" class=\"field__input\" name=\"properties[Largo (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"></div></div><p id=\"pc-error\" style=\"display:none;color:rgb(192,57,43);font-size:.8125rem;margin:4px 0 8px\">No hacemos ese tamaño (mín. 30 cm · máx. 700 cm)</p><div id=\"pc-box\" style=\"padding:12px 16px;margin:12px 0;background:rgb(236,229,219);transition:background .2s\"><span style=\"display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:rgb(122,92,62)\">PRECIO TOTAL</span><span id=\"pc-val\" style=\"display:block;font-size:.875rem;color:#aaa;margin-top:4px\">Introduce tus medidas</span></div><input type=\"hidden\" name=\"properties[_precio_calculado]\" id=\"pc-hp\"><input type=\"hidden\" name=\"properties[_m2]\" id=\"pc-hm\"></div><script>(function(){var MIN=30,MAX=700;function rate(m2){return m2<1?150:m2<=3?105:95;}function up(){var aEl=document.getElementById('pc-ancho'),lEl=document.getElementById('pc-largo');if(!aEl||!lEl)return;var a=aEl.value?parseFloat(aEl.value):null,l=lEl.value?parseFloat(lEl.value):null;var err=document.getElementById('pc-error'),box=document.getElementById('pc-box'),val=document.getElementById('pc-val'),hp=document.getElementById('pc-hp'),hm=document.getElementById('pc-hm');var form=aEl.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));var inv=(a!==null&&(a<MIN||a>MAX))||(l!==null&&(l<MIN||l>MAX));aEl.style.borderColor=(a!==null&&(a<MIN||a>MAX))?'rgb(192,57,43)':'';lEl.style.borderColor=(l!==null&&(l<MIN||l>MAX))?'rgb(192,57,43)':'';if(inv){err.style.display='block';box.style.background='rgb(248,224,221)';val.style.cssText='display:block;font-size:.875rem;color:rgb(192,57,43);margin-top:4px';val.textContent='No hacemos ese tamaño';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}err.style.display='none';if(a===null||l===null){box.style.background='rgb(236,229,219)';val.style.cssText='display:block;font-size:.875rem;color:#aaa;margin-top:4px';val.textContent='Introduce tus medidas';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}var q=1,qEl=form&&form.querySelector('[name=quantity]');if(qEl)q=parseInt(qEl.value)||1;var m2=a*l/10000,r=rate(m2),u=Math.ceil(m2*r*100)/100,t=Math.ceil(u*q*100)/100;box.style.background='rgb(232,151,122)';val.style.cssText='display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';val.textContent='€ '+t.toFixed(2).replace('.',',');if(btn)btn.disabled=false;hp.value=t.toFixed(2);hm.value=m2.toFixed(4);}document.addEventListener('DOMContentLoaded',function(){var a=document.getElementById('pc-ancho'),l=document.getElementById('pc-largo');if(!a||!l)return;var form=a.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));if(btn)btn.disabled=true;a.addEventListener('input',up);l.addEventListener('input',up);var q=form&&form.querySelector('[name=quantity]');if(q)q.addEventListener('change',up);});})();</script>"
           }
         },
         "envio_gratis_link": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío en 7-10 días hábiles<\/a><\/div>"
+            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío en 7-10 días hábiles</a></div>"
           }
         },
-        "price": { "type": "price", "disabled": true, "settings": {} },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
         "klarna": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"border: 1px solid #ccc; padding: 10px; font-size: 12px; margin: 0; font-family: 'Arial', sans-serif; align-items: center; text-align: center; background-color: #f8f8f8;\">Paga en 3 plazos sin intereses (0% TAE) con <strong>Klarna.<\/strong><\/div>"
+            "custom_liquid": "<div style=\"border: 1px solid #ccc; padding: 10px; font-size: 12px; margin: 0; font-family: 'Arial', sans-serif; align-items: center; text-align: center; background-color: #f8f8f8;\">Paga en 3 plazos sin intereses (0% TAE) con <strong>Klarna.</strong></div>"
           }
         },
-        "variant_picker": { "type": "variant_picker", "disabled": true, "settings": { "picker_type": "button" } },
-        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": { "show_dynamic_checkout": true, "show_gift_card_recipient": true }
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
         },
         "shipping_icons": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div class=\"mi-web-features-section\" style=\"display:flex;flex-wrap:wrap;justify-content:space-around;align-items:center;padding:10px;text-align:center\"><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/11_7.png?v=1728409474\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Envío en 7-10 días hábiles<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/1_11.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Devoluciones Gratis 30 días<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/3_15.png?v=1728409472\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Pago 100% Fácil y Seguro<\/p><\/div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0776\/3194\/7095\/files\/4_12.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Atención Personalizada<\/p><\/div><\/div>"
+            "custom_liquid": "<div class=\"mi-web-features-section\" style=\"display:flex;flex-wrap:wrap;justify-content:space-around;align-items:center;padding:10px;text-align:center\"><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https://cdn.shopify.com/s/files/1/0776/3194/7095/files/11_7.png?v=1728409474\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Envío en 7-10 días hábiles</p></div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https://cdn.shopify.com/s/files/1/0776/3194/7095/files/1_11.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Devoluciones Gratis 30 días</p></div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https://cdn.shopify.com/s/files/1/0776/3194/7095/files/3_15.png?v=1728409472\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Pago 100% Fácil y Seguro</p></div><div style=\"flex:1 1 22%;padding:10px;box-sizing:border-box\"><img src=\"https://cdn.shopify.com/s/files/1/0776/3194/7095/files/4_12.png?v=1728409473\" style=\"width:40px;height:auto;margin-bottom:10px\"><p style=\"font-size:12px;margin:0;font-family:'Arial',sans-serif\">Atención Personalizada</p></div></div>"
           }
         },
         "caracteristicas_inline": {
@@ -76,27 +107,95 @@
         "padding_bottom": 36
       }
     },
-
     "antes_despues": {
       "type": "antes-despues",
       "blocks": {
-        "imagen_tgyfLj": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_7.jpg" } },
-        "imagen_P4URGa": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_6.jpg" } },
-        "imagen_VkweVf": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_11.jpg" } },
-        "imagen_zFidcz": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_9.jpg" } },
-        "imagen_FjTEfJ": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_8.jpg" } },
-        "imagen_iBjVhg": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_12.jpg" } },
-        "imagen_NKR3hN": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_4.jpg" } },
-        "imagen_W48Hi7": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_10.jpg" } },
-        "imagen_hWVpiJ": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_5.jpg" } },
-        "imagen_CQ8Fn6": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_2.png" } },
-        "imagen_c6ApCX": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_3.png" } },
-        "imagen_r6Prma": { "type": "imagen", "settings": { "image": "shopify://shop_images/antes_y_despues_1.png" } }
+        "imagen_tgyfLj": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_7.jpg"
+          }
+        },
+        "imagen_P4URGa": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_6.jpg"
+          }
+        },
+        "imagen_VkweVf": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_11.jpg"
+          }
+        },
+        "imagen_zFidcz": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_9.jpg"
+          }
+        },
+        "imagen_FjTEfJ": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_8.jpg"
+          }
+        },
+        "imagen_iBjVhg": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_12.jpg"
+          }
+        },
+        "imagen_NKR3hN": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_4.jpg"
+          }
+        },
+        "imagen_W48Hi7": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_10.jpg"
+          }
+        },
+        "imagen_hWVpiJ": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_5.jpg"
+          }
+        },
+        "imagen_CQ8Fn6": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_2.png"
+          }
+        },
+        "imagen_c6ApCX": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_3.png"
+          }
+        },
+        "imagen_r6Prma": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_1.png"
+          }
+        }
       },
       "block_order": [
-        "imagen_tgyfLj","imagen_P4URGa","imagen_VkweVf","imagen_zFidcz",
-        "imagen_FjTEfJ","imagen_iBjVhg","imagen_NKR3hN","imagen_W48Hi7",
-        "imagen_hWVpiJ","imagen_CQ8Fn6","imagen_c6ApCX","imagen_r6Prma"
+        "imagen_tgyfLj",
+        "imagen_P4URGa",
+        "imagen_VkweVf",
+        "imagen_zFidcz",
+        "imagen_FjTEfJ",
+        "imagen_iBjVhg",
+        "imagen_NKR3hN",
+        "imagen_W48Hi7",
+        "imagen_hWVpiJ",
+        "imagen_CQ8Fn6",
+        "imagen_c6ApCX",
+        "imagen_r6Prma"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -106,7 +205,6 @@
         "padding_bottom": 56
       }
     },
-
     "historia": {
       "type": "persiana-historia",
       "settings": {
@@ -114,7 +212,8 @@
         "eyebrow": "Pampaneira · Las Alpujarras · Granada",
         "heading": "Una tradición de siglos desde las Alpujarras",
         "intro": "Las persianas de esparto de Jarapa Home nacen del conocimiento artesanal transmitido de generación en generación en el corazón de la Alpujarra granadina.",
-        "body": "<p>El esparto es una fibra natural que crece de forma silvestre en las laderas de Sierra Nevada. Cada persiana se elabora íntegramente a mano, combinando técnicas ancestrales con un acabado contemporáneo que encaja en cualquier hogar.</p><p>Al elegir una persiana de esparto, apuestas por un material 100% natural, duradero y biodegradable, fabricado a pocos kilómetros de donde crece la planta. Sin intermediarios, sin fábricas, sin plástico.</p>",
+        "image": "shopify://shop_images/Alpujarra.png",
+        "body": "<h5>El esparto es una fibra natural que crece de forma silvestre en las laderas de Sierra Nevada. Cada persiana se elabora íntegramente a mano, combinando técnicas ancestrales con un acabado contemporáneo que encaja en cualquier hogar.</h5><h5>Al elegir una persiana de esparto, apuestas por un material 100% natural, duradero y biodegradable, fabricado a pocos kilómetros de donde crece la planta. Sin intermediarios, sin fábricas, sin plástico.</h5>",
         "stat_1_num": "+15 años",
         "stat_1_label": "de tradición artesanal",
         "stat_2_num": "100%",
@@ -126,7 +225,6 @@
         "padding_bottom": 72
       }
     },
-
     "como_fabricamos": {
       "type": "como-fabricamos",
       "settings": {
@@ -139,7 +237,6 @@
         "padding_bottom": 72
       }
     },
-
     "como_medidas": {
       "type": "como-tomar-medidas",
       "settings": {
@@ -155,7 +252,6 @@
         "video_exterior": ""
       }
     },
-
     "como_instalar": {
       "type": "como-instalar",
       "settings": {
@@ -164,15 +260,16 @@
         "padding_top": 56,
         "padding_bottom": 56,
         "video_url": "",
-        "instrucciones": "<ol><li>Mide el hueco donde quieres colocar la persiana.<\/li><li>Coloca los ganchos incluidos en la parte superior del marco.<\/li><li>Cuelga la persiana de los ganchos. Listo.<\/li><\/ol>"
+        "instrucciones": "<ol><li><h5>Mide el hueco donde quieres colocar la persiana.</h5></li><li><h5>Coloca los ganchos incluidos en la parte superior del marco.</h5></li><li><h5>Cuelga la persiana de los ganchos. Listo.</h5></li></ol>"
       }
     },
-
     "personalizar_btn": {
       "type": "persiana-personalizar-btn",
-      "settings": { "padding_top": 32, "padding_bottom": 32 }
+      "settings": {
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     },
-
     "sustainability": {
       "type": "multicolumn",
       "blocks": {
@@ -181,8 +278,9 @@
           "settings": {
             "image": "shopify://shop_images/pagetify-file-1722926471938.webp",
             "title": "Materiales Reciclados",
-            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.<\/p>",
-            "link_label": "", "link": ""
+            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "col_2": {
@@ -190,8 +288,9 @@
           "settings": {
             "image": "shopify://shop_images/pagetify-file-1722926429934.webp",
             "title": "Producción Artesanal",
-            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.<\/p>",
-            "link_label": "", "link": ""
+            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "col_3": {
@@ -199,12 +298,17 @@
           "settings": {
             "image": "shopify://shop_images/pagetify-file-1722926486395.webp",
             "title": "Sostenibilidad y Respeto",
-            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.<\/p>",
-            "link_label": "", "link": ""
+            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3"],
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
       "settings": {
         "title": "COMPROMETIDOS CON EL MEDIO AMBIENTE",
         "heading_size": "h2",
@@ -213,7 +317,8 @@
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
-        "button_label": "", "button_link": "",
+        "button_label": "",
+        "button_link": "",
         "color_scheme": "",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
@@ -221,24 +326,34 @@
         "padding_bottom": 36
       }
     },
-
     "reviews_widget": {
       "type": "apps",
       "blocks": {
+        "judge_me_reviews_featured_carousel_jMJUYG": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 850
+          }
+        },
         "judge_me_widget": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
           "settings": {
-            "review_data": "sample_data",
+            "review_data": "real_data",
             "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget"
+            "empty_state": "hide_widget"
           }
         }
       },
-      "block_order": ["judge_me_widget"],
-      "settings": { "include_margins": true }
+      "block_order": [
+        "judge_me_reviews_featured_carousel_jMJUYG",
+        "judge_me_widget"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     },
-
     "related_products": {
       "type": "related-products",
       "settings": {
@@ -257,7 +372,6 @@
         "padding_bottom": 28
       }
     },
-
     "faq_section": {
       "type": "collapsible-content",
       "blocks": {
@@ -307,7 +421,13 @@
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
       "settings": {
         "caption": "",
         "heading": "Preguntas frecuentes",
@@ -324,7 +444,6 @@
       }
     }
   },
-
   "order": [
     "main",
     "antes_despues",
