@@ -27,7 +27,7 @@
         "envio_gratis_link": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío Gratis en toda la Península<\/a><\/div>"
+            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío en 7-10 días hábiles<\/a><\/div>"
           }
         },
         "price": {
@@ -98,7 +98,7 @@
         "vendor", "title", "judge_me", "incluimos_sistema", "calculator",
         "envio_gratis_link", "price", "klarna", "variant_picker",
         "quantity_selector", "buy_buttons",
-        "shipping_icons", "caracteristicas_tab", "faq_tab", "como_medidas_tab", "como_instalar_tab"
+        "shipping_icons", "caracteristicas_tab", "como_medidas_tab", "como_instalar_tab", "faq_tab"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -117,9 +117,12 @@
     },
     "antes_despues": {
       "type": "antes-despues",
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "color_scheme": "scheme-1",
         "heading": "Antes y Después (de clientes)",
+        "per_view": 3,
         "padding_top": 56,
         "padding_bottom": 56
       }

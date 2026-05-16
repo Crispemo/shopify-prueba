@@ -1,25 +1,43 @@
 <section class="antes-despues color-{{ section.settings.color_scheme }}">
   <div class="antes-despues__inner page-width">
     <h2 class="antes-despues__heading">{{ section.settings.heading | default: 'Antes y Después (de clientes)' }}</h2>
-    <div class="antes-despues__grid">
-      {%- for i in (1..4) -%}
-        {%- assign img_key = 'image_' | append: i -%}
-        {%- assign img = section.settings[img_key] -%}
-        <div class="antes-despues__item">
-          {%- if img != blank -%}
-            <img
-              src="{{ img | image_url: width: 600 }}"
-              alt="{{ img.alt | escape }}"
-              width="600"
-              height="{{ 600 | divided_by: img.aspect_ratio | round }}"
-              loading="lazy"
-            >
-          {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'antes-despues__placeholder' }}
-          {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ad-carousel" id="ad-carousel-{{ section.id }}">
+        <div class="ad-carousel__track" id="ad-track-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            <div class="ad-carousel__slide" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
+                  width="600"
+                  height="{{ 600 | divided_by: block.settings.image.aspect_ratio | round }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'ad-carousel__placeholder' }}
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <p class="ad-carousel__caption">{{ block.settings.caption }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
         </div>
-      {%- endfor -%}
-    </div>
+
+        {%- if section.blocks.size > 1 -%}
+          <button class="ad-carousel__btn ad-carousel__btn--prev" aria-label="Anterior" data-carousel="{{ section.id }}" data-dir="-1">&#8249;</button>
+          <button class="ad-carousel__btn ad-carousel__btn--next" aria-label="Siguiente" data-carousel="{{ section.id }}" data-dir="1">&#8250;</button>
+          <div class="ad-carousel__dots" id="ad-dots-{{ section.id }}">
+            {%- for block in section.blocks -%}
+              <button class="ad-carousel__dot{% if forloop.first %} is-active{% endif %}" aria-label="Imagen {{ forloop.index }}" data-index="{{ forloop.index0 }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center;color:#888;padding:24px 0;">Añade imágenes desde el personalizador del tema.</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -36,38 +54,154 @@
     margin-bottom: 32px;
     color: var(--color-foreground);
   }
-  .antes-despues__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+
+  /* Carrusel */
+  .ad-carousel { position: relative; overflow: hidden; }
+  .ad-carousel__track {
+    display: flex;
+    transition: transform .4s ease;
   }
-  .antes-despues__item { overflow: hidden; }
-  .antes-despues__item img,
-  .antes-despues__placeholder {
+  .ad-carousel__slide {
+    flex: 0 0 calc(100% / {{ section.settings.per_view | default: 3 }});
+    padding: 0 6px;
+    box-sizing: border-box;
+  }
+  .ad-carousel__slide img,
+  .ad-carousel__placeholder {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
+    border-radius: 4px;
   }
-  @media (max-width: 600px) {
-    .antes-despues__grid { grid-template-columns: repeat(2, 1fr); }
+  .ad-carousel__caption {
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--color-foreground);
+    margin: 6px 0 0;
+  }
+
+  /* Botones prev/next */
+  .ad-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,.85);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+  .ad-carousel__btn--prev { left: 8px; }
+  .ad-carousel__btn--next { right: 8px; }
+  .ad-carousel__btn:hover { background: #fff; }
+
+  /* Puntos */
+  .ad-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .ad-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    padding: 0;
+  }
+  .ad-carousel__dot.is-active { background: #c8824a; }
+
+  @media (max-width: 640px) {
+    .ad-carousel__slide { flex-basis: 80%; }
   }
 </style>
+
+<script>
+(function () {
+  var carouselEl = document.getElementById('ad-carousel-{{ section.id }}');
+  if (!carouselEl) return;
+
+  var track   = document.getElementById('ad-track-{{ section.id }}');
+  var dotsEl  = document.getElementById('ad-dots-{{ section.id }}');
+  var slides  = track ? track.querySelectorAll('.ad-carousel__slide') : [];
+  var total   = slides.length;
+  if (total <= 1) return;
+
+  var perView = window.innerWidth <= 640 ? 1 : {{ section.settings.per_view | default: 3 }};
+  var current = 0;
+  var maxIndex = total - perView;
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, maxIndex));
+    var pct = (100 / perView) * current;
+    track.style.transform = 'translateX(-' + pct + '%)';
+    if (dotsEl) {
+      dotsEl.querySelectorAll('.ad-carousel__dot').forEach(function (d, i) {
+        d.classList.toggle('is-active', i === current);
+      });
+    }
+  }
+
+  carouselEl.querySelectorAll('.ad-carousel__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      goTo(current + parseInt(this.dataset.dir));
+    });
+  });
+
+  if (dotsEl) {
+    dotsEl.querySelectorAll('.ad-carousel__dot').forEach(function (dot, i) {
+      dot.addEventListener('click', function () { goTo(i); });
+    });
+  }
+
+  window.addEventListener('resize', function () {
+    perView = window.innerWidth <= 640 ? 1 : {{ section.settings.per_view | default: 3 }};
+    maxIndex = total - perView;
+    goTo(current);
+  });
+})();
+</script>
 
 {% schema %}
 {
   "name": "Antes y Después",
   "tag": "section",
   "class": "section",
+  "blocks": [
+    {
+      "type": "imagen",
+      "name": "Imagen",
+      "settings": [
+        { "type": "image_picker", "id": "image",   "label": "Imagen" },
+        { "type": "text",         "id": "caption", "label": "Pie de foto (opcional)" }
+      ]
+    }
+  ],
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "text",         "id": "heading",      "label": "Título", "default": "Antes y Después (de clientes)" },
+    { "type": "text",  "id": "heading",   "label": "Título", "default": "Antes y Después (de clientes)" },
+    {
+      "type": "range",
+      "id": "per_view",
+      "label": "Imágenes visibles (escritorio)",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 100, "step": 4, "default": 56 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 4, "default": 56 },
-    { "type": "image_picker", "id": "image_1", "label": "Imagen 1" },
-    { "type": "image_picker", "id": "image_2", "label": "Imagen 2" },
-    { "type": "image_picker", "id": "image_3", "label": "Imagen 3" },
-    { "type": "image_picker", "id": "image_4", "label": "Imagen 4" }
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 4, "default": 56 }
   ],
   "presets": [{ "name": "Antes y Después" }]
 }

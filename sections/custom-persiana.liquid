@@ -156,6 +156,22 @@
         color: #333;
     }
 
+    /* Acordeones: títulos uniformes y legibles */
+    .product__accordion .accordion__title {
+      font-size: 0.9375rem !important;
+      font-weight: 600 !important;
+      letter-spacing: .04em;
+      text-transform: none !important;
+    }
+    .product__accordion summary {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .product__accordion .accordion__content {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+
     @media screen and (min-width: 750px) {
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
