@@ -83,7 +83,7 @@
         "caracteristicas_inline": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:16px 0;padding:20px 24px;background:#faf7f3;border-radius:8px;border-left:4px solid #c8824a\"><p style=\"font-weight:700;font-size:1rem;margin:0 0 14px;color:#3a2a1a\">Material: Esparto &nbsp;&middot;&nbsp; Incluye tornillos para la colocación<\/p><ul style=\"margin:0;padding-left:20px;font-size:1rem;line-height:2.1;color:inherit\"><li>Resistente a lluvia y al invierno<\/li><li>Perfecto tanto para interior como para exterior<\/li><li>Producto 100% artesanal, hecho en España<\/li><li>Elaborado con esparto natural<\/li><li>Materiales sostenibles &mdash; ¡Cuidamos del medio ambiente!<\/li><\/ul><\/div>"
+            "custom_liquid": "<div style=\"margin:16px 0;padding:22px 26px;background:#faf7f3;border-radius:8px;border-left:4px solid #c8824a\"><p style=\"font-weight:700;font-size:1.125rem;margin:0 0 16px;color:#3a2a1a\">Material: Esparto &nbsp;&middot;&nbsp; Incluye tornillos para la colocación<\/p><ul style=\"margin:0;padding-left:22px;font-size:1.0625rem;line-height:2.2;color:inherit\"><li>Resistente a lluvia y al invierno<\/li><li>Perfecto tanto para interior como para exterior<\/li><li>Producto 100% artesanal, hecho en España<\/li><li>Elaborado con esparto natural<\/li><li>Materiales sostenibles &mdash; ¡Cuidamos del medio ambiente!<\/li><\/ul><\/div>"
           }
         }
       },
