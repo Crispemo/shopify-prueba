@@ -42,7 +42,7 @@
         "envio_gratis_link": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío en 7-10 días hábiles</a></div>"
+            "custom_liquid": "<div style=\"margin:6px 0 4px\"><a href=\"#\" style=\"color:#c8824a;font-size:0.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;\">Envío Gratis en toda la Península</a></div>"
           }
         },
         "price": {
@@ -83,7 +83,7 @@
         "caracteristicas_inline": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin:16px 0;padding:16px 20px;background:#faf7f3;border-radius:6px;border-left:3px solid #c8824a\"><p style=\"font-weight:700;font-size:0.8125rem;margin:0 0 10px;color:#3a2a1a;text-transform:uppercase;letter-spacing:.07em\">Material: Esparto &nbsp;·&nbsp; Incluye tornillos para la colocación<\/p><ul style=\"margin:0;padding-left:18px;font-size:0.9375rem;line-height:2;color:inherit\"><li>Resistente a lluvia y al invierno<\/li><li>Perfecto tanto para interior como para exterior<\/li><li>Producto 100% artesanal, hecho en España<\/li><li>Elaborado con esparto natural<\/li><li>Materiales sostenibles &mdash; ¡Cuidamos del medio ambiente!<\/li><\/ul><\/div>"
+            "custom_liquid": "<div style=\"margin:16px 0;padding:20px 24px;background:#faf7f3;border-radius:8px;border-left:4px solid #c8824a\"><p style=\"font-weight:700;font-size:1rem;margin:0 0 14px;color:#3a2a1a\">Material: Esparto &nbsp;&middot;&nbsp; Incluye tornillos para la colocación<\/p><ul style=\"margin:0;padding-left:20px;font-size:1rem;line-height:2.1;color:inherit\"><li>Resistente a lluvia y al invierno<\/li><li>Perfecto tanto para interior como para exterior<\/li><li>Producto 100% artesanal, hecho en España<\/li><li>Elaborado con esparto natural<\/li><li>Materiales sostenibles &mdash; ¡Cuidamos del medio ambiente!<\/li><\/ul><\/div>"
           }
         }
       },
@@ -256,11 +256,13 @@
       "type": "como-instalar",
       "settings": {
         "color_scheme": "scheme-1",
+        "eyebrow": "Instalación en minutos",
         "heading": "Cómo instalar las persianas de esparto",
-        "padding_top": 56,
-        "padding_bottom": 56,
+        "intro": "Es más fácil de lo que parece. En menos de 5 minutos tu persiana estará colocada con el sistema incluido.",
         "video_url": "",
-        "instrucciones": "<ol><li><h5>Mide el hueco donde quieres colocar la persiana.</h5></li><li><h5>Coloca los ganchos incluidos en la parte superior del marco.</h5></li><li><h5>Cuelga la persiana de los ganchos. Listo.</h5></li></ol>"
+        "instrucciones": "<ol><li>Mide el hueco donde quieres colocar la persiana.<\/li><li>Coloca los ganchos incluidos en la parte superior del marco.<\/li><li>Cuelga la persiana de los ganchos. ¡Listo!<\/li><\/ol>",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "personalizar_btn": {
@@ -380,7 +382,7 @@
           "settings": {
             "heading": "¿Se pueden hacer persianas a medida?",
             "icon": "none",
-            "content": "<p>Sí. Todas nuestras persianas se fabrican a medida. Puedes contactarnos por WhatsApp o por email y nos pondremos en contacto contigo lo antes posible para asesorarte y darte el mejor presupuesto.<\/p>",
+            "row_content": "<p>Sí. Todas nuestras persianas se fabrican a medida. Puedes contactarnos por WhatsApp o por email y nos pondremos en contacto contigo lo antes posible para asesorarte y darte el mejor presupuesto.<\/p>",
             "page": ""
           }
         },
@@ -389,7 +391,7 @@
           "settings": {
             "heading": "¿Cómo puedo colocar las persianas de esparto?",
             "icon": "none",
-            "content": "<p>La persiana de esparto lleva incluidos todos los materiales necesarios para su colocación. Además, hemos preparado una guía paso a paso para que puedas verlo fácilmente. ¡Es muy sencillo!<\/p>",
+            "row_content": "<p>La persiana de esparto lleva incluidos todos los materiales necesarios para su colocación. Además, hemos preparado una guía paso a paso para que puedas verlo fácilmente. ¡Es muy sencillo!<\/p>",
             "page": ""
           }
         },
@@ -398,7 +400,7 @@
           "settings": {
             "heading": "¿Cuánto tarda en llegarme el pedido?",
             "icon": "none",
-            "content": "<p>Es un producto hecho a mano, por lo que el plazo medio es de entre 3 y 7 días hábiles dependiendo de la época del año. Te informaremos del estado de tu pedido en todo momento.<\/p>",
+            "row_content": "<p>Es un producto hecho a mano, por lo que el plazo medio es de entre 3 y 7 días hábiles dependiendo de la época del año. Te informaremos del estado de tu pedido en todo momento.<\/p>",
             "page": ""
           }
         },
@@ -407,7 +409,7 @@
           "settings": {
             "heading": "¿Se puede lavar?",
             "icon": "none",
-            "content": "<p>Sí. Puedes limpiarla con agua, jabón y un cepillo suave. Después déjala al sol o al aire libre para que se seque bien antes de volver a colocarla.<\/p>",
+            "row_content": "<p>Sí. Puedes limpiarla con agua, jabón y un cepillo suave. Después déjala al sol o al aire libre para que se seque bien antes de volver a colocarla.<\/p>",
             "page": ""
           }
         },
@@ -416,7 +418,7 @@
           "settings": {
             "heading": "¿Está hecha en España?",
             "icon": "none",
-            "content": "<p>Sí. Todos nuestros productos de esparto están hechos a mano en España. La fibra de esparto se recoge en campos españoles, apoyando la producción local y la artesanía tradicional.<\/p>",
+            "row_content": "<p>Sí. Todos nuestros productos de esparto están hechos a mano en España. La fibra de esparto se recoge en campos españoles, apoyando la producción local y la artesanía tradicional.<\/p>",
             "page": ""
           }
         }
