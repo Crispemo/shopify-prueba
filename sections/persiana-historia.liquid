@@ -58,24 +58,30 @@
 
   </div>
 
-  {%- if section.settings.video_url != blank -%}
+  {%- if section.settings.video_file != blank or section.settings.video_url != blank -%}
     <div class="p-historia__video-wrap page-width">
-      {%- if section.settings.video_url contains 'youtu' -%}
-        {%- assign vid_id = section.settings.video_url | split: 'v=' | last | split: '&' | first -%}
-        {%- assign embed_src = 'https://www.youtube.com/embed/' | append: vid_id -%}
-      {%- else -%}
-        {%- assign embed_src = section.settings.video_url -%}
+      {%- if section.settings.video_file != blank -%}
+        <div class="p-historia__video p-historia__video--native">
+          {{ section.settings.video_file | video_tag: autoplay: false, loop: false, controls: true, class: 'p-historia__video-tag' }}
+        </div>
+      {%- elsif section.settings.video_url != blank -%}
+        {%- assign vid = section.settings.video_url -%}
+        {%- if vid.type == 'youtube' -%}
+          {%- assign embed_src = 'https://www.youtube.com/embed/' | append: vid.id -%}
+        {%- elsif vid.type == 'vimeo' -%}
+          {%- assign embed_src = 'https://player.vimeo.com/video/' | append: vid.id -%}
+        {%- endif -%}
+        <div class="p-historia__video">
+          <iframe
+            src="{{ embed_src }}"
+            title="{{ section.settings.heading }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
       {%- endif -%}
-      <div class="p-historia__video">
-        <iframe
-          src="{{ embed_src }}"
-          title="{{ section.settings.heading }}"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
     </div>
   {%- endif -%}
 
@@ -195,6 +201,8 @@
     width: 100%;
     height: 100%;
   }
+  .p-historia__video--native { padding-bottom: 0; height: auto; }
+  .p-historia__video-tag { width: 100%; border-radius: 8px; display: block; }
 
   /* Mobile */
   @media (max-width: 749px) {
@@ -224,7 +232,8 @@
     { "type": "text", "id": "stat_2_label", "label": "Estadística 2 — etiqueta", "default": "fibra natural de esparto" },
     { "type": "text", "id": "stat_3_num",   "label": "Estadística 3 — número",  "default": "A medida" },
     { "type": "text", "id": "stat_3_label", "label": "Estadística 3 — etiqueta", "default": "cada persiana es única" },
-    { "type": "url",      "id": "video_url", "label": "Vídeo del proceso (YouTube / Vimeo — opcional)" },
+    { "type": "video",     "id": "video_file", "label": "Vídeo del proceso (archivos de Shopify)" },
+    { "type": "video_url", "id": "video_url",  "label": "O pega una URL de YouTube / Vimeo", "accept": "youtube, vimeo" },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 72 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 72 }
   ],

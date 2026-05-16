@@ -11,12 +11,16 @@
   {%- endif -%}
 
   <div class="cf__video-wrap page-width">
-    {%- if section.settings.video_url != blank -%}
-      {%- if section.settings.video_url contains 'youtu' -%}
-        {%- assign video_id = section.settings.video_url | split: 'v=' | last | split: '&' | first -%}
-        {%- assign embed_src = 'https://www.youtube.com/embed/' | append: video_id -%}
-      {%- else -%}
-        {%- assign embed_src = section.settings.video_url -%}
+    {%- if section.settings.video_file != blank -%}
+      <div class="cf__video cf__video--native">
+        {{ section.settings.video_file | video_tag: autoplay: false, loop: false, controls: true, class: 'cf__video-tag' }}
+      </div>
+    {%- elsif section.settings.video_url != blank -%}
+      {%- assign vid = section.settings.video_url -%}
+      {%- if vid.type == 'youtube' -%}
+        {%- assign embed_src = 'https://www.youtube.com/embed/' | append: vid.id -%}
+      {%- elsif vid.type == 'vimeo' -%}
+        {%- assign embed_src = 'https://player.vimeo.com/video/' | append: vid.id -%}
       {%- endif -%}
       <div class="cf__video">
         <iframe
@@ -88,6 +92,8 @@
     width: 100%;
     height: 100%;
   }
+  .cf__video--native { padding-bottom: 0; height: auto; }
+  .cf__video-tag { width: 100%; border-radius: 8px; display: block; }
   .cf__placeholder {
     aspect-ratio: 16/9;
     background: #e8e0d6;
@@ -113,7 +119,8 @@
     { "type": "text",  "id": "eyebrow",       "label": "Texto pequeño sobre el título", "default": "Artesanía tradicional" },
     { "type": "text",  "id": "heading",        "label": "Título",  "default": "Cómo fabricamos las persianas de esparto" },
     { "type": "text",  "id": "intro",          "label": "Descripción (opcional)", "default": "Cada persiana nace de nuestras manos. Te mostramos el proceso completo, desde la recogida del esparto hasta el producto final listo para tu hogar." },
-    { "type": "url",   "id": "video_url",      "label": "URL del vídeo (YouTube / Vimeo)" },
+    { "type": "video",     "id": "video_file", "label": "Vídeo (desde archivos de Shopify)" },
+    { "type": "video_url", "id": "video_url",  "label": "O pega una URL de YouTube / Vimeo", "accept": "youtube, vimeo" },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 72 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 72 }
   ],
