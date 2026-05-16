@@ -3,28 +3,21 @@
     <h2 class="como-medidas__heading">{{ section.settings.heading | default: 'Cómo tomar las medidas' }}</h2>
     <div class="como-medidas__grid">
 
-      {%- assign slot_keys = 'porche,interna,exterior' | split: ',' -%}
+      {%- assign cols = 'porche,interna,exterior' | split: ',' -%}
+      {%- assign labels = section.settings.label_porche | append: '|||' | append: section.settings.label_interna | append: '|||' | append: section.settings.label_exterior | split: '|||' -%}
+      {%- assign urls = section.settings.video_porche | append: '|||' | append: section.settings.video_interna | append: '|||' | append: section.settings.video_exterior | split: '|||' -%}
 
-      {%- for key in slot_keys -%}
-        {%- assign label_key = 'label_' | append: key -%}
-        {%- assign file_key  = 'video_file_' | append: key -%}
-        {%- assign url_key   = 'video_' | append: key -%}
-        {%- assign label      = section.settings[label_key] -%}
-        {%- assign video_file = section.settings[file_key] -%}
-        {%- assign video_url  = section.settings[url_key] -%}
-
+      {%- for i in (0..2) -%}
+        {%- assign label     = labels[i] -%}
+        {%- assign video_url = urls[i] -%}
         <div class="como-medidas__col">
           <p class="como-medidas__label">{{ label }}</p>
-
-          {%- if video_file != blank -%}
-            <div class="como-medidas__video-native">
-              {{ video_file | video_tag: autoplay: false, loop: false, controls: true, class: 'como-medidas__video-tag' }}
-            </div>
-          {%- elsif video_url != blank -%}
-            {%- if video_url.type == 'youtube' -%}
-              {%- assign embed_src = 'https://www.youtube.com/embed/' | append: video_url.id -%}
-            {%- elsif video_url.type == 'vimeo' -%}
-              {%- assign embed_src = 'https://player.vimeo.com/video/' | append: video_url.id -%}
+          {%- if video_url != blank -%}
+            {%- if video_url contains 'youtu' -%}
+              {%- assign video_id = video_url | split: 'v=' | last | split: '&' | first -%}
+              {%- assign embed_src = 'https://www.youtube.com/embed/' | append: video_id -%}
+            {%- else -%}
+              {%- assign embed_src = video_url -%}
             {%- endif -%}
             <div class="como-medidas__video-wrap">
               <iframe
@@ -79,7 +72,6 @@
     height: 0;
     overflow: hidden;
     background: #c4d8d0;
-    border-radius: 8px;
   }
   .como-medidas__video-wrap iframe {
     position: absolute;
@@ -87,16 +79,13 @@
     width: 100%;
     height: 100%;
   }
-  .como-medidas__video-native { border-radius: 8px; overflow: hidden; }
-  .como-medidas__video-tag { width: 100%; display: block; }
   .como-medidas__placeholder {
     aspect-ratio: 4/3;
-    background: #e8e0d6;
-    border-radius: 8px;
+    background: #c4d8d0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8a7060;
+    color: #fff;
     font-size: 0.875rem;
   }
   @media (max-width: 640px) {
@@ -114,18 +103,12 @@
     { "type": "text",  "id": "heading",        "label": "Título",            "default": "Cómo tomar las medidas" },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 100, "step": 4, "default": 56 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 4, "default": 56 },
-    { "type": "header", "content": "Vídeo 1 — Porche" },
-    { "type": "text",      "id": "label_porche",      "label": "Etiqueta",          "default": "Porche" },
-    { "type": "video",     "id": "video_file_porche",  "label": "Vídeo (archivos de Shopify)" },
-    { "type": "video_url", "id": "video_porche",       "label": "O URL de YouTube / Vimeo", "accept": "youtube, vimeo" },
-    { "type": "header", "content": "Vídeo 2 — Ventana interna" },
-    { "type": "text",      "id": "label_interna",      "label": "Etiqueta",          "default": "Ventana (parte interna)" },
-    { "type": "video",     "id": "video_file_interna",  "label": "Vídeo (archivos de Shopify)" },
-    { "type": "video_url", "id": "video_interna",       "label": "O URL de YouTube / Vimeo", "accept": "youtube, vimeo" },
-    { "type": "header", "content": "Vídeo 3 — Ventana exterior" },
-    { "type": "text",      "id": "label_exterior",     "label": "Etiqueta",          "default": "Ventana (exterior)" },
-    { "type": "video",     "id": "video_file_exterior", "label": "Vídeo (archivos de Shopify)" },
-    { "type": "video_url", "id": "video_exterior",      "label": "O URL de YouTube / Vimeo", "accept": "youtube, vimeo" }
+    { "type": "text",  "id": "label_porche",   "label": "Etiqueta vídeo 1", "default": "Porche" },
+    { "type": "url",   "id": "video_porche",   "label": "URL vídeo 1 (YouTube)" },
+    { "type": "text",  "id": "label_interna",  "label": "Etiqueta vídeo 2", "default": "Ventana (parte interna)" },
+    { "type": "url",   "id": "video_interna",  "label": "URL vídeo 2 (YouTube)" },
+    { "type": "text",  "id": "label_exterior", "label": "Etiqueta vídeo 3", "default": "Ventana (exterior)" },
+    { "type": "url",   "id": "video_exterior", "label": "URL vídeo 3 (YouTube)" }
   ],
   "presets": [{ "name": "Cómo tomar medidas" }]
 }
