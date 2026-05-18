@@ -106,10 +106,21 @@
         }
       },
       "block_order": [
-        "vendor", "title", "judge_me", "incluimos_sistema", "calculator",
-        "popups", "envio_gratis_link", "price", "klarna", "variant_picker",
-        "quantity_selector", "buy_buttons", "shipping_icons",
-        "caracteristicas_tab", "faq_tab"
+        "vendor",
+        "title",
+        "judge_me",
+        "incluimos_sistema",
+        "calculator",
+        "popups",
+        "envio_gratis_link",
+        "price",
+        "klarna",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "shipping_icons",
+        "caracteristicas_tab",
+        "faq_tab"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -231,6 +242,7 @@
         "eyebrow": "Artesanía tradicional",
         "heading": "Cómo fabricamos las persianas de esparto",
         "intro": "Cada persiana nace de nuestras manos. Te mostramos el proceso completo, desde la recogida del esparto hasta el producto final listo para tu hogar.",
+        "video_file": "shopify://files/videos/cómo_se_hacen.mp4",
         "video_url": "",
         "padding_top": 72,
         "padding_bottom": 72
