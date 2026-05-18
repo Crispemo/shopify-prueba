@@ -39,6 +39,12 @@
             "custom_liquid": "<div style=\"margin:8px 0\"><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-ancho\">Ancho en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de izquierda a derecha\">&#9432;</span></label><div class=\"field\"><input type=\"number\" id=\"pc-ancho\" class=\"field__input\" name=\"properties[Ancho (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"></div></div><div class=\"product-form__input\" style=\"margin-bottom:8px\"><label class=\"form__label\" for=\"pc-largo\">Largo en centímetros <span style=\"display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border:1px solid #aaa;border-radius:50%;font-size:9px;cursor:help;color:#888;margin-left:4px;vertical-align:middle\" title=\"Mide el hueco de arriba a abajo\">&#9432;</span></label><div class=\"field\"><input type=\"number\" id=\"pc-largo\" class=\"field__input\" name=\"properties[Largo (cm)]\" min=\"30\" max=\"700\" placeholder=\"100\" autocomplete=\"off\"></div></div><p id=\"pc-error\" style=\"display:none;color:rgb(192,57,43);font-size:.8125rem;margin:4px 0 8px\">No hacemos ese tamaño (mín. 30 cm · máx. 700 cm)</p><div id=\"pc-box\" style=\"padding:12px 16px;margin:12px 0;background:rgb(236,229,219);transition:background .2s\"><span style=\"display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:rgb(122,92,62)\">PRECIO TOTAL</span><span id=\"pc-val\" style=\"display:block;font-size:.875rem;color:#aaa;margin-top:4px\">Introduce tus medidas</span></div><input type=\"hidden\" name=\"properties[_precio_calculado]\" id=\"pc-hp\"><input type=\"hidden\" name=\"properties[_m2]\" id=\"pc-hm\"></div><script>(function(){var MIN=30,MAX=700;function rate(m2){return m2<1?150:m2<=3?105:95;}function up(){var aEl=document.getElementById('pc-ancho'),lEl=document.getElementById('pc-largo');if(!aEl||!lEl)return;var a=aEl.value?parseFloat(aEl.value):null,l=lEl.value?parseFloat(lEl.value):null;var err=document.getElementById('pc-error'),box=document.getElementById('pc-box'),val=document.getElementById('pc-val'),hp=document.getElementById('pc-hp'),hm=document.getElementById('pc-hm');var form=aEl.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));var inv=(a!==null&&(a<MIN||a>MAX))||(l!==null&&(l<MIN||l>MAX));aEl.style.borderColor=(a!==null&&(a<MIN||a>MAX))?'rgb(192,57,43)':'';lEl.style.borderColor=(l!==null&&(l<MIN||l>MAX))?'rgb(192,57,43)':'';if(inv){err.style.display='block';box.style.background='rgb(248,224,221)';val.style.cssText='display:block;font-size:.875rem;color:rgb(192,57,43);margin-top:4px';val.textContent='No hacemos ese tamaño';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}err.style.display='none';if(a===null||l===null){box.style.background='rgb(236,229,219)';val.style.cssText='display:block;font-size:.875rem;color:#aaa;margin-top:4px';val.textContent='Introduce tus medidas';if(btn)btn.disabled=true;hp.value='';hm.value='';return;}var q=1,qEl=form&&form.querySelector('[name=quantity]');if(qEl)q=parseInt(qEl.value)||1;var m2=a*l/10000,r=rate(m2),u=Math.ceil(m2*r*100)/100,t=Math.ceil(u*q*100)/100;box.style.background='rgb(232,151,122)';val.style.cssText='display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';val.textContent='€ '+t.toFixed(2).replace('.',',');if(btn)btn.disabled=false;hp.value=t.toFixed(2);hm.value=m2.toFixed(4);}document.addEventListener('DOMContentLoaded',function(){var a=document.getElementById('pc-ancho'),l=document.getElementById('pc-largo');if(!a||!l)return;var form=a.closest('form'),btn=form&&(form.querySelector('[name=add]')||form.querySelector('button[type=submit]'));if(btn)btn.disabled=true;a.addEventListener('input',up);l.addEventListener('input',up);var q=form&&form.querySelector('[name=quantity]');if(q)q.addEventListener('change',up);});})();</script>"
           }
         },
+        "popups": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"margin:4px 0 10px;display:flex;gap:20px\"><button onclick=\"document.getElementById('jh-modal-medidas').style.display='flex'\" style=\"background:none;border:none;color:#c8824a;font-size:0.875rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;font-family:inherit\">¿Cómo tomar medidas?</button><button onclick=\"document.getElementById('jh-modal-instalar').style.display='flex'\" style=\"background:none;border:none;color:#c8824a;font-size:0.875rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;font-family:inherit\">¿Cómo montarlo?</button></div><div id=\"jh-modal-medidas\" style=\"display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;align-items:flex-end;justify-content:center\" onclick=\"if(event.target===this)this.style.display='none'\"><div style=\"background:#fff;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0\"><div style=\"display:flex;justify-content:center;padding:12px 0 0\"><div style=\"width:40px;height:4px;background:#ddd;border-radius:2px\"></div></div><div style=\"display:flex;justify-content:space-between;align-items:center;padding:16px 20px 8px\"><h2 style=\"font-size:1.125rem;font-weight:700;margin:0\">Cómo tomar las medidas</h2><button onclick=\"document.getElementById('jh-modal-medidas').style.display='none'\" style=\"background:#f5f5f5;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;color:#666\">✕</button></div><div style=\"padding:8px 20px 40px;display:flex;flex-direction:column;gap:24px\"><div><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:8px\"><span style=\"display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.75rem;font-weight:700;flex-shrink:0\">1</span><h3 style=\"font-size:1rem;font-weight:700;color:#c8824a;margin:0\">Porche</h3></div><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.65\">Mide el hueco de izquierda a derecha (ancho) y de arriba a abajo (largo) con una cinta métrica. Anota las medidas en centímetros.</p></div><div><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:8px\"><span style=\"display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.75rem;font-weight:700;flex-shrink:0\">2</span><h3 style=\"font-size:1rem;font-weight:700;color:#c8824a;margin:0\">Ventana (parte interna)</h3></div><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.65\">Para colgar la persiana por dentro del marco, mide el ancho y alto interior del hueco.</p></div><div><div style=\"display:flex;align-items:center;gap:10px;margin-bottom:8px\"><span style=\"display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.75rem;font-weight:700;flex-shrink:0\">3</span><h3 style=\"font-size:1rem;font-weight:700;color:#c8824a;margin:0\">Ventana (exterior)</h3></div><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.65\">Para cubrir la ventana por fuera, añade 5 cm de margen a cada lado del ancho y elige el alto deseado.</p></div><p style=\"font-size:0.8125rem;color:#aaa;margin:0;border-top:1px solid #f0f0f0;padding-top:16px\">¿Tienes dudas? Escríbenos y te ayudamos enseguida.</p></div></div></div><div id=\"jh-modal-instalar\" style=\"display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;align-items:flex-end;justify-content:center\" onclick=\"if(event.target===this)this.style.display='none'\"><div style=\"background:#fff;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0\"><div style=\"display:flex;justify-content:center;padding:12px 0 0\"><div style=\"width:40px;height:4px;background:#ddd;border-radius:2px\"></div></div><div style=\"display:flex;justify-content:space-between;align-items:center;padding:16px 20px 8px\"><h2 style=\"font-size:1.125rem;font-weight:700;margin:0\">Cómo montarlo</h2><button onclick=\"document.getElementById('jh-modal-instalar').style.display='none'\" style=\"background:#f5f5f5;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;color:#666\">✕</button></div><div style=\"padding:8px 20px 40px;display:flex;flex-direction:column;gap:20px\"><div style=\"display:flex;gap:14px;align-items:flex-start\"><span style=\"display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.875rem;font-weight:700;flex-shrink:0\">1</span><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.6;padding-top:5px\">Mide el hueco donde quieres colocar la persiana.</p></div><div style=\"display:flex;gap:14px;align-items:flex-start\"><span style=\"display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.875rem;font-weight:700;flex-shrink:0\">2</span><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.6;padding-top:5px\">Coloca los ganchos incluidos en la parte superior del marco.</p></div><div style=\"display:flex;gap:14px;align-items:flex-start\"><span style=\"display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;background:#c8824a;color:#fff;border-radius:50%;font-size:0.875rem;font-weight:700;flex-shrink:0\">3</span><p style=\"font-size:0.9375rem;color:#444;margin:0;line-height:1.6;padding-top:5px\">Cuelga la persiana de los ganchos. ¡Listo! En menos de 5 minutos.</p></div><p style=\"font-size:0.8125rem;color:#aaa;margin:0;border-top:1px solid #f0f0f0;padding-top:16px\">¿Necesitas ayuda? Escríbenos y te ayudamos.</p></div></div></div>"
+          }
+        },
         "envio_gratis_link": {
           "type": "custom_liquid",
           "settings": {
@@ -89,24 +95,6 @@
             "page": ""
           }
         },
-        "como_medidas_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Cómo tomar las medidas",
-            "icon": "none",
-            "content": "<p><strong>Porche:</strong> Mide el hueco de izquierda a derecha (ancho) y de arriba a abajo (largo) con una cinta métrica. Apunta las medidas en centímetros.</p><p><strong>Ventana (parte interna):</strong> Para colgar la persiana por dentro del marco, mide el ancho interior del hueco y el alto interior.</p><p><strong>Ventana (exterior):</strong> Para cubrir la ventana por fuera, mide el ancho del marco exterior más unos centímetros de margen a cada lado, y el alto deseado.</p>",
-            "page": ""
-          }
-        },
-        "como_instalar_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Cómo instalar las persianas de esparto",
-            "icon": "none",
-            "content": "<ol><li>Mide el hueco donde quieres colocar la persiana.</li><li>Coloca los ganchos incluidos en la parte superior del marco.</li><li>Cuelga la persiana de los ganchos. Listo.</li></ol>",
-            "page": ""
-          }
-        },
         "faq_tab": {
           "type": "collapsible_tab",
           "settings": {
@@ -119,9 +107,9 @@
       },
       "block_order": [
         "vendor", "title", "judge_me", "incluimos_sistema", "calculator",
-        "envio_gratis_link", "price", "klarna", "variant_picker",
+        "popups", "envio_gratis_link", "price", "klarna", "variant_picker",
         "quantity_selector", "buy_buttons", "shipping_icons",
-        "caracteristicas_tab", "como_medidas_tab", "como_instalar_tab", "faq_tab"
+        "caracteristicas_tab", "faq_tab"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -236,26 +224,6 @@
         "padding_bottom": 56
       }
     },
-    "historia": {
-      "type": "persiana-historia",
-      "settings": {
-        "color_scheme": "background-1",
-        "eyebrow": "Pampaneira · Las Alpujarras · Granada",
-        "heading": "Una tradición de siglos desde las Alpujarras",
-        "intro": "Las persianas de esparto de Jarapa Home nacen del conocimiento artesanal transmitido de generación en generación en el corazón de la Alpujarra granadina.",
-        "image": "shopify://shop_images/Alpujarra.png",
-        "body": "<h5>El esparto es una fibra natural que crece de forma silvestre en las laderas de Sierra Nevada. Cada persiana se elabora íntegramente a mano, combinando técnicas ancestrales con un acabado contemporáneo que encaja en cualquier hogar.</h5><h5>Al elegir una persiana de esparto, apuestas por un material 100% natural, duradero y biodegradable, fabricado a pocos kilómetros de donde crece la planta. Sin intermediarios, sin fábricas, sin plástico.</h5>",
-        "stat_1_num": "+15 años",
-        "stat_1_label": "de tradición artesanal",
-        "stat_2_num": "100%",
-        "stat_2_label": "fibra natural de esparto",
-        "stat_3_num": "A medida",
-        "stat_3_label": "cada persiana es única",
-        "video_url": "",
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
-    },
     "como_fabricamos": {
       "type": "como-fabricamos",
       "settings": {
@@ -268,39 +236,19 @@
         "padding_bottom": 72
       }
     },
-    "como_medidas": {
-      "type": "como-tomar-medidas",
-      "settings": {
-        "color_scheme": "background-1",
-        "heading": "Cómo tomar las medidas",
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "label_porche": "Porche",
-        "video_porche": "",
-        "label_interna": "Ventana (parte interna)",
-        "video_interna": "",
-        "label_exterior": "Ventana (exterior)",
-        "video_exterior": ""
-      }
-    },
-    "como_instalar": {
-      "type": "como-instalar",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "Instalación en minutos",
-        "heading": "Cómo instalar las persianas de esparto",
-        "intro": "Es más fácil de lo que parece. En menos de 5 minutos tu persiana estará colocada con el sistema incluido.",
-        "video_url": "",
-        "instrucciones": "<ol><li>Mide el hueco donde quieres colocar la persiana.<\/li><li>Coloca los ganchos incluidos en la parte superior del marco.<\/li><li>Cuelga la persiana de los ganchos. ¡Listo!<\/li><\/ol>",
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
-    },
     "personalizar_btn": {
       "type": "persiana-personalizar-btn",
       "settings": {
         "padding_top": 32,
         "padding_bottom": 32
+      }
+    },
+    "seo_text": {
+      "type": "persiana-seo-text",
+      "settings": {
+        "color_scheme": "background-1",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "sustainability": {
@@ -409,11 +357,9 @@
   "order": [
     "main",
     "antes_despues",
-    "historia",
     "como_fabricamos",
-    "como_medidas",
-    "como_instalar",
     "personalizar_btn",
+    "seo_text",
     "sustainability",
     "reviews_widget",
     "related_products"
