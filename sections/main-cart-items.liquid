@@ -82,10 +82,10 @@
                     {% if item.image == item.image %}
                       {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
 
-                      <a data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                      <a data-cpcproducturl='{{ item.variant_id }}' data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
                       <div class="cart-item__image-container gradient global-media-settings">
                         <img
-                          data-cpcimageid='{{ item.variant_id }}' data-cpcimageid='{{ item.variant_id }}' src="{{ item.image | image_url: width: 300 }}"
+                          data-cpcimageid='{{ item.variant_id }}' data-cpcimageid='{{ item.variant_id }}' data-cpcimageid='{{ item.variant_id }}' src="{{ item.image | image_url: width: 300 }}"
                           class="cart-item__image"
                           alt="{{ item.image.alt | escape }}"
                           loading="lazy"
@@ -101,7 +101,7 @@
                       <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
                     {%- endif -%}
 
-                    <a data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="cart-item__name h4 break"><cpc class='product_title' data-id='{{ item.variant_id }}'>{{ item.product.title | escape | cpc_modified }}</cpc></a>
+                    <a data-cpcproducturl='{{ item.variant_id }}' data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="cart-item__name h4 break"><cpc class='product_title' data-id='{{ item.variant_id }}'>{{ item.product.title | escape | cpc_modified }}</cpc></a>
 
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
@@ -237,7 +237,7 @@
                   -%}
                     <td>
                       <span class="custom-button">
-                    <a style="padding:8px!important; margin-top:5px; width:160px!important; text-align:center!important" data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="btn-custom">
+                    <a style="padding:8px!important; margin-top:5px; width:160px!important; text-align:center!important" data-cpcproducturl='{{ item.variant_id }}' data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url }}" class="btn-custom">
                       Comprar más
                     </a>
                   </span> 
@@ -296,7 +296,7 @@
                           data-index="{{ item.index | plus: 1 }}"
                         >
                           <a
-                            data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url_to_remove }}"
+                            data-cpcproducturl='{{ item.variant_id }}' data-cpcproducturl='{{ item.variant_id }}' href="{{ item.url_to_remove }}"
                             class="button button--tertiary"
                             aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
                           >
