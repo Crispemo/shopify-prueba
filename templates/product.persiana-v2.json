@@ -56,12 +56,6 @@
           "disabled": true,
           "settings": {}
         },
-        "klarna": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"border: 1px solid #ccc; padding: 10px; font-size: 12px; margin: 0; font-family: 'Arial', sans-serif; align-items: center; text-align: center; background-color: #f8f8f8;\">Paga en 3 plazos sin intereses (0% TAE) con <strong>Klarna.</strong></div>"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "disabled": true,
@@ -114,7 +108,6 @@
         "popups",
         "envio_gratis_link",
         "price",
-        "klarna",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
