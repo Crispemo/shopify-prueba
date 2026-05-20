@@ -1,122 +1,135 @@
-class PersianaCalculator {
-  static RATE(m2) {
-    if (m2 < 1) return 150;
-    if (m2 <= 3) return 105;
-    return 95;
+(function () {
+  'use strict';
+
+  var MIN = 30, MAX = 700;
+
+  function rate(m2) {
+    return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
   }
 
-  static calcTotal(anchoCm, largoCm, qty) {
-    const m2 = (anchoCm * largoCm) / 10000;
-    const rate = PersianaCalculator.RATE(m2);
-    const unit = Math.ceil(m2 * rate * 100) / 100;
-    return { m2, rate, unit, total: Math.ceil(unit * qty * 100) / 100 };
-  }
+  function init() {
+    var root = document.getElementById('pc-root');
+    if (!root) return;
 
-  constructor(section) {
-    this.MIN = 30;
-    this.MAX = 700;
-    this.section = section;
+    var workerUrl    = root.dataset.workerUrl;
+    var productTitle = root.dataset.productTitle || 'Persiana a medida';
+    var sectionId    = root.dataset.sectionId;
 
-    this.anchoInput  = section.querySelector('[data-calc="ancho"]');
-    this.largoInput  = section.querySelector('[data-calc="largo"]');
-    this.qtyInput    = section.querySelector('[data-calc="qty"]');
-    this.priceBox    = section.querySelector('[data-calc="price-box"]');
-    this.priceValue  = section.querySelector('[data-calc="price-value"]');
-    this.errorMsg    = section.querySelector('[data-calc="error"]');
-    this.submitBtn   = section.querySelector('[data-calc="submit"]');
-    this.hiddenPrice = section.querySelector('[data-calc="hidden-price"]');
-    this.hiddenM2    = section.querySelector('[data-calc="hidden-m2"]');
+    var aEl   = document.getElementById('pc-ancho');
+    var lEl   = document.getElementById('pc-largo');
+    if (!aEl || !lEl) return;
 
-    this._bindEvents();
-    this._bindGallery();
-    this._bindQtyButtons();
-  }
+    var errEl = document.getElementById('pc-error');
+    var boxEl = document.getElementById('pc-box');
+    var valEl = document.getElementById('pc-val');
+    var hpEl  = document.getElementById('pc-hp');
+    var hmEl  = document.getElementById('pc-hm');
 
-  _bindEvents() {
-    [this.anchoInput, this.largoInput, this.qtyInput].forEach(el => {
-      if (el) el.addEventListener('input', () => this._update());
-    });
-  }
+    var form = document.getElementById('product-form-' + sectionId)
+             || document.querySelector('[data-type="add-to-cart-form"]');
+    var btn  = form && (form.querySelector('[name=add]') || form.querySelector('button[type=submit]'));
 
-  _bindGallery() {
-    this.section.querySelectorAll('[data-gallery-thumb]').forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        this.section.querySelectorAll('[data-gallery-thumb]').forEach(t => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
-        const main = this.section.querySelector('[data-gallery-main]');
-        if (main) {
-          main.src    = thumb.dataset.imageSrc;
-          main.alt    = thumb.dataset.imageAlt || '';
-          main.srcset = '';
-        }
-      });
-    });
-  }
+    if (btn) btn.disabled = true;
 
-  _bindQtyButtons() {
-    this.section.querySelectorAll('[data-qty-action]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const current = parseInt(this.qtyInput.value, 10) || 1;
-        const next = btn.dataset.qtyAction === 'inc'
-          ? current + 1
-          : Math.max(1, current - 1);
-        this.qtyInput.value = next;
-        this._update();
-      });
-    });
-  }
+    function update() {
+      var a   = aEl.value ? parseFloat(aEl.value) : null;
+      var l   = lEl.value ? parseFloat(lEl.value) : null;
+      var qEl = form && form.querySelector('[name=quantity]');
+      var q   = qEl ? (parseInt(qEl.value) || 1) : 1;
 
-  _validate(inputEl) {
-    const val = inputEl.value;
-    if (!val) { inputEl.classList.remove('is-error'); return null; }
-    const n = parseFloat(val);
-    if (isNaN(n) || n < this.MIN || n > this.MAX) {
-      inputEl.classList.add('is-error');
-      return false;
-    }
-    inputEl.classList.remove('is-error');
-    return n;
-  }
+      var aInv = a !== null && (a < MIN || a > MAX);
+      var lInv = l !== null && (l < MIN || l > MAX);
 
-  _reset() {
-    this.priceValue.textContent = 'Introduce tus medidas';
-    this.priceBox.dataset.state = 'empty';
-    this.submitBtn.disabled = true;
-    this.errorMsg.hidden = true;
-    this.hiddenPrice.value = '';
-    this.hiddenM2.value    = '';
-  }
+      aEl.style.borderColor = aInv ? 'rgb(192,57,43)' : '';
+      lEl.style.borderColor = lInv ? 'rgb(192,57,43)' : '';
 
-  _update() {
-    const ancho = this._validate(this.anchoInput);
-    const largo = this._validate(this.largoInput);
-    const qty   = Math.max(1, parseInt(this.qtyInput.value, 10) || 1);
+      if (aInv || lInv) {
+        errEl.style.display = 'block';
+        boxEl.style.background = 'rgb(248,224,221)';
+        valEl.style.cssText = 'display:block;font-size:.875rem;color:rgb(192,57,43);margin-top:4px';
+        valEl.textContent = 'No hacemos ese tama\xF1o';
+        if (btn) btn.disabled = true;
+        hpEl.value = ''; hmEl.value = '';
+        return;
+      }
 
-    if (ancho === false || largo === false) {
-      this.errorMsg.hidden = false;
-      this.priceValue.textContent = 'No hacemos ese tamaño';
-      this.priceBox.dataset.state = 'error';
-      this.submitBtn.disabled = true;
-      this.hiddenPrice.value = '';
-      this.hiddenM2.value    = '';
-      return;
+      errEl.style.display = 'none';
+
+      if (a === null || l === null) {
+        boxEl.style.background = 'rgb(236,229,219)';
+        valEl.style.cssText = 'display:block;font-size:.875rem;color:#aaa;margin-top:4px';
+        valEl.textContent = 'Introduce tus medidas';
+        if (btn) btn.disabled = true;
+        hpEl.value = ''; hmEl.value = '';
+        return;
+      }
+
+      var m2 = a * l / 10000;
+      var r  = rate(m2);
+      var u  = Math.ceil(m2 * r * 100) / 100;
+      var t  = Math.ceil(u * q * 100) / 100;
+
+      boxEl.style.background = 'rgb(232,151,122)';
+      valEl.style.cssText = 'display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';
+      valEl.textContent = '€ ' + t.toFixed(2).replace('.', ',');
+      if (btn) btn.disabled = false;
+      hpEl.value = t.toFixed(2);
+      hmEl.value = m2.toFixed(4);
     }
 
-    this.errorMsg.hidden = true;
+    aEl.addEventListener('input', update);
+    lEl.addEventListener('input', update);
+    var qEl = form && form.querySelector('[name=quantity]');
+    if (qEl) qEl.addEventListener('change', update);
 
-    if (ancho === null || largo === null) { this._reset(); return; }
+    if (!form) return;
 
-    const result    = PersianaCalculator.calcTotal(ancho, largo, qty);
-    const formatted = result.total.toFixed(2).replace('.', ',');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    this.priceValue.textContent = `€ ${formatted}`;
-    this.priceBox.dataset.state = 'active';
-    this.submitBtn.disabled     = false;
-    this.hiddenPrice.value      = result.total.toFixed(2);
-    this.hiddenM2.value         = result.m2.toFixed(4);
+      var ancho  = parseFloat(aEl.value);
+      var largo  = parseFloat(lEl.value);
+      var precio = parseFloat(hpEl.value);
+
+      if (!ancho || !largo || !precio) return;
+
+      var spanEl = btn && btn.querySelector('span');
+      var spinEl = btn && btn.querySelector('.loading-overlay__spinner');
+
+      if (btn)    { btn.disabled = true; btn.classList.add('loading'); }
+      if (spanEl) spanEl.textContent = 'Procesando…';
+      if (spinEl) spinEl.classList.remove('hidden');
+
+      fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ancho:  ancho,
+          largo:  largo,
+          precio: precio.toFixed(2),
+          titulo: productTitle
+        })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+          } else {
+            throw new Error('no checkout_url');
+          }
+        })
+        .catch(function () {
+          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
+          if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
+          if (spinEl) spinEl.classList.add('hidden');
+          alert('Error al procesar el pedido. Por favor, int\xE9ntalo de nuevo.');
+        });
+    });
   }
-}
 
-document.querySelectorAll('[data-persiana-calculator]').forEach(section => {
-  new PersianaCalculator(section);
-});
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
