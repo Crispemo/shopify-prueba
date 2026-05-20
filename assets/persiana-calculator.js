@@ -73,7 +73,7 @@
       valEl.style.cssText = 'display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';
       valEl.textContent = '€ ' + t.toFixed(2).replace('.', ',');
       if (btn) btn.disabled = false;
-      hpEl.value = t.toFixed(2);
+      hpEl.value = u.toFixed(2);   // precio unitario (no total)
       hmEl.value = m2.toFixed(4);
     }
 
@@ -87,9 +87,11 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var ancho  = parseFloat(aEl.value);
-      var largo  = parseFloat(lEl.value);
-      var precio = parseFloat(hpEl.value);
+      var ancho    = parseFloat(aEl.value);
+      var largo    = parseFloat(lEl.value);
+      var precio   = parseFloat(hpEl.value);
+      var qEl2     = form.querySelector('[name=quantity]');
+      var cantidad = qEl2 ? (parseInt(qEl2.value) || 1) : 1;
 
       if (!ancho || !largo || !precio) return;
 
@@ -104,10 +106,11 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ancho:  ancho,
-          largo:  largo,
-          precio: precio.toFixed(2),
-          titulo: productTitle
+          ancho:    ancho,
+          largo:    largo,
+          precio:   precio.toFixed(2),
+          cantidad: cantidad,
+          titulo:   productTitle
         })
       })
         .then(function (r) { return r.json(); })
