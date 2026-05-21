@@ -2,8 +2,8 @@
   'use strict';
 
   var MIN = 30, MAX = 700;
-  var STORAGE_KEY    = 'jarapa_draft_id';
-  var CHECKOUT_KEY   = 'jarapa_checkout_url';
+  var STORAGE_KEY  = 'jarapa_draft_id';
+  var CHECKOUT_KEY = 'jarapa_checkout_url';
 
   function rate(m2) {
     return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
@@ -32,24 +32,6 @@
     var btn  = form && (form.querySelector('[name=add]') || form.querySelector('button[type=submit]'));
 
     if (btn) btn.disabled = true;
-
-    // Botón "Ir al pago" persistente
-    var checkoutBtn = document.getElementById('pc-checkout-btn');
-    if (!checkoutBtn && btn) {
-      checkoutBtn = document.createElement('a');
-      checkoutBtn.id = 'pc-checkout-btn';
-      checkoutBtn.style.cssText = 'display:none;margin-top:8px;width:100%;text-align:center;padding:14px;background:#c8824a;color:#fff;font-weight:700;font-size:1rem;border-radius:4px;text-decoration:none;box-sizing:border-box;';
-      btn.parentNode.insertBefore(checkoutBtn, btn.nextSibling);
-    }
-
-    // Mostrar botón "Ir al pago" si ya hay items en el carrito
-    var savedCheckout = localStorage.getItem(CHECKOUT_KEY);
-    var savedCount    = parseInt(localStorage.getItem(STORAGE_KEY + '_count') || '0');
-    if (checkoutBtn && savedCheckout && savedCount > 0) {
-      checkoutBtn.href        = savedCheckout;
-      checkoutBtn.textContent = 'Ir al pago (' + savedCount + ' ' + (savedCount === 1 ? 'persiana' : 'persianas') + ')';
-      checkoutBtn.style.display = 'block';
-    }
 
     function update() {
       var a   = aEl.value ? parseFloat(aEl.value) : null;
@@ -93,7 +75,7 @@
       valEl.style.cssText = 'display:block;font-size:1.75rem;font-weight:700;color:#fff;margin-top:4px';
       valEl.textContent = '€ ' + t.toFixed(2).replace('.', ',');
       if (btn) btn.disabled = false;
-      hpEl.value = u.toFixed(2);   // precio por unidad
+      hpEl.value = u.toFixed(2);
       hmEl.value = m2.toFixed(4);
     }
 
@@ -140,27 +122,15 @@
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
 
-          // Guardar estado del carrito
           localStorage.setItem(STORAGE_KEY, data.draft_order_id);
           localStorage.setItem(CHECKOUT_KEY, data.checkout_url);
-          var prev = parseInt(localStorage.getItem(STORAGE_KEY + '_count') || '0');
-          var next = prev + cantidad;
-          localStorage.setItem(STORAGE_KEY + '_count', next);
 
-          // Mostrar confirmación en el botón
-          if (btn)    { btn.classList.remove('loading'); }
+          // Confirmación en el botón
+          if (btn)    { btn.classList.remove('loading'); btn.disabled = false; }
           if (spanEl) spanEl.textContent = '✓ A\xF1adida al carrito';
           if (spinEl) spinEl.classList.add('hidden');
-          btn.disabled = false;
 
-          // Mostrar / actualizar botón "Ir al pago"
-          if (checkoutBtn) {
-            checkoutBtn.href        = data.checkout_url;
-            checkoutBtn.textContent = 'Ir al pago (' + next + ' ' + (next === 1 ? 'persiana' : 'persianas') + ')';
-            checkoutBtn.style.display = 'block';
-          }
-
-          // Resetear medidas después de 2 s
+          // Resetear campos tras 2 s
           setTimeout(function () {
             aEl.value = '';
             lEl.value = '';
