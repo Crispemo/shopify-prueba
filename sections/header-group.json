@@ -1,1 +1,186 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"Envío gratis y devoluciones en 30 días","link":""}}},"block_order":["announcement-bar-0"],"settings":{"color_scheme":"inverse","show_line_separator":true,"show_social":false,"auto_rotate":false,"change_slides_speed":5,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"middle-left","menu":"menu","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"scheme-9293d739-628b-43d5-8db0-fd95268caf7e","menu_color_scheme":"scheme-9293d739-628b-43d5-8db0-fd95268caf7e","enable_country_selector":true,"enable_language_selector":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":20,"padding_bottom":20}},"17777759825e25f799":{"type":"apps","settings":{"include_margins":true}}},"order":["announcement-bar","header","17777759825e25f799"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Envío gratis y devoluciones en 30 días",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "color_scheme": "inverse",
+        "show_line_separator": true,
+        "show_social": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "menu": "menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-9293d739-628b-43d5-8db0-fd95268caf7e",
+        "menu_color_scheme": "scheme-9293d739-628b-43d5-8db0-fd95268caf7e",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "home_hero_TpNDbA": {
+      "type": "home-hero",
+      "name": "Hero",
+      "settings": {
+        "image": "shopify://shop_images/portada.png",
+        "overlay_opacity": 30,
+        "heading": "DECORA TU HOGAR",
+        "subheading": "PRODUCTOS ARTESANALES DE ESPARTO Y YUTE",
+        "button_label": "Ver productos",
+        "button_url": "",
+        "height": 700,
+        "height_mobile": 480
+      }
+    },
+    "persianas_personalizadas_QMfLeq": {
+      "type": "persianas-personalizadas",
+      "name": "Persianas personalizadas",
+      "settings": {
+        "color_scheme": "",
+        "image_position": "left",
+        "eyebrow": "Hecho a mano · A tu medida",
+        "heading": "Persianas de esparto personalizadas",
+        "body": "<p>Diseñamos cada persiana según tus medidas exactas. Elige el ancho y el largo, y la fabricamos en nuestro taller de las Alpujarras con esparto 100% natural.</p><p>Sin molestos estándares de fábrica. Sin tamaños fijos. Tu ventana, tu persiana.</p>",
+        "feature_1": "Medidas a la carta (de 30 a 700 cm)",
+        "feature_2": "Esparto natural y sostenible",
+        "feature_3": "Fabricación artesanal en las Alpujarras",
+        "feature_4": "Precio calculado al instante por m²",
+        "button_label": "Configurar mi persiana",
+        "button_url": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "pack_verano_fGrykF": {
+      "type": "pack-verano",
+      "name": "Pack de Verano",
+      "settings": {
+        "fallback_color": "#f5ede3",
+        "overlay_opacity": 30,
+        "card_position": "left",
+        "card_opacity": 95,
+        "text_color": "#2b2118",
+        "badge": "Próximamente",
+        "heading": "Pack de Verano Jarapa",
+        "subheading": "Todo lo que necesitas para un verano con estilo natural",
+        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.</p><p>Sé el primero en enterarte cuando esté disponible.</p>",
+        "button_label": "Avisarme cuando esté disponible",
+        "button_url": "",
+        "button2_label": "",
+        "button2_url": "",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "home_mas_vendidos_4i3f4e": {
+      "type": "home-mas-vendidos",
+      "name": "Los más vendidos",
+      "settings": {
+        "heading": "LOS MÁS VENDIDOS",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "home_social_q83yR6": {
+      "type": "home-social",
+      "blocks": {
+        "photo_QeMtjg": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_YL7Ur7": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_QNicLC": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_tB63X9": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_YCi73j": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_QeMtjg",
+        "photo_YL7Ur7",
+        "photo_QNicLC",
+        "photo_tB63X9",
+        "photo_YCi73j"
+      ],
+      "name": "Social / UGC",
+      "settings": {
+        "color_scheme": "",
+        "heading": "¡COMPARTE TU ESTILO CON NOSOTROS!",
+        "body": "Sigue a Jarapa Home en nuestras redes sociales y descubre inspiración diaria para decorar tu hogar de forma sostenible. Etiqueta tu decoración con #JarapaHome para compartir tu estilo con nosotros.",
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    },
+    "17777759825e25f799": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "home_hero_TpNDbA",
+    "persianas_personalizadas_QMfLeq",
+    "pack_verano_fGrykF",
+    "home_mas_vendidos_4i3f4e",
+    "home_social_q83yR6",
+    "17777759825e25f799"
+  ]
+}
