@@ -8,25 +8,31 @@
     </div>
   </div>
 
-  <div class="h-social__grid">
-    {%- for block in section.blocks -%}
-      <div class="h-social__item" {{ block.shopify_attributes }}>
-        {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" target="_blank" rel="noopener">{%- endif -%}
-        {%- if block.settings.image != blank -%}
-          <img
-            src="{{ block.settings.image | image_url: width: 600 }}"
-            alt="{{ block.settings.image.alt | default: '' | escape }}"
-            width="600"
-            height="{{ 600 | divided_by: block.settings.image.aspect_ratio | round }}"
-            loading="lazy"
-            class="h-social__img"
-          >
-        {%- else -%}
-          <div class="h-social__img h-social__img--ph">{{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag }}</div>
-        {%- endif -%}
-        {%- if block.settings.url != blank -%}</a>{%- endif -%}
-      </div>
-    {%- endfor -%}
+  <div class="h-social__wrap">
+    <button class="h-social__arrow h-social__arrow--prev" aria-label="Anterior">&#8249;</button>
+
+    <div class="h-social__track" id="h-social-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="h-social__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" target="_blank" rel="noopener">{%- endif -%}
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="{{ block.settings.image.alt | default: '' | escape }}"
+              width="600"
+              height="{{ 600 | divided_by: block.settings.image.aspect_ratio | round }}"
+              loading="lazy"
+              class="h-social__img"
+            >
+          {%- else -%}
+            <div class="h-social__img h-social__img--ph">{{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag }}</div>
+          {%- endif -%}
+          {%- if block.settings.url != blank -%}</a>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <button class="h-social__arrow h-social__arrow--next" aria-label="Siguiente">&#8250;</button>
   </div>
 </section>
 
@@ -60,13 +66,25 @@
     line-height: 1.7;
   }
 
-  .h-social__grid {
-    display: grid;
-    grid-template-columns: repeat({{ section.blocks.size | default: 5 }}, 1fr);
-    gap: 0;
+  .h-social__wrap {
+    display: flex;
+    align-items: stretch;
   }
 
-  .h-social__item { overflow: hidden; aspect-ratio: 1; }
+  .h-social__track {
+    display: flex;
+    overflow: hidden;
+    flex: 1;
+    scroll-behavior: smooth;
+  }
+
+  .h-social__item {
+    flex: 0 0 calc(100% / {{ section.settings.per_row }});
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .h-social__item a { display: block; height: 100%; }
 
   .h-social__img {
     width: 100%;
@@ -78,6 +96,8 @@
   .h-social__item:hover .h-social__img { transform: scale(1.06); }
 
   .h-social__img--ph {
+    width: 100%;
+    height: 100%;
     background: #e8e0d6;
     display: flex;
     align-items: center;
@@ -85,26 +105,71 @@
   }
   .h-social__img--ph svg { width: 40px; opacity: .3; }
 
-  .h-social__item a { display: block; height: 100%; }
-
-  @media (max-width: 749px) {
-    .h-social__grid { grid-template-columns: repeat(2, 1fr); }
+  .h-social__arrow {
+    background: #fff;
+    border: none;
+    width: 48px;
+    flex-shrink: 0;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    transition: color .2s;
+    padding: 0;
+    line-height: 1;
   }
-  @media (max-width: 399px) {
-    .h-social__grid { grid-template-columns: 1fr; }
+  .h-social__arrow:hover { color: #111; }
+
+  @media (max-width: 899px) {
+    .h-social__item { flex: 0 0 33.333%; }
+  }
+  @media (max-width: 549px) {
+    .h-social__item { flex: 0 0 80%; }
+    .h-social__arrow { width: 36px; font-size: 1.5rem; }
   }
 </style>
+
+<script>
+(function() {
+  var track = document.querySelector('#h-social-{{ section.id }}');
+  if (!track) return;
+  var wrap = track.closest('.h-social__wrap');
+
+  function cardW() {
+    var c = track.querySelector('.h-social__item');
+    return c ? c.offsetWidth : 0;
+  }
+  function visible() { return Math.round(track.offsetWidth / cardW()) || 1; }
+
+  wrap.querySelector('.h-social__arrow--prev').addEventListener('click', function() {
+    track.scrollLeft -= cardW() * visible();
+  });
+  wrap.querySelector('.h-social__arrow--next').addEventListener('click', function() {
+    track.scrollLeft += cardW() * visible();
+  });
+
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = startX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) track.scrollLeft += dx > 0 ? cardW() : -cardW();
+  }, {passive:true});
+})();
+</script>
 
 {% schema %}
 {
   "name": "Social / UGC",
   "tag": "section",
   "class": "section",
-  "max_blocks": 8,
+  "max_blocks": 10,
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "background-1" },
-    { "type": "text",     "id": "heading", "label": "Título", "default": "¡COMPARTE TU ESTILO CON NOSOTROS!" },
-    { "type": "textarea", "id": "body",    "label": "Descripción", "default": "Sigue a Jarapa Home en nuestras redes sociales y descubre inspiración diaria para decorar tu hogar de forma sostenible. Etiqueta tu decoración con #JarapaHome para compartir tu estilo con nosotros." },
+    { "type": "text",     "id": "heading",  "label": "Título", "default": "¡COMPARTE TU ESTILO CON NOSOTROS!" },
+    { "type": "textarea", "id": "body",     "label": "Descripción", "default": "Sigue a Jarapa Home en nuestras redes sociales y descubre inspiración diaria para decorar tu hogar de forma sostenible. Conoce más sobre nuestras técnicas artesanales, participa en sorteos exclusivos, y sé parte de un movimiento que celebra el diseño ético y responsable. No olvides etiquetar tu decoración con #JarapaHome para compartir tu estilo con nosotros." },
+    { "type": "range", "id": "per_row",      "label": "Fotos visibles (escritorio)", "min": 2, "max": 6, "step": 1, "default": 5 },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 60 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 0 }
   ],
@@ -114,7 +179,7 @@
       "name": "Foto",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Imagen" },
-        { "type": "url",          "id": "url",   "label": "Enlace (opcional, p.ej. Instagram)" }
+        { "type": "url",          "id": "url",   "label": "Enlace (opcional)" }
       ]
     }
   ],
@@ -122,11 +187,8 @@
     {
       "name": "Social / UGC",
       "blocks": [
-        { "type": "photo" },
-        { "type": "photo" },
-        { "type": "photo" },
-        { "type": "photo" },
-        { "type": "photo" }
+        { "type": "photo" }, { "type": "photo" }, { "type": "photo" },
+        { "type": "photo" }, { "type": "photo" }
       ]
     }
   ]

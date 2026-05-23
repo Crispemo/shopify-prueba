@@ -1,51 +1,44 @@
-{%- assign col = section.settings.collection -%}
-
 <section class="h-mv">
   <div class="page-width">
     <h2 class="h-mv__title">{{ section.settings.heading }}</h2>
   </div>
 
-  <div class="h-mv__track-wrap page-width">
-    <button class="h-mv__arrow h-mv__arrow--prev" aria-label="Anterior" onclick="mvScroll(this, -1)">&#8249;</button>
+  <div class="h-mv__wrap">
+    <button class="h-mv__arrow h-mv__arrow--prev" aria-label="Anterior" data-dir="-1">&#8249;</button>
 
-    <div class="h-mv__track" id="h-mv-track-{{ section.id }}">
-      {%- if col != blank -%}
-        {%- for product in col.products limit: section.settings.products_limit -%}
-          <div class="h-mv__card">
-            <a href="{{ product.url }}" class="h-mv__img-link">
-              {%- if product.featured_image != blank -%}
-                <img
-                  src="{{ product.featured_image | image_url: width: 600 }}"
-                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                  width="600"
-                  height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
-                  loading="lazy"
-                  class="h-mv__img"
-                >
-              {%- else -%}
-                <div class="h-mv__img-ph">{{ 'product-1' | placeholder_svg_tag }}</div>
-              {%- endif -%}
+    <div class="h-mv__track" id="h-mv-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- assign prod = block.settings.product -%}
+        {%- if prod != blank -%}
+          <div class="h-mv__card" {{ block.shopify_attributes }}>
+            <a href="{{ prod.url }}" class="h-mv__img-link">
+              <img
+                src="{{ prod.featured_image | image_url: width: 700 }}"
+                alt="{{ prod.featured_image.alt | default: prod.title | escape }}"
+                width="700"
+                height="{{ 700 | divided_by: prod.featured_image.aspect_ratio | round }}"
+                loading="lazy"
+                class="h-mv__img"
+              >
             </a>
             <div class="h-mv__info">
-              <p class="h-mv__name">{{ product.title }}</p>
-              <a href="{{ product.url }}" class="h-mv__btn">VER PRODUCTO</a>
+              <p class="h-mv__name">{{ prod.title }}</p>
+              <a href="{{ prod.url }}" class="h-mv__btn">VER PRODUCTO</a>
             </div>
           </div>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..4) -%}
-          <div class="h-mv__card">
-            <div class="h-mv__img-ph">{{ 'product-' | append: i | placeholder_svg_tag }}</div>
+        {%- else -%}
+          <div class="h-mv__card" {{ block.shopify_attributes }}>
+            <div class="h-mv__img-ph">{{ 'product-1' | placeholder_svg_tag }}</div>
             <div class="h-mv__info">
-              <p class="h-mv__name">Producto de ejemplo</p>
+              <p class="h-mv__name">Producto</p>
               <span class="h-mv__btn">VER PRODUCTO</span>
             </div>
           </div>
-        {%- endfor -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
-    <button class="h-mv__arrow h-mv__arrow--next" aria-label="Siguiente" onclick="mvScroll(this, 1)">&#8250;</button>
+    <button class="h-mv__arrow h-mv__arrow--next" aria-label="Siguiente" data-dir="1">&#8250;</button>
   </div>
 </section>
 
@@ -57,38 +50,34 @@
 
   .h-mv__title {
     text-align: center;
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     font-weight: 700;
-    letter-spacing: .12em;
+    letter-spacing: .14em;
     text-transform: uppercase;
     color: #111;
-    margin: 0 0 40px;
+    margin: 0 0 36px;
   }
 
-  .h-mv__track-wrap {
+  .h-mv__wrap {
     position: relative;
     display: flex;
-    align-items: center;
-    gap: 0;
+    align-items: stretch;
   }
 
   .h-mv__track {
-    display: grid;
-    grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    display: flex;
+    overflow: hidden;
     flex: 1;
+    scroll-behavior: smooth;
   }
-  .h-mv__track::-webkit-scrollbar { display: none; }
 
   .h-mv__card {
-    scroll-snap-align: start;
+    flex: 0 0 calc(100% / {{ section.settings.per_row }});
     display: flex;
     flex-direction: column;
+    border-right: 1px solid #f0f0f0;
   }
+  .h-mv__card:last-child { border-right: none; }
 
   .h-mv__img-link { display: block; overflow: hidden; }
 
@@ -97,14 +86,14 @@
     aspect-ratio: 3/4;
     object-fit: cover;
     display: block;
-    transition: transform .4s ease;
+    transition: transform .45s ease;
   }
-  .h-mv__img-link:hover .h-mv__img { transform: scale(1.04); }
+  .h-mv__img-link:hover .h-mv__img { transform: scale(1.05); }
 
   .h-mv__img-ph {
     width: 100%;
     aspect-ratio: 3/4;
-    background: #f0ede8;
+    background: #f2ede8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,16 +101,16 @@
   .h-mv__img-ph svg { width: 60px; opacity: .3; }
 
   .h-mv__info {
-    padding: 16px 12px 12px;
+    padding: 16px 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     flex: 1;
   }
 
   .h-mv__name {
     font-size: 1rem;
-    color: #111;
+    color: #222;
     margin: 0;
     text-align: center;
     font-weight: 400;
@@ -130,56 +119,75 @@
   .h-mv__btn {
     display: block;
     text-align: center;
-    border: 1.5px solid #111;
-    padding: 10px 8px;
+    border: 1.5px solid #bbb;
+    padding: 11px 8px;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: .1em;
-    color: #111;
+    color: #222;
     text-decoration: none;
     background: #fff;
-    transition: background .2s, color .2s;
-    cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
     margin-top: auto;
   }
-  .h-mv__btn:hover { background: #111; color: #fff; }
+  .h-mv__btn:hover { background: #222; color: #fff; border-color: #222; }
 
   .h-mv__arrow {
     background: #fff;
-    border: 1.5px solid #ddd;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    line-height: 1;
+    border: none;
+    width: 48px;
+    flex-shrink: 0;
+    font-size: 2rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    color: #111;
-    transition: background .2s;
-    z-index: 2;
+    color: #888;
+    transition: color .2s;
+    padding: 0;
+    line-height: 1;
   }
-  .h-mv__arrow:hover { background: #f5f5f5; }
-  .h-mv__arrow--prev { margin-right: 12px; }
-  .h-mv__arrow--next { margin-left: 12px; }
+  .h-mv__arrow:hover { color: #111; }
 
   @media (max-width: 899px) {
-    .h-mv__track { grid-template-columns: repeat(2, 1fr); }
-    .h-mv__arrow { display: none; }
+    .h-mv__card { flex: 0 0 50%; }
   }
   @media (max-width: 549px) {
-    .h-mv__track { grid-template-columns: repeat(1, 80vw); }
+    .h-mv__card { flex: 0 0 85%; }
+    .h-mv__arrow { width: 36px; font-size: 1.5rem; }
   }
 </style>
 
 <script>
-  function mvScroll(btn, dir) {
-    var track = btn.closest('.h-mv__track-wrap').querySelector('.h-mv__track');
-    var cardW = track.querySelector('.h-mv__card').offsetWidth;
-    track.scrollBy({ left: dir * cardW, behavior: 'smooth' });
+(function() {
+  var section = document.querySelector('#h-mv-{{ section.id }}');
+  if (!section) return;
+  var wrap = section.closest('.h-mv__wrap');
+
+  function getCardW() {
+    var card = section.querySelector('.h-mv__card');
+    return card ? card.offsetWidth : 0;
   }
+
+  function getVisible() {
+    return Math.round(section.offsetWidth / getCardW()) || 1;
+  }
+
+  wrap.querySelector('.h-mv__arrow--prev').addEventListener('click', function() {
+    section.scrollLeft -= getCardW() * getVisible();
+  });
+  wrap.querySelector('.h-mv__arrow--next').addEventListener('click', function() {
+    section.scrollLeft += getCardW() * getVisible();
+  });
+
+  /* touch swipe */
+  var startX = 0;
+  section.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  section.addEventListener('touchend', function(e){
+    var dx = startX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) section.scrollLeft += dx > 0 ? getCardW() : -getCardW();
+  }, {passive:true});
+})();
 </script>
 
 {% schema %}
@@ -187,14 +195,32 @@
   "name": "Los más vendidos",
   "tag": "section",
   "class": "section",
+  "max_blocks": 12,
   "settings": [
-    { "type": "text",       "id": "heading",          "label": "Título",                        "default": "LOS MÁS VENDIDOS" },
-    { "type": "collection", "id": "collection",       "label": "Colección de productos" },
-    { "type": "range",      "id": "products_limit",   "label": "Número máximo de productos",    "min": 2, "max": 12, "step": 1, "default": 6 },
-    { "type": "range",      "id": "products_per_row", "label": "Columnas en escritorio",        "min": 2, "max": 5,  "step": 1, "default": 4 },
+    { "type": "text",  "id": "heading",  "label": "Título", "default": "LOS MÁS VENDIDOS" },
+    { "type": "range", "id": "per_row",  "label": "Productos visibles (escritorio)", "min": 2, "max": 5, "step": 1, "default": 4 },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 60 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 60 }
   ],
-  "presets": [{ "name": "Los más vendidos" }]
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Los más vendidos",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
 }
 {% endschema %}
