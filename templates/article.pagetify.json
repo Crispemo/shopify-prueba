@@ -8,15 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "pagetify-page": {
-      "type": "pagetify-page",
-      "settings": {
-        "type": "article"
-      }
-    }
-  },
-  "order": [
-    "pagetify-page"
-  ]
+    "sections": {
+        "pagetify-page": {
+            "type": "pagetify-page",
+            "settings": {
+                "type": "article"
+            }
+        }
+    },
+    "order": ["pagetify-page"]
 }

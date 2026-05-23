@@ -143,47 +143,10 @@
     },
     "content_for_index": [],
     "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      },
-      "16278478101612877664": {
-        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
-        "disabled": false,
-        "settings": {}
-      },
       "11724500921838622758": {
         "type": "shopify://apps/frequently-bought-together/blocks/app-embed-block/b1a8cbea-c844-4842-9529-7c62dbab1b1f",
         "disabled": true,
         "settings": {}
-      },
-      "8232603958289840080": {
-        "type": "shopify://apps/seo-manager-venntov/blocks/seomanager-404/c54c366f-d4bb-4d52-8d2f-dd61ce8e7e12",
-        "disabled": false,
-        "settings": {}
-      },
-      "17992116214976573926": {
-        "type": "shopify://apps/seo-manager-venntov/blocks/seomanager/c54c366f-d4bb-4d52-8d2f-dd61ce8e7e12",
-        "disabled": false,
-        "settings": {}
-      },
-      "6478312753674380289": {
-        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
-        "disabled": false,
-        "settings": {}
-      },
-      "855628211100114053": {
-        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
-        "disabled": false,
-        "settings": {}
-      },
-      "4571859552318407796": {
-        "type": "shopify://apps/glo-color-swatch/blocks/app-embed-block/4394f710-096c-4021-bbde-8ebb26057c11",
-        "disabled": false,
-        "settings": {
-          "customCssGCW": ""
-        }
       },
       "11813581335429059158": {
         "type": "shopify://apps/whatsapp-chat-widget/blocks/app-embed/b85b5e45-9cea-417a-9b9e-0aa961ccf3ef",
@@ -212,6 +175,11 @@
           "distance_bottom": 30
         }
       },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
       "1519107564253711417": {
         "type": "shopify://apps/vimg-multiple-variant-images/blocks/app.embeded/3fcfc3bb-b4e3-44bd-9ff9-3d525461bb38",
         "disabled": false,
@@ -221,8 +189,35 @@
           "slider_class": ""
         }
       },
-      "6460986421370555689": {
-        "type": "shopify://apps/apippa-custom-price-calculator/blocks/cpc-app-embed/c499fa68-8478-4285-a3f7-27654dd66c3e",
+      "16278478101612877664": {
+        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
+        "disabled": false,
+        "settings": {}
+      },
+      "17992116214976573926": {
+        "type": "shopify://apps/seo-manager-venntov/blocks/seomanager/c54c366f-d4bb-4d52-8d2f-dd61ce8e7e12",
+        "disabled": false,
+        "settings": {}
+      },
+      "4571859552318407796": {
+        "type": "shopify://apps/glo-color-swatch/blocks/app-embed-block/4394f710-096c-4021-bbde-8ebb26057c11",
+        "disabled": false,
+        "settings": {
+          "customCssGCW": ""
+        }
+      },
+      "6478312753674380289": {
+        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
+        "disabled": false,
+        "settings": {}
+      },
+      "8232603958289840080": {
+        "type": "shopify://apps/seo-manager-venntov/blocks/seomanager-404/c54c366f-d4bb-4d52-8d2f-dd61ce8e7e12",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
       }
@@ -295,6 +290,14 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "._1fragemph {border-block-color: black;}",
+      "_1fragemon {border-right-color: #000000;}",
+      "._1fragemol {border-left-color: #000000;}",
+      ".button,.shopify-challenge__button,.customer button {color: #000; background-color: rgb(24 39 75 / 0%);}"
+    ]
   },
   "presets": {
     "Default": {
@@ -486,13 +489,5 @@
         }
       }
     }
-  },
-  "platform_customizations": {
-    "custom_css": [
-      "._1fragemph {border-block-color: black;}",
-      "_1fragemon {border-right-color: #000000;}",
-      "._1fragemol {border-left-color: #000000;}",
-      ".button,.shopify-challenge__button,.customer button {color: #000; background-color: rgb(24 39 75 / 0%);}"
-    ]
   }
 }
