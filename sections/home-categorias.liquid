@@ -1,0 +1,136 @@
+<section class="h-cats">
+  <div class="h-cats__grid">
+    {%- for block in section.blocks -%}
+      <div class="h-cats__col" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img
+            src="{{ block.settings.image | image_url: width: 900 }}"
+            alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+            width="900"
+            height="{{ 900 | divided_by: block.settings.image.aspect_ratio | round }}"
+            loading="lazy"
+            class="h-cats__img"
+          >
+        {%- else -%}
+          <div class="h-cats__img h-cats__img--ph">{{ 'collection-' | append: forloop.index | placeholder_svg_tag }}</div>
+        {%- endif -%}
+        <div class="h-cats__overlay"></div>
+        <div class="h-cats__text">
+          {%- if block.settings.label != blank -%}
+            <p class="h-cats__label">{{ block.settings.label }}</p>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank and block.settings.url != blank -%}
+            <a href="{{ block.settings.url }}" class="h-cats__link">{{ block.settings.link_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .h-cats { width: 100%; }
+
+  .h-cats__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | default: 3 }}, 1fr);
+    min-height: {{ section.settings.height }}px;
+  }
+
+  .h-cats__col {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .h-cats__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .h-cats__col:hover .h-cats__img { transform: scale(1.05); }
+
+  .h-cats__img--ph { background: #ccc; }
+
+  .h-cats__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    z-index: 1;
+  }
+
+  .h-cats__text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 24px;
+  }
+
+  .h-cats__label {
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    color: #fff;
+  }
+
+  .h-cats__link {
+    font-size: 0.8125rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity .2s;
+  }
+  .h-cats__link:hover { opacity: .75; }
+
+  @media (max-width: 749px) {
+    .h-cats__grid { grid-template-columns: 1fr; }
+    .h-cats__col { min-height: 240px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Categorías (3 columnas)",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "range", "id": "height",          "label": "Altura mínima (px)", "min": 200, "max": 700, "step": 20, "default": 480 },
+    { "type": "range", "id": "overlay_opacity", "label": "Oscuridad overlay (%)", "min": 0, "max": 80, "step": 5, "default": 25 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        { "type": "image_picker", "id": "image",      "label": "Imagen de fondo" },
+        { "type": "text",         "id": "label",      "label": "Nombre de categoría", "default": "ALFOMBRAS" },
+        { "type": "text",         "id": "link_label", "label": "Texto del enlace",    "default": "VER COLECCIÓN" },
+        { "type": "url",          "id": "url",        "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorías",
+      "blocks": [
+        { "type": "category", "settings": { "label": "ALFOMBRAS",  "link_label": "VER COLECCIÓN" } },
+        { "type": "category", "settings": { "label": "ESPARTO",    "link_label": "VER COLECCIÓN" } },
+        { "type": "category", "settings": { "label": "TEXTILES",   "link_label": "VER COLECCIÓN" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
