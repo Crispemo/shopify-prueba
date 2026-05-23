@@ -1,0 +1,188 @@
+<section class="p-custom color-{{ section.settings.color_scheme }}">
+  <div class="p-custom__inner page-width">
+
+    <div class="p-custom__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 900 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          width="900"
+          height="{{ 900 | divided_by: section.settings.image.aspect_ratio | round }}"
+          loading="lazy"
+          class="p-custom__img"
+        >
+      {%- else -%}
+        <div class="p-custom__img-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="p-custom__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="p-custom__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h2 class="p-custom__heading">{{ section.settings.heading }}</h2>
+
+      {%- if section.settings.body != blank -%}
+        <div class="p-custom__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.feature_1 != blank or section.settings.feature_2 != blank or section.settings.feature_3 != blank -%}
+        <ul class="p-custom__features">
+          {%- if section.settings.feature_1 != blank -%}
+            <li>{{ section.settings.feature_1 }}</li>
+          {%- endif -%}
+          {%- if section.settings.feature_2 != blank -%}
+            <li>{{ section.settings.feature_2 }}</li>
+          {%- endif -%}
+          {%- if section.settings.feature_3 != blank -%}
+            <li>{{ section.settings.feature_3 }}</li>
+          {%- endif -%}
+          {%- if section.settings.feature_4 != blank -%}
+            <li>{{ section.settings.feature_4 }}</li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+        <a href="{{ section.settings.button_url }}" class="p-custom__btn button button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .p-custom {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: var(--color-background);
+  }
+
+  .p-custom__inner {
+    display: grid;
+    grid-template-columns: {% if section.settings.image_position == 'right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+    gap: 64px;
+    align-items: center;
+    {% if section.settings.image_position == 'right' %}direction: rtl;{% endif %}
+  }
+
+  {% if section.settings.image_position == 'right' %}
+  .p-custom__content { direction: ltr; }
+  .p-custom__media   { direction: ltr; }
+  {% endif %}
+
+  .p-custom__img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    max-height: 580px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .p-custom__img-placeholder {
+    min-height: 420px;
+    background: #e8e0d6;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .p-custom__img-placeholder svg { width: 80px; opacity: .35; }
+
+  .p-custom__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #c8824a;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+
+  .p-custom__heading {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+
+  .p-custom__body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-foreground);
+    opacity: .85;
+    margin-bottom: 28px;
+  }
+
+  .p-custom__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .p-custom__features li {
+    font-size: 1rem;
+    color: var(--color-foreground);
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .p-custom__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #c8824a;
+    font-weight: 700;
+  }
+
+  .p-custom__btn {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  @media (max-width: 899px) {
+    .p-custom__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      direction: ltr;
+    }
+    .p-custom__img { min-height: 280px; max-height: 380px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Persianas personalizadas",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "background-1" },
+    { "type": "select", "id": "image_position", "label": "Posición de la imagen", "options": [
+        { "value": "left",  "label": "Izquierda" },
+        { "value": "right", "label": "Derecha" }
+      ], "default": "left" },
+    { "type": "image_picker", "id": "image", "label": "Imagen del producto" },
+    { "type": "text",     "id": "eyebrow",  "label": "Texto pequeño sobre el título", "default": "Hecho a mano · A tu medida" },
+    { "type": "text",     "id": "heading",  "label": "Título", "default": "Persianas de esparto personalizadas" },
+    { "type": "richtext", "id": "body",     "label": "Descripción", "default": "<p>Diseñamos cada persiana según tus medidas exactas. Elige el ancho y el largo, y la fabricamos en nuestro taller de las Alpujarras con esparto 100% natural.</p><p>Sin molestos estándares de fábrica. Sin tamaños fijos. Tu ventana, tu persiana.</p>" },
+    { "type": "text", "id": "feature_1", "label": "Característica 1", "default": "Medidas a la carta (de 30 a 700 cm)" },
+    { "type": "text", "id": "feature_2", "label": "Característica 2", "default": "Esparto natural y sostenible" },
+    { "type": "text", "id": "feature_3", "label": "Característica 3", "default": "Fabricación artesanal en las Alpujarras" },
+    { "type": "text", "id": "feature_4", "label": "Característica 4", "default": "Precio calculado al instante por m²" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Configurar mi persiana" },
+    { "type": "url",  "id": "button_url",   "label": "Enlace del botón" },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 80 }
+  ],
+  "presets": [{ "name": "Persianas personalizadas" }]
+}
+{% endschema %}
