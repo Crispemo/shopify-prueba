@@ -11,41 +11,13 @@
   "sections": {
     "pagetify-page": {
       "type": "pagetify-page",
-      "settings": { "type": "index", "width": "boxed" }
-    },
-    "persianas-personalizadas": {
-      "type": "persianas-personalizadas",
       "settings": {
-        "eyebrow": "Hecho a mano · A tu medida",
-        "heading": "Persianas de esparto personalizadas",
-        "body": "<p>Diseñamos cada persiana según tus medidas exactas. Elige el ancho y el largo, y la fabricamos en nuestro taller de las Alpujarras con esparto 100% natural.<\/p><p>Sin molestos estándares de fábrica. Sin tamaños fijos. Tu ventana, tu persiana.<\/p>",
-        "feature_1": "Medidas a la carta (de 30 a 700 cm)",
-        "feature_2": "Esparto natural y sostenible",
-        "feature_3": "Fabricación artesanal en las Alpujarras",
-        "feature_4": "Precio calculado al instante por m²",
-        "button_label": "Configurar mi persiana",
-        "image_position": "left",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "pack-verano": {
-      "type": "pack-verano",
-      "settings": {
-        "badge": "Próximamente",
-        "heading": "Pack de Verano Jarapa",
-        "subheading": "Todo lo que necesitas para un verano con estilo natural",
-        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.<\/p><p>Sé el primero en enterarte cuando esté disponible.<\/p>",
-        "button_label": "Avisarme cuando esté disponible",
-        "fallback_color": "#f5ede3",
-        "card_position": "left",
-        "card_opacity": 95,
-        "overlay_opacity": 30,
-        "text_color": "#2b2118",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "type": "index",
+        "width": "boxed"
       }
     }
   },
-  "order": ["pagetify-page", "persianas-personalizadas", "pack-verano"]
+  "order": [
+    "pagetify-page"
+  ]
 }
