@@ -1507,6 +1507,20 @@ a.product__text {
   display: none;
 }
 
+/* Fix: glo-color-swatch labels no se apilen cuando el color no está mapeado */
+fieldset.product-form__input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
+fieldset.product-form__input input[type='radio'] + label {
+  display: inline-flex !important;
+  position: relative !important;
+  flex-shrink: 0;
+}
+
 .recipient-form > input[type='checkbox'] {
   position: absolute;
   width: 1.6rem;
