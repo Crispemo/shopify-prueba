@@ -8,15 +8,17 @@
  * ------------------------------------------------------------
  */
 {
-    "layout": "theme.pagetify",
-    "sections": {
-        "pagetify-page": {
-            "type": "pagetify-page",
-            "settings": {
-                "type": "landing",
-                "width": ""
-            }
-        }
-    },
-    "order": ["pagetify-page"]
+  "layout": "theme.pagetify",
+  "sections": {
+    "pagetify-page": {
+      "type": "pagetify-page",
+      "settings": {
+        "type": "landing",
+        "width": ""
+      }
+    }
+  },
+  "order": [
+    "pagetify-page"
+  ]
 }

@@ -37,12 +37,6 @@
           "type": "price",
           "settings": {}
         },
-        "custom_liquid_qxxgqV": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"border: 1px solid #ccc; padding: 10px; font-size: 12px;\n            margin: 0;\n            font-family: 'Arial', sans-serif;\nalign-items: center;\ntext-align: center;\nbackground-color: #f8f8f8;\">\n  Paga en 3 plazos sin intereses (0% TAE) con <strong>Klarna.</strong>\n</div>"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -58,6 +52,46 @@
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Compartir"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {}
+        },
+        "6bc544d2-c561-432b-9cc8-47cb5b5becac": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "truck",
+            "heading_1": "<strong>Envío Gratis</strong> en 24-72h (UE)",
+            "icon_2": "box",
+            "heading_2": "Devoluciones GRATIS 30 días (UE)",
+            "icon_3": "star",
+            "image_3": "shopify://shop_images/verificado.png",
+            "heading_3": "Pago 100% Fácil y Seguro"
+          }
+        },
+        "c9a486b4-fe60-4d45-939f-60d65ba1543a": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "heart",
+            "image_1": "shopify://shop_images/whatsapp_1.png",
+            "heading_1": "Atención personalizada <a href=\"https://wa.link/0tn3k4\" target=\"_blank\"><strong>Contáctenos</strong></a>",
+            "icon_2": "none",
+            "heading_2": "",
+            "icon_3": "none",
+            "heading_3": ""
           }
         },
         "custom_liquid_qdV4Pe": {
@@ -95,10 +129,13 @@
         "07ec7f5e-8bdd-4c84-bdf6-39969430239c",
         "custom_liquid_fkXfJQ",
         "price",
-        "custom_liquid_qxxgqV",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "share",
+        "description",
+        "6bc544d2-c561-432b-9cc8-47cb5b5becac",
+        "c9a486b4-fe60-4d45-939f-60d65ba1543a",
         "custom_liquid_qdV4Pe",
         "collapsible_tab_akbbrj",
         "collapsible_tab_xVymQJ",
@@ -107,7 +144,7 @@
       "custom_css": [],
       "settings": {
         "enable_sticky_info": true,
-        "media_size": "small",
+        "media_size": "medium",
         "constrain_to_viewport": false,
         "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
@@ -135,12 +172,7 @@
       "blocks": {
         "deba3e50-402d-4b83-bbfc-ea9236da8c8b": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
+          "settings": {}
         }
       },
       "block_order": [
