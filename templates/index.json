@@ -106,6 +106,34 @@
     },
     "home-medio-ambiente": {
       "type": "home-medio-ambiente",
+      "blocks": {
+        "pillar_qRqRxM": {
+          "type": "pillar",
+          "settings": {
+            "title": "MATERIALES RECICLADOS",
+            "text": "Se utilizan materiales reciclados para reducir el impacto ambiental."
+          }
+        },
+        "pillar_QGarJY": {
+          "type": "pillar",
+          "settings": {
+            "title": "MATERIALES RECICLADOS",
+            "text": "Se utilizan materiales reciclados para reducir el impacto ambiental."
+          }
+        },
+        "pillar_MyBeLN": {
+          "type": "pillar",
+          "settings": {
+            "title": "MATERIALES RECICLADOS",
+            "text": "Se utilizan materiales reciclados para reducir el impacto ambiental."
+          }
+        }
+      },
+      "block_order": [
+        "pillar_qRqRxM",
+        "pillar_QGarJY",
+        "pillar_MyBeLN"
+      ],
       "settings": {
         "color_scheme": "",
         "heading": "TIENDA COMPROMETIDA CON EL MEDIO AMBIENTE",
@@ -122,6 +150,7 @@
         "eyebrow": "",
         "heading": "Un Legado de Artesanía en la Alpujarra",
         "intro": "",
+        "image": "shopify://shop_images/Alpujarra.png",
         "body": "<p>En 1993, nuestro padre fundó un pequeño taller en Pampaneira, un encantador pueblo en la Alpujarra. Hoy, seguimos su legado ofreciendo productos hechos a mano con materiales naturales como el algodón reciclado y el esparto.</p>",
         "stat_1_num": "",
         "stat_1_label": "de tradición artesanal",
@@ -136,13 +165,57 @@
     },
     "home-social": {
       "type": "home-social",
+      "blocks": {
+        "photo_Kg3TBH": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_5.jpg",
+            "url": ""
+          }
+        },
+        "photo_YB4bJ4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_9.jpg",
+            "url": ""
+          }
+        },
+        "photo_zxpjyT": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_11.jpg",
+            "url": ""
+          }
+        },
+        "photo_8qfLrA": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_8.jpg",
+            "url": ""
+          }
+        },
+        "photo_b898kA": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_1.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_Kg3TBH",
+        "photo_YB4bJ4",
+        "photo_zxpjyT",
+        "photo_8qfLrA",
+        "photo_b898kA"
+      ],
       "settings": {
         "color_scheme": "",
         "heading": "¡COMPARTE TU ESTILO CON NOSOTROS!",
         "body": "Sigue a Jarapa Home en nuestras redes sociales y descubre inspiración diaria para decorar tu hogar de forma sostenible. Etiqueta tu decoración con #JarapaHome para compartir tu estilo con nosotros.",
         "per_row": 5,
-        "padding_top": 60,
-        "padding_bottom": 0
+        "padding_top": 44,
+        "padding_bottom": 48
       }
     }
   },
