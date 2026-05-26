@@ -166,6 +166,20 @@
     "home-social": {
       "type": "home-social",
       "blocks": {
+        "photo_c9gDtV": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_4.jpg",
+            "url": ""
+          }
+        },
+        "photo_4gGBgJ": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_12.jpg",
+            "url": ""
+          }
+        },
         "photo_Kg3TBH": {
           "type": "photo",
           "settings": {
@@ -203,6 +217,8 @@
         }
       },
       "block_order": [
+        "photo_c9gDtV",
+        "photo_4gGBgJ",
         "photo_Kg3TBH",
         "photo_YB4bJ4",
         "photo_zxpjyT",
