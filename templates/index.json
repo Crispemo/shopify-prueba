@@ -1,21 +1,12 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "home-hero": {
       "type": "home-hero",
       "settings": {
-        "overlay_opacity": 30,
         "heading": "DECORA TU HOGAR",
         "subheading": "PRODUCTOS ARTESANALES DE ESPARTO Y YUTE",
         "button_label": "Ver productos",
+        "overlay_opacity": 30,
         "height": 700,
         "height_mobile": 480
       }
@@ -23,15 +14,15 @@
     "persianas-personalizadas": {
       "type": "persianas-personalizadas",
       "settings": {
-        "image_position": "left",
         "eyebrow": "Hecho a mano · A tu medida",
         "heading": "Persianas de esparto personalizadas",
-        "body": "<p>Diseñamos cada persiana según tus medidas exactas. Elige el ancho y el largo, y la fabricamos en nuestro taller de las Alpujarras con esparto 100% natural.</p><p>Sin molestos estándares de fábrica. Sin tamaños fijos. Tu ventana, tu persiana.</p>",
+        "body": "<p>Diseñamos cada persiana según tus medidas exactas. Elige el ancho y el largo, y la fabricamos en nuestro taller de las Alpujarras con esparto 100% natural.<\/p><p>Sin molestos estándares de fábrica. Sin tamaños fijos. Tu ventana, tu persiana.<\/p>",
         "feature_1": "Medidas a la carta (de 30 a 700 cm)",
         "feature_2": "Esparto natural y sostenible",
         "feature_3": "Fabricación artesanal en las Alpujarras",
         "feature_4": "Precio calculado al instante por m²",
         "button_label": "Configurar mi persiana",
+        "image_position": "left",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -39,117 +30,66 @@
     "pack-verano": {
       "type": "pack-verano",
       "settings": {
-        "fallback_color": "#f5ede3",
-        "overlay_opacity": 30,
-        "card_position": "left",
-        "card_opacity": 95,
-        "text_color": "#2b2118",
         "badge": "Próximamente",
         "heading": "Pack de Verano Jarapa",
         "subheading": "Todo lo que necesitas para un verano con estilo natural",
-        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.</p><p>Sé el primero en enterarte cuando esté disponible.</p>",
+        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.<\/p><p>Sé el primero en enterarte cuando esté disponible.<\/p>",
         "button_label": "Avisarme cuando esté disponible",
+        "fallback_color": "#f5ede3",
+        "card_position": "left",
+        "card_opacity": 95,
+        "overlay_opacity": 30,
+        "text_color": "#2b2118",
         "padding_top": 96,
         "padding_bottom": 96
       }
     },
     "home-mas-vendidos": {
       "type": "home-mas-vendidos",
-      "blocks": {
-        "mv-1": {
-          "type": "product",
-          "settings": {}
-        },
-        "mv-2": {
-          "type": "product",
-          "settings": {}
-        },
-        "mv-3": {
-          "type": "product",
-          "settings": {}
-        },
-        "mv-4": {
-          "type": "product",
-          "settings": {}
-        },
-        "mv-5": {
-          "type": "product",
-          "settings": {}
-        },
-        "mv-6": {
-          "type": "product",
-          "settings": {}
-        }
-      },
       "settings": {
         "heading": "LOS MÁS VENDIDOS",
         "per_row": 4,
         "padding_top": 60,
         "padding_bottom": 60
-      }
+      },
+      "blocks": {
+        "mv-1": { "type": "product", "settings": {} },
+        "mv-2": { "type": "product", "settings": {} },
+        "mv-3": { "type": "product", "settings": {} },
+        "mv-4": { "type": "product", "settings": {} },
+        "mv-5": { "type": "product", "settings": {} },
+        "mv-6": { "type": "product", "settings": {} }
+      },
+      "blocks_order": ["mv-1", "mv-2", "mv-3", "mv-4", "mv-5", "mv-6"]
     },
     "home-categorias": {
       "type": "home-categorias",
-      "blocks": {
-        "cat-1": {
-          "type": "category",
-          "settings": {
-            "label": "ALFOMBRAS",
-            "link_label": "VER COLECCIÓN"
-          }
-        },
-        "cat-2": {
-          "type": "category",
-          "settings": {
-            "label": "ESPARTO",
-            "link_label": "VER COLECCIÓN"
-          }
-        },
-        "cat-3": {
-          "type": "category",
-          "settings": {
-            "label": "TEXTILES",
-            "link_label": "VER COLECCIÓN"
-          }
-        }
-      },
       "settings": {
         "height": 480,
         "overlay_opacity": 25
-      }
+      },
+      "blocks": {
+        "cat-1": { "type": "category", "settings": { "label": "ALFOMBRAS",  "link_label": "VER COLECCIÓN" } },
+        "cat-2": { "type": "category", "settings": { "label": "ESPARTO",    "link_label": "VER COLECCIÓN" } },
+        "cat-3": { "type": "category", "settings": { "label": "TEXTILES",   "link_label": "VER COLECCIÓN" } }
+      },
+      "blocks_order": ["cat-1", "cat-2", "cat-3"]
     },
     "home-medio-ambiente": {
       "type": "home-medio-ambiente",
-      "blocks": {
-        "p1": {
-          "type": "pillar",
-          "settings": {
-            "title": "Materiales Reciclados",
-            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
-          }
-        },
-        "p2": {
-          "type": "pillar",
-          "settings": {
-            "title": "Producción Artesanal",
-            "text": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
-          }
-        },
-        "p3": {
-          "type": "pillar",
-          "settings": {
-            "title": "Sostenibilidad y Respeto",
-            "text": "El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos."
-          }
-        }
-      },
       "settings": {
         "style": "elegante",
         "heading": "TIENDA COMPROMETIDA CON EL MEDIO AMBIENTE",
         "body": "Todos nuestros productos están elaborados con materiales reciclados o de origen natural, siguiendo procesos tradicionales que minimizan el impacto ambiental.",
         "padding_top": 72,
         "padding_bottom": 72
-      }
+      },
+      "blocks": {
+        "p1": { "type": "pillar", "settings": { "title": "Materiales Reciclados",    "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización." } },
+        "p2": { "type": "pillar", "settings": { "title": "Producción Artesanal",     "text": "Todos los productos están hechos a mano, garantizando la calidad de las piezas." } },
+        "p3": { "type": "pillar", "settings": { "title": "Sostenibilidad y Respeto", "text": "El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos." } }
+      },
+      "blocks_order": ["p1", "p2", "p3"]
     },
     "persiana-historia": {
       "type": "persiana-historia",
@@ -158,7 +98,7 @@
         "eyebrow": "",
         "heading": "Un Legado de Artesanía en la Alpujarra",
         "intro": "",
-        "body": "<p>En 1993, nuestro padre fundó un pequeño taller en Pampaneira, un encantador pueblo en la Alpujarra. Hoy, seguimos su legado ofreciendo productos hechos a mano con materiales naturales como el algodón reciclado y el esparto.</p>",
+        "body": "<p>En 1993, nuestro padre fundó un pequeño taller en Pampaneira, un encantador pueblo en la Alpujarra. Hoy, seguimos su legado ofreciendo productos hechos a mano con materiales naturales como el algodón reciclado y el esparto.<\/p>",
         "stat_1_num": "",
         "stat_2_num": "",
         "stat_3_num": "",
@@ -168,34 +108,20 @@
     },
     "home-social": {
       "type": "home-social",
-      "blocks": {
-        "ph1": {
-          "type": "photo",
-          "settings": {}
-        },
-        "ph2": {
-          "type": "photo",
-          "settings": {}
-        },
-        "ph3": {
-          "type": "photo",
-          "settings": {}
-        },
-        "ph4": {
-          "type": "photo",
-          "settings": {}
-        },
-        "ph5": {
-          "type": "photo",
-          "settings": {}
-        }
-      },
       "settings": {
         "heading": "¡COMPARTE TU ESTILO CON NOSOTROS!",
         "body": "Sigue a Jarapa Home en nuestras redes sociales y descubre inspiración diaria para decorar tu hogar de forma sostenible. Etiqueta tu decoración con #JarapaHome para compartir tu estilo con nosotros.",
         "padding_top": 60,
         "padding_bottom": 0
-      }
+      },
+      "blocks": {
+        "ph1": { "type": "photo", "settings": {} },
+        "ph2": { "type": "photo", "settings": {} },
+        "ph3": { "type": "photo", "settings": {} },
+        "ph4": { "type": "photo", "settings": {} },
+        "ph5": { "type": "photo", "settings": {} }
+      },
+      "blocks_order": ["ph1", "ph2", "ph3", "ph4", "ph5"]
     }
   },
   "order": [
