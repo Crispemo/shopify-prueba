@@ -112,30 +112,22 @@
         "pillar_V7B8WL": {
           "type": "pillar",
           "settings": {
-            "title": "Materiales Reciclados",
-            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+            "title": "Producción artesanal",
+            "text": "Todos los productos están hechos a mano, garantizando la calidad de las piezas."
           }
         },
         "pillar_tU9UMK": {
           "type": "pillar",
           "settings": {
-            "title": "Materiales Reciclados",
-            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
-          }
-        },
-        "pillar_kHRJyN": {
-          "type": "pillar",
-          "settings": {
-            "title": "Materiales Reciclados",
-            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+            "title": "Sostenibilidad y respeto",
+            "text": "El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos."
           }
         }
       },
       "block_order": [
         "pillar_RpNtNM",
         "pillar_V7B8WL",
-        "pillar_tU9UMK",
-        "pillar_kHRJyN"
+        "pillar_tU9UMK"
       ],
       "settings": {
         "color_scheme": "",
@@ -175,7 +167,7 @@
       ],
       "name": "t:sections.collection-list.presets.name",
       "settings": {
-        "title": "Collections",
+        "title": "Nuestras colecciones",
         "heading_size": "h1",
         "image_ratio": "square",
         "columns_desktop": 3,
