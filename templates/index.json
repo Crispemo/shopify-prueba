@@ -44,6 +44,7 @@
     "pack-verano": {
       "type": "pack-verano",
       "settings": {
+        "product_image": "shopify://shop_images/Gemini_Generated_Image_e0b6v8e0b6v8e0b6.png",
         "image_side": "right",
         "fallback_color": "#f5ede3",
         "overlay_opacity": 30,
@@ -64,6 +65,38 @@
     },
     "home-mas-vendidos": {
       "type": "home-mas-vendidos",
+      "blocks": {
+        "product_LMHxAx": {
+          "type": "product",
+          "settings": {
+            "product": "alfombra-andina-gris"
+          }
+        },
+        "product_HpMTna": {
+          "type": "product",
+          "settings": {
+            "product": "alfombras-pelo-extra-crudo"
+          }
+        },
+        "product_WJY4GY": {
+          "type": "product",
+          "settings": {
+            "product": "alfombra-de-yute-y-algodon"
+          }
+        },
+        "product_DqayMR": {
+          "type": "product",
+          "settings": {
+            "product": "alfombra-chenilla-doble-cara"
+          }
+        }
+      },
+      "block_order": [
+        "product_LMHxAx",
+        "product_HpMTna",
+        "product_WJY4GY",
+        "product_DqayMR"
+      ],
       "settings": {
         "heading": "LOS MÁS VENDIDOS",
         "per_row": 4,
