@@ -44,8 +44,8 @@
         </ul>
       {%- endif -%}
 
-      {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
-        <a href="{{ section.settings.button_url }}" class="p-custom__btn button button--primary">
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_url | default: '#' }}" class="p-custom__btn button button--primary">
           {{ section.settings.button_label }}
         </a>
       {%- endif -%}
