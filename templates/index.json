@@ -145,6 +145,7 @@
         "eyebrow": "",
         "heading": "Un Legado de Artesanía en la Alpujarra",
         "intro": "",
+        "image": "shopify://shop_images/Alpujarra.png",
         "body": "<p>En 1993, nuestro padre fundó un pequeño taller en Pampaneira, un encantador pueblo en la Alpujarra. Hoy, seguimos su legado ofreciendo productos hechos a mano con materiales naturales como el algodón reciclado y el esparto.</p>",
         "stat_1_num": "",
         "stat_1_label": "de tradición artesanal",
@@ -159,6 +160,71 @@
     },
     "home-social": {
       "type": "home-social",
+      "blocks": {
+        "photo_pctRyU": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_2.png",
+            "url": ""
+          }
+        },
+        "photo_D6bGiW": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_12.jpg",
+            "url": ""
+          }
+        },
+        "photo_DyqewE": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_3.png",
+            "url": ""
+          }
+        },
+        "photo_xectHN": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_11.jpg",
+            "url": ""
+          }
+        },
+        "photo_NwP9EK": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/antes_y_despues_10.jpg",
+            "url": ""
+          }
+        },
+        "photo_JDwTyA": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_pjMD7U": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        },
+        "photo_6MhBKt": {
+          "type": "photo",
+          "settings": {
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_pctRyU",
+        "photo_D6bGiW",
+        "photo_DyqewE",
+        "photo_xectHN",
+        "photo_NwP9EK",
+        "photo_JDwTyA",
+        "photo_pjMD7U",
+        "photo_6MhBKt"
+      ],
       "settings": {
         "color_scheme": "",
         "heading": "¡COMPARTE TU ESTILO CON NOSOTROS!",
