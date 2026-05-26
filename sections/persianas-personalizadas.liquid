@@ -45,7 +45,7 @@
       {%- endif -%}
 
       {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_url | default: '#' }}" class="p-custom__btn button button--primary">
+        <a href="{{ section.settings.button_url | default: '#' }}" class="p-custom__btn">
           {{ section.settings.button_label }}
         </a>
       {%- endif -%}
@@ -147,7 +147,16 @@
   .p-custom__btn {
     display: inline-block;
     text-decoration: none;
+    background: #2b2118;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    padding: 14px 32px;
+    border-radius: 4px;
+    transition: background .2s, opacity .2s;
   }
+  .p-custom__btn:hover { opacity: .85; }
 
   @media (max-width: 899px) {
     .p-custom__inner {

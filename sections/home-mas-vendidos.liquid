@@ -83,7 +83,7 @@
 
   .h-mv__img {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1/1;
     object-fit: cover;
     display: block;
     transition: transform .45s ease;
@@ -92,7 +92,7 @@
 
   .h-mv__img-ph {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1/1;
     background: #f2ede8;
     display: flex;
     align-items: center;
@@ -101,27 +101,28 @@
   .h-mv__img-ph svg { width: 60px; opacity: .3; }
 
   .h-mv__info {
-    padding: 16px 16px 20px;
+    padding: 10px 10px 14px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
     flex: 1;
   }
 
   .h-mv__name {
-    font-size: 1rem;
+    font-size: 0.8125rem;
     color: #222;
     margin: 0;
     text-align: center;
     font-weight: 400;
+    line-height: 1.4;
   }
 
   .h-mv__btn {
     display: block;
     text-align: center;
-    border: 1.5px solid #bbb;
-    padding: 11px 8px;
-    font-size: 0.75rem;
+    border: 1px solid #bbb;
+    padding: 8px 6px;
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: .1em;
     color: #222;
@@ -198,7 +199,7 @@
   "max_blocks": 12,
   "settings": [
     { "type": "text",  "id": "heading",  "label": "Título", "default": "LOS MÁS VENDIDOS" },
-    { "type": "range", "id": "per_row",  "label": "Productos visibles (escritorio)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "per_row",  "label": "Productos visibles (escritorio)", "min": 2, "max": 6, "step": 1, "default": 5 },
     { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 4, "default": 60 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 60 }
   ],
