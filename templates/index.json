@@ -92,6 +92,42 @@
     },
     "home-medio-ambiente": {
       "type": "home-medio-ambiente",
+      "blocks": {
+        "pillar_RpNtNM": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales Reciclados",
+            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        },
+        "pillar_V7B8WL": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales Reciclados",
+            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        },
+        "pillar_tU9UMK": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales Reciclados",
+            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        },
+        "pillar_kHRJyN": {
+          "type": "pillar",
+          "settings": {
+            "title": "Materiales Reciclados",
+            "text": "Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización."
+          }
+        }
+      },
+      "block_order": [
+        "pillar_RpNtNM",
+        "pillar_V7B8WL",
+        "pillar_tU9UMK",
+        "pillar_kHRJyN"
+      ],
       "settings": {
         "color_scheme": "",
         "style": "elegante",
