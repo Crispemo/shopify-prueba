@@ -1,1 +1,106 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"ab9d1052-b16e-43ed-a1b2-02d7176c0940":{"type":"newsletter","blocks":{"sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-heading-1":{"type":"heading","settings":{"heading":"¡Únete a nuestra newsletter!","heading_size":"h1"}},"sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-paragraph-1":{"type":"paragraph","settings":{"text":"<h2>Y disfruta de un 10% dto para compras superiores a 150€<\/h2>"}},"sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-email_form-1":{"type":"email_form","settings":{}}},"block_order":["sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-heading-1","sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-paragraph-1","sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-email_form-1"],"disabled":true,"settings":{"color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}},"footer":{"type":"footer","blocks":{"1e40259d-777a-45b2-b3c9-1e63fbb8cd28":{"type":"link_list","settings":{"heading":"Enlaces de Interés","menu":"footer"}},"7ca7c2e1-2ff8-4af3-b2c5-07826bfa287e":{"type":"link_list","settings":{"heading":"Categorias","menu":"categorias"}},"d9cd8826-ce0d-4270-8db1-49ebe8f293f3":{"type":"link_list","settings":{"heading":"Información Legal","menu":"soporte"}},"9fb43188-404e-4b61-b459-745317049961":{"type":"brand_information","settings":{"show_social":true}}},"block_order":["1e40259d-777a-45b2-b3c9-1e63fbb8cd28","7ca7c2e1-2ff8-4af3-b2c5-07826bfa287e","d9cd8826-ce0d-4270-8db1-49ebe8f293f3","9fb43188-404e-4b61-b459-745317049961"],"custom_css":[],"settings":{"color_scheme":"background-1","newsletter_enable":false,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":false,"show_social":false,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["ab9d1052-b16e-43ed-a1b2-02d7176c0940","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "ab9d1052-b16e-43ed-a1b2-02d7176c0940": {
+      "type": "newsletter",
+      "blocks": {
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "¡Únete a nuestra newsletter!",
+            "heading_size": "h1"
+          }
+        },
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<h2>Y disfruta de un 10% dto para compras superiores a 150€</h2>"
+          }
+        },
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-email_form-1": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-heading-1",
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-paragraph-1",
+        "sections--19628674515287__ab9d1052-b16e-43ed-a1b2-02d7176c0940-email_form-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "1e40259d-777a-45b2-b3c9-1e63fbb8cd28": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Enlaces de Interés",
+            "menu": "footer"
+          }
+        },
+        "7ca7c2e1-2ff8-4af3-b2c5-07826bfa287e": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Categorias",
+            "menu": "categorias"
+          }
+        },
+        "d9cd8826-ce0d-4270-8db1-49ebe8f293f3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Información Legal",
+            "menu": "soporte"
+          }
+        },
+        "9fb43188-404e-4b61-b459-745317049961": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        }
+      },
+      "block_order": [
+        "1e40259d-777a-45b2-b3c9-1e63fbb8cd28",
+        "7ca7c2e1-2ff8-4af3-b2c5-07826bfa287e",
+        "d9cd8826-ce0d-4270-8db1-49ebe8f293f3",
+        "9fb43188-404e-4b61-b459-745317049961"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "background-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": false,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": [
+    "ab9d1052-b16e-43ed-a1b2-02d7176c0940",
+    "footer"
+  ]
+}
