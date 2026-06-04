@@ -124,7 +124,7 @@
           sessionStorage.setItem(DRAFT_KEY, String(data.draft_order_id));
 
           document.dispatchEvent(new CustomEvent('persiana:added', {
-            detail: { checkoutUrl: data.checkout_url, draftOrderId: data.draft_order_id }
+            detail: { checkoutUrl: data.checkout_url, draftOrderId: data.draft_order_id, workerUrl: workerUrl }
           }));
 
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
