@@ -157,7 +157,7 @@
     "grid-fix-css": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<style>@media screen and (min-width:750px){ul#product-grid{display:flex!important;flex-wrap:wrap!important;}ul#product-grid>.grid__item{flex:0 0 calc(25% - 20px)!important;width:calc(25% - 20px)!important;max-width:calc(25% - 20px)!important;margin:10px!important;overflow:hidden!important;}}</style>"
+        "custom_liquid": "<style>ul#product-grid{display:flex!important;flex-wrap:wrap!important;}ul#product-grid>.grid__item{flex:0 0 calc(25% - 20px)!important;width:calc(25% - 20px)!important;max-width:calc(25% - 20px)!important;margin:10px!important;overflow:hidden!important;box-sizing:border-box!important;}@media screen and (max-width:749px){ul#product-grid>.grid__item{flex:0 0 calc(50% - 20px)!important;width:calc(50% - 20px)!important;max-width:calc(50% - 20px)!important;}}</style>"
       }
     }
   },
