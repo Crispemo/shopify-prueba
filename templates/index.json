@@ -18,8 +18,8 @@
         "subheading": "PRODUCTOS ARTESANALES DE ESPARTO Y YUTE",
         "button_label": "Ver productos",
         "button_url": "",
-        "height": 700,
-        "height_mobile": 480
+        "height": 540,
+        "height_mobile": 400
       }
     },
     "persianas-personalizadas": {
@@ -37,8 +37,8 @@
         "feature_4": "Precio calculado al instante por m²",
         "button_label": "Configurar mi persiana",
         "button_url": "shopify://products/persianas-esparto",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "pack-verano": {
