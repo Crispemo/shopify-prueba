@@ -24,9 +24,13 @@
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
+    .section-{{ section.id }}-padding #product-grid {
+      display: grid !important;
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr) !important;
+    }
     .section-{{ section.id }}-padding #product-grid .grid__item {
-      width: calc({{ 100.0 | divided_by: section.settings.columns_desktop | round: 4 }}% - var(--grid-desktop-horizontal-spacing) * {{ section.settings.columns_desktop | minus: 1 }} / {{ section.settings.columns_desktop }});
-      max-width: calc({{ 100.0 | divided_by: section.settings.columns_desktop | round: 4 }}% - var(--grid-desktop-horizontal-spacing) * {{ section.settings.columns_desktop | minus: 1 }} / {{ section.settings.columns_desktop }});
+      width: 100% !important;
+      max-width: 100% !important;
     }
   }
 {%- endstyle -%}
