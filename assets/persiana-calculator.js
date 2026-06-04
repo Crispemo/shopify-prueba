@@ -121,7 +121,11 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
-          window.location.href = data.checkout_url;
+          // Vaciar el carrito normal antes de ir al checkout del Draft Order
+          fetch('/cart/clear.js', { method: 'POST' })
+            .finally(function () {
+              window.location.href = data.checkout_url;
+            });
         })
         .catch(function () {
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
