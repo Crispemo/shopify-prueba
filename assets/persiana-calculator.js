@@ -84,7 +84,7 @@
 
     if (!form) return;
 
-    function proceedWithOrder(ancho, largo, precio, cantidad) {
+    function sendOrder(ancho, largo, precio, cantidad, cartItems) {
       var spanEl = btn && btn.querySelector('span');
       var spinEl = btn && btn.querySelector('.loading-overlay__spinner');
 
@@ -96,16 +96,23 @@
       sessionStorage.removeItem('jarapa_draft_id');
       sessionStorage.removeItem('jarapa_worker_url');
 
+      var payload = {
+        ancho:    ancho,
+        largo:    largo,
+        precio:   precio.toFixed(2),
+        cantidad: cantidad,
+        titulo:   productTitle,
+      };
+      if (cartItems && cartItems.length > 0) {
+        payload.cart_items = cartItems.map(function (i) {
+          return { variant_id: i.variant_id, quantity: i.quantity };
+        });
+      }
+
       fetch(workerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ancho:    ancho,
-          largo:    largo,
-          precio:   precio.toFixed(2),
-          cantidad: cantidad,
-          titulo:   productTitle
-        })
+        body: JSON.stringify(payload),
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -115,17 +122,36 @@
           if (spanEl) spanEl.textContent = '✓ Persiana a\xF1adida — preparando tu pedido…';
           if (spinEl) spinEl.classList.add('hidden');
 
-          // Mostrar toast de confirmación
+          var extra = cartItems && cartItems.length > 0
+            ? ' y ' + cartItems.length + ' art\xEDculo' + (cartItems.length > 1 ? 's m\xE1s' : ' m\xE1s')
+            : '';
+
           var toast = document.createElement('div');
-          toast.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#3a2a1a;color:#fff;padding:14px 24px;border-radius:8px;font-size:1rem;font-weight:600;z-index:99998;box-shadow:0 4px 16px rgba(0,0,0,0.3);text-align:center;';
-          toast.textContent = '📦 Tu persiana est\xE1 lista — redirigiendo al pago…';
+          toast.style.cssText = [
+            'position:fixed',
+            'top:24px',
+            'left:50%',
+            'transform:translateX(-50%)',
+            'background:#3a2a1a',
+            'color:#fff',
+            'padding:20px 36px',
+            'border-radius:10px',
+            'font-size:1.35rem',
+            'font-weight:700',
+            'z-index:99998',
+            'box-shadow:0 4px 20px rgba(0,0,0,0.35)',
+            'text-align:center',
+            'line-height:1.4',
+            'max-width:90vw',
+          ].join(';');
+          toast.textContent = '📦 Tu persiana' + extra + ' lista — redirigiendo al pago…';
           document.body.appendChild(toast);
 
           fetch('/cart/clear.js', { method: 'POST' })
             .finally(function () {
               setTimeout(function () {
                 window.location.href = data.checkout_url;
-              }, 1500);
+              }, 1800);
             });
         })
         .catch(function () {
@@ -149,25 +175,30 @@
 
       if (!ancho || !largo || !precio) return;
 
-      // Comprobar si el carrito tiene otros artículos
+      // Obtener items del carrito antes de proceder
       fetch('/cart.js')
         .then(function (r) { return r.json(); })
         .then(function (cart) {
-          if (cart.item_count > 0) {
-            // Mostrar aviso modal antes de continuar
+          var cartItems = (cart.items || []).filter(function (i) { return i.variant_id; });
+
+          if (cartItems.length > 0) {
+            // Mostrar aviso: los artículos del carrito se incluirán en el pedido
+            var n     = cartItems.length;
+            var label = n === 1 ? '1 art\xEDculo' : n + ' art\xEDculos';
+
             var overlay = document.createElement('div');
             overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;';
+
             var box = document.createElement('div');
-            box.style.cssText = 'background:#fff;border-radius:12px;padding:28px 32px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.2);font-family:inherit;';
-            var n = cart.item_count;
-            var label = n === 1 ? '1 art\xEDculo' : n + ' art\xEDculos';
+            box.style.cssText = 'background:#fff;border-radius:14px;padding:32px 36px;max-width:440px;width:92%;box-shadow:0 8px 32px rgba(0,0,0,0.2);font-family:inherit;';
             box.innerHTML =
-              '<p style="font-size:1.1rem;font-weight:700;margin:0 0 12px;color:#3a2a1a;">Tienes ' + label + ' en el carrito</p>' +
-              '<p style="font-size:.95rem;color:#555;margin:0 0 24px;line-height:1.5;">La persiana personalizada se gestiona por separado. Al continuar, tu carrito actual se vaciará y te redirigiremos al pago de la persiana.<br><br>Puedes volver después para añadir el resto de productos.</p>' +
-              '<div style="display:flex;gap:12px;justify-content:flex-end;">' +
-                '<button id="jarapa-cancel" style="padding:10px 18px;border:1px solid #ccc;background:#fff;border-radius:6px;cursor:pointer;font-size:.9rem;">Cancelar</button>' +
-                '<button id="jarapa-confirm" style="padding:10px 18px;background:#3a2a1a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.9rem;font-weight:600;">Continuar con la persiana</button>' +
+              '<p style="font-size:1.3rem;font-weight:700;margin:0 0 14px;color:#3a2a1a;">Tienes ' + label + ' en el carrito</p>' +
+              '<p style="font-size:1.1rem;color:#444;margin:0 0 28px;line-height:1.6;">Tus art\xEDculos se incluir\xE1n junto con la persiana en el mismo pago. Solo tendr\xE1s que completar una \xFAnica compra.</p>' +
+              '<div style="display:flex;gap:14px;justify-content:flex-end;">' +
+                '<button id="jarapa-cancel" style="padding:12px 20px;border:1px solid #ccc;background:#fff;border-radius:8px;cursor:pointer;font-size:1rem;">Cancelar</button>' +
+                '<button id="jarapa-confirm" style="padding:12px 20px;background:#3a2a1a;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:700;">Ir al pago</button>' +
               '</div>';
+
             overlay.appendChild(box);
             document.body.appendChild(overlay);
 
@@ -176,15 +207,14 @@
             });
             document.getElementById('jarapa-confirm').addEventListener('click', function () {
               document.body.removeChild(overlay);
-              proceedWithOrder(ancho, largo, precio, cantidad);
+              sendOrder(ancho, largo, precio, cantidad, cartItems);
             });
           } else {
-            proceedWithOrder(ancho, largo, precio, cantidad);
+            sendOrder(ancho, largo, precio, cantidad, []);
           }
         })
         .catch(function () {
-          // Si falla la comprobación del carrito, proceder igualmente
-          proceedWithOrder(ancho, largo, precio, cantidad);
+          sendOrder(ancho, largo, precio, cantidad, []);
         });
     });
   }
