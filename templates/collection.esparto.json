@@ -1,1 +1,196 @@
-{"sections":{"banner":{"type":"main-collection-banner","settings":{"show_collection_description":true,"show_collection_image":false,"color_scheme":"background-1"}},"featured_collection_8fdEhq":{"type":"featured-collection","disabled":true,"custom_css":[".price,.product-price,.card__information .price,.card__content .price,.product-card__price,.price__regular,.price__sale {display: none !important;}",".card__heading {font-size: 1.5rem; font-weight: 60;}",".swatches-globo--list {display: none !important;}"],"settings":{"title":"","heading_size":"h1","description":"","show_description":false,"description_style":"body","collection":"esparto","products_to_show":3,"columns_desktop":4,"full_width":false,"show_view_all":false,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"","image_ratio":"square","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"enable_quick_add":false,"columns_mobile":"2","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}},"collection_list_D8zXEQ":{"type":"collection-list","blocks":{"featured_collection_8LFW6m":{"type":"featured_collection","settings":{"collection":"persianas"}},"featured_collection_e7aVmb":{"type":"featured_collection","settings":{"collection":"cactus-esparto"}}},"block_order":["featured_collection_8LFW6m","featured_collection_e7aVmb"],"name":"t:sections.collection-list.presets.name","settings":{"title":"","heading_size":"h1","image_ratio":"square","columns_desktop":3,"color_scheme":"","show_view_all":false,"columns_mobile":"1","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}},"product-grid":{"type":"main-collection-product-grid","disabled":true,"settings":{"products_per_page":16,"columns_desktop":4,"image_ratio":"square","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"enable_quick_add":true,"enable_filtering":true,"filter_type":"drawer","enable_sorting":true,"columns_mobile":"2","padding_top":36,"padding_bottom":36}},"rich_text_jhaLJk":{"type":"rich-text","blocks":{"heading_MLBGQe":{"type":"heading","settings":{"heading":"<strong>COMPROMETIDOS CON EL MEDIO AMBIENTE<\/strong>","heading_size":"h2"}}},"block_order":["heading_MLBGQe"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":24}},"multicolumn_DJRLMn":{"type":"multicolumn","blocks":{"column_xL9HCx":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/pagetify-file-1722926471938.webp","title":"Materiales Reciclados","text":"<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.<\/p>","link_label":"","link":""}},"column_kg9PU4":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/pagetify-file-1722926429934.webp","title":"Producción Artesanal","text":"<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.<\/p>","link_label":"","link":""}},"column_wPfwEf":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/pagetify-file-1722926486395.webp","title":"Sostenibilidad y Respeto","text":"<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.<\/p>","link_label":"","link":""}}},"block_order":["column_xL9HCx","column_kg9PU4","column_wPfwEf"],"settings":{"title":"","heading_size":"h1","image_width":"third","image_ratio":"adapt","columns_desktop":3,"column_alignment":"center","background_style":"none","button_label":"","button_link":"","color_scheme":"","columns_mobile":"1","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}}},"order":["banner","featured_collection_8fdEhq","collection_list_D8zXEQ","product-grid","rich_text_jhaLJk","multicolumn_DJRLMn"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "background-1"
+      }
+    },
+    "featured_collection_8fdEhq": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".price,.product-price,.card__information .price,.card__content .price,.product-card__price,.price__regular,.price__sale {display: none !important;}",
+        ".card__heading {font-size: 1.5rem; font-weight: 60;}",
+        ".swatches-globo--list {display: none !important;}"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "esparto",
+        "products_to_show": 3,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_D8zXEQ": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_8LFW6m": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "persianas"
+          }
+        },
+        "featured_collection_e7aVmb": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "cactus-esparto"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_8LFW6m",
+        "featured_collection_e7aVmb"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "disabled": true
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_jhaLJk": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_MLBGQe": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>COMPROMETIDOS CON EL MEDIO AMBIENTE</strong>",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MLBGQe"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 24
+      }
+    },
+    "multicolumn_DJRLMn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xL9HCx": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926471938.webp",
+            "title": "Materiales Reciclados",
+            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_kg9PU4": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926429934.webp",
+            "title": "Producción Artesanal",
+            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_wPfwEf": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/pagetify-file-1722926486395.webp",
+            "title": "Sostenibilidad y Respeto",
+            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_xL9HCx",
+        "column_kg9PU4",
+        "column_wPfwEf"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "featured_collection_8fdEhq",
+    "collection_list_D8zXEQ",
+    "rich_text_jhaLJk",
+    "multicolumn_DJRLMn"
+  ]
+}
