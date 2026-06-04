@@ -28,14 +28,30 @@
     var form = document.getElementById('product-form-' + sectionId)
              || document.querySelector('[data-type="add-to-cart-form"]');
     var btn  = form && (form.querySelector('[name=add]') || form.querySelector('button[type=submit]'));
+    var cEl  = document.getElementById('pc-cantidad');
 
     if (btn) btn.disabled = true;
 
+    // Botones +/-
+    var plusBtn  = document.getElementById('pc-plus');
+    var minusBtn = document.getElementById('pc-minus');
+    if (plusBtn && cEl) {
+      plusBtn.addEventListener('click', function () {
+        var v = parseInt(cEl.value) || 1;
+        if (v < 50) { cEl.value = v + 1; update(); }
+      });
+    }
+    if (minusBtn && cEl) {
+      minusBtn.addEventListener('click', function () {
+        var v = parseInt(cEl.value) || 1;
+        if (v > 1) { cEl.value = v - 1; update(); }
+      });
+    }
+
     function update() {
-      var a   = aEl.value ? parseFloat(aEl.value) : null;
-      var l   = lEl.value ? parseFloat(lEl.value) : null;
-      var qEl = form && form.querySelector('[name=quantity]');
-      var q   = qEl ? (parseInt(qEl.value) || 1) : 1;
+      var a = aEl.value ? parseFloat(aEl.value) : null;
+      var l = lEl.value ? parseFloat(lEl.value) : null;
+      var q = cEl ? (parseInt(cEl.value) || 1) : 1;
 
       var aInv = a !== null && (a < MIN || a > MAX);
       var lInv = l !== null && (l < MIN || l > MAX);
@@ -79,8 +95,7 @@
 
     aEl.addEventListener('input', update);
     lEl.addEventListener('input', update);
-    var qEl = form && form.querySelector('[name=quantity]');
-    if (qEl) qEl.addEventListener('change', update);
+    if (cEl) cEl.addEventListener('input', update);
 
     if (!form) return;
 
@@ -170,8 +185,7 @@
       var ancho    = parseFloat(aEl.value);
       var largo    = parseFloat(lEl.value);
       var precio   = parseFloat(hpEl.value);
-      var qEl2     = form.querySelector('[name=quantity]');
-      var cantidad = qEl2 ? (parseInt(qEl2.value) || 1) : 1;
+      var cantidad = cEl ? (parseInt(cEl.value) || 1) : 1;
 
       if (!ancho || !largo || !precio) return;
 
