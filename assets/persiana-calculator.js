@@ -2,6 +2,7 @@
   'use strict';
 
   var MIN = 30, MAX = 700;
+  var DRAFT_KEY = 'jarapa_draft_id';
 
   function rate(m2) {
     return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
@@ -102,21 +103,42 @@
       if (spanEl) spanEl.textContent = 'A\xF1adiendo…';
       if (spinEl) spinEl.classList.remove('hidden');
 
+      var draftId = sessionStorage.getItem(DRAFT_KEY) || null;
+
       fetch(workerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ancho:    ancho,
-          largo:    largo,
-          precio:   precio.toFixed(2),
-          cantidad: cantidad,
-          titulo:   productTitle
+          ancho:          ancho,
+          largo:          largo,
+          precio:         precio.toFixed(2),
+          cantidad:       cantidad,
+          titulo:         productTitle,
+          draft_order_id: draftId
         })
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
-          window.location.href = data.checkout_url;
+
+          sessionStorage.setItem(DRAFT_KEY, String(data.draft_order_id));
+
+          document.dispatchEvent(new CustomEvent('persiana:added', {
+            detail: { checkoutUrl: data.checkout_url, draftOrderId: data.draft_order_id }
+          }));
+
+          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
+          if (spanEl) spanEl.textContent = '✓ A\xF1adida';
+          if (spinEl) spinEl.classList.add('hidden');
+
+          aEl.value = ''; lEl.value = '';
+          if (qEl2) qEl2.value = '1';
+          hpEl.value = ''; hmEl.value = '';
+          update();
+
+          setTimeout(function () {
+            if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
+          }, 3000);
         })
         .catch(function () {
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
