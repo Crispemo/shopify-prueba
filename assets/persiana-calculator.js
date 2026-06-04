@@ -2,8 +2,6 @@
   'use strict';
 
   var MIN = 30, MAX = 700;
-  var STORAGE_KEY  = 'jarapa_draft_id';
-  var CHECKOUT_KEY = 'jarapa_checkout_url';
 
   function rate(m2) {
     return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
@@ -104,40 +102,26 @@
       if (spanEl) spanEl.textContent = 'A\xF1adiendo…';
       if (spinEl) spinEl.classList.remove('hidden');
 
-      var draftId = localStorage.getItem(STORAGE_KEY);
+      // Limpiar sessionStorage antiguo del banner
+      sessionStorage.removeItem('jarapa_checkout_url');
+      sessionStorage.removeItem('jarapa_draft_id');
+      sessionStorage.removeItem('jarapa_worker_url');
 
       fetch(workerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ancho:          ancho,
-          largo:          largo,
-          precio:         precio.toFixed(2),
-          cantidad:       cantidad,
-          titulo:         productTitle,
-          draft_order_id: draftId || null
+          ancho:    ancho,
+          largo:    largo,
+          precio:   precio.toFixed(2),
+          cantidad: cantidad,
+          titulo:   productTitle
         })
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
-
-          localStorage.setItem(STORAGE_KEY, data.draft_order_id);
-          localStorage.setItem(CHECKOUT_KEY, data.checkout_url);
-
-          // Confirmación en el botón
-          if (btn)    { btn.classList.remove('loading'); btn.disabled = false; }
-          if (spanEl) spanEl.textContent = '✓ A\xF1adida al carrito';
-          if (spinEl) spinEl.classList.add('hidden');
-
-          // Resetear campos tras 2 s
-          setTimeout(function () {
-            aEl.value = '';
-            lEl.value = '';
-            if (qEl2) qEl2.value = '1';
-            update();
-            if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
-          }, 2000);
+          window.location.href = data.checkout_url;
         })
         .catch(function () {
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
