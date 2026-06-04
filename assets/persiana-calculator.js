@@ -2,8 +2,6 @@
   'use strict';
 
   var MIN = 30, MAX = 700;
-  var STORAGE_KEY  = 'jarapa_draft_id';
-  var CHECKOUT_KEY = 'jarapa_checkout_url';
 
   function rate(m2) {
     return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
@@ -13,13 +11,14 @@
     var root = document.getElementById('pc-root');
     if (!root) return;
 
-    var workerUrl    = root.dataset.workerUrl;
-    var productTitle = root.dataset.productTitle || 'Persiana a medida';
-    var sectionId    = root.dataset.sectionId;
+    var sectionId = root.dataset.sectionId;
 
     var aEl   = document.getElementById('pc-ancho');
     var lEl   = document.getElementById('pc-largo');
     if (!aEl || !lEl) return;
+
+    aEl.setAttribute('name', 'properties[Ancho (cm)]');
+    lEl.setAttribute('name', 'properties[Largo (cm)]');
 
     var errEl = document.getElementById('pc-error');
     var boxEl = document.getElementById('pc-box');
@@ -84,56 +83,6 @@
     var qEl = form && form.querySelector('[name=quantity]');
     if (qEl) qEl.addEventListener('change', update);
 
-    if (!form) return;
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var ancho    = parseFloat(aEl.value);
-      var largo    = parseFloat(lEl.value);
-      var precio   = parseFloat(hpEl.value);
-      var qEl2     = form.querySelector('[name=quantity]');
-      var cantidad = qEl2 ? (parseInt(qEl2.value) || 1) : 1;
-
-      if (!ancho || !largo || !precio) return;
-
-      var spanEl = btn && btn.querySelector('span');
-      var spinEl = btn && btn.querySelector('.loading-overlay__spinner');
-
-      if (btn)    { btn.disabled = true; btn.classList.add('loading'); }
-      if (spanEl) spanEl.textContent = 'A\xF1adiendo…';
-      if (spinEl) spinEl.classList.remove('hidden');
-
-      var draftId = localStorage.getItem(STORAGE_KEY);
-
-      fetch(workerUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ancho:          ancho,
-          largo:          largo,
-          precio:         precio.toFixed(2),
-          cantidad:       cantidad,
-          titulo:         productTitle,
-          draft_order_id: draftId || null
-        })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (!data.checkout_url) throw new Error('sin checkout_url');
-
-          localStorage.setItem(STORAGE_KEY, data.draft_order_id);
-          localStorage.setItem(CHECKOUT_KEY, data.checkout_url);
-
-          window.location.href = data.checkout_url;
-        })
-        .catch(function () {
-          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
-          if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
-          if (spinEl) spinEl.classList.add('hidden');
-          alert('Error al procesar el pedido. Por favor, int\xE9ntalo de nuevo.');
-        });
-    });
   }
 
   if (document.readyState === 'loading') {
