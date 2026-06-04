@@ -42,12 +42,14 @@
         "heading_cortinas": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>COMPROMETIDOS CON EL MEDIO AMBIENTE<\/strong>",
+            "heading": "<strong>COMPROMETIDOS CON EL MEDIO AMBIENTE</strong>",
             "heading_size": "h2"
           }
         }
       },
-      "block_order": ["heading_cortinas"],
+      "block_order": [
+        "heading_cortinas"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -63,9 +65,9 @@
         "column_cortinas_1": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/pagetify-file-1722926471938.webp",
+            "image": "shopify://shop_images/pagetify-file-1722926471938.webp",
             "title": "Materiales Reciclados",
-            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.<\/p>",
+            "text": "<p>Se utilizan materiales reciclados para reducir el desperdicio y promover la reutilización.</p>",
             "link_label": "",
             "link": ""
           }
@@ -73,9 +75,9 @@
         "column_cortinas_2": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/pagetify-file-1722926429934.webp",
+            "image": "shopify://shop_images/pagetify-file-1722926429934.webp",
             "title": "Producción Artesanal",
-            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.<\/p>",
+            "text": "<p>Todos los productos están hechos a mano, garantizando la calidad de las piezas.</p>",
             "link_label": "",
             "link": ""
           }
@@ -83,15 +85,19 @@
         "column_cortinas_3": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/pagetify-file-1722926486395.webp",
+            "image": "shopify://shop_images/pagetify-file-1722926486395.webp",
             "title": "Sostenibilidad y Respeto",
-            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.<\/p>",
+            "text": "<p>El uso de materiales naturales, como el esparto, evita el uso de plásticos y materiales sintéticos.</p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["column_cortinas_1", "column_cortinas_2", "column_cortinas_3"],
+      "block_order": [
+        "column_cortinas_1",
+        "column_cortinas_2",
+        "column_cortinas_3"
+      ],
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -108,7 +114,19 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "grid-fix-css": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>@media screen and (min-width:750px){ul#product-grid{display:flex!important;flex-wrap:wrap!important;}ul#product-grid>.grid__item{flex:0 0 calc(25% - 20px)!important;width:calc(25% - 20px)!important;max-width:calc(25% - 20px)!important;margin:10px!important;overflow:hidden!important;}}</style>"
+      }
     }
   },
-  "order": ["banner", "product-grid", "rich_text_cortinas", "multicolumn_cortinas"]
+  "order": [
+    "banner",
+    "grid-fix-css",
+    "product-grid",
+    "rich_text_cortinas",
+    "multicolumn_cortinas"
+  ]
 }
