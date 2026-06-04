@@ -2,7 +2,8 @@
   'use strict';
 
   var MIN = 30, MAX = 700;
-  var DRAFT_KEY = 'jarapa_draft_id';
+  var STORAGE_KEY  = 'jarapa_draft_id';
+  var CHECKOUT_KEY = 'jarapa_checkout_url';
 
   function rate(m2) {
     return m2 < 1 ? 150 : m2 <= 3 ? 105 : 95;
@@ -16,8 +17,8 @@
     var productTitle = root.dataset.productTitle || 'Persiana a medida';
     var sectionId    = root.dataset.sectionId;
 
-    var aEl  = document.getElementById('pc-ancho');
-    var lEl  = document.getElementById('pc-largo');
+    var aEl   = document.getElementById('pc-ancho');
+    var lEl   = document.getElementById('pc-largo');
     if (!aEl || !lEl) return;
 
     var errEl = document.getElementById('pc-error');
@@ -103,7 +104,7 @@
       if (spanEl) spanEl.textContent = 'A\xF1adiendo…';
       if (spinEl) spinEl.classList.remove('hidden');
 
-      var draftId = sessionStorage.getItem(DRAFT_KEY) || null;
+      var draftId = localStorage.getItem(STORAGE_KEY);
 
       fetch(workerUrl, {
         method: 'POST',
@@ -114,31 +115,29 @@
           precio:         precio.toFixed(2),
           cantidad:       cantidad,
           titulo:         productTitle,
-          draft_order_id: draftId
+          draft_order_id: draftId || null
         })
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
 
-          sessionStorage.setItem(DRAFT_KEY, String(data.draft_order_id));
+          localStorage.setItem(STORAGE_KEY, data.draft_order_id);
+          localStorage.setItem(CHECKOUT_KEY, data.checkout_url);
 
-          document.dispatchEvent(new CustomEvent('persiana:added', {
-            detail: { checkoutUrl: data.checkout_url, draftOrderId: data.draft_order_id, workerUrl: workerUrl }
-          }));
-
-          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
-          if (spanEl) spanEl.textContent = '✓ A\xF1adida';
+          // Confirmación en el botón
+          if (btn)    { btn.classList.remove('loading'); btn.disabled = false; }
+          if (spanEl) spanEl.textContent = '✓ A\xF1adida al carrito';
           if (spinEl) spinEl.classList.add('hidden');
 
-          aEl.value = ''; lEl.value = '';
-          if (qEl2) qEl2.value = '1';
-          hpEl.value = ''; hmEl.value = '';
-          update();
-
+          // Resetear campos tras 2 s
           setTimeout(function () {
+            aEl.value = '';
+            lEl.value = '';
+            if (qEl2) qEl2.value = '1';
+            update();
             if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
-          }, 3000);
+          }, 2000);
         })
         .catch(function () {
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }

@@ -83,11 +83,11 @@
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
-      },
-      "disabled": true
+      }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "disabled": true,
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
@@ -187,9 +187,9 @@
   },
   "order": [
     "banner",
-    "product-grid",
     "featured_collection_8fdEhq",
     "collection_list_D8zXEQ",
+    "product-grid",
     "rich_text_jhaLJk",
     "multicolumn_DJRLMn"
   ]
