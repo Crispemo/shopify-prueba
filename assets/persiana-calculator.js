@@ -84,17 +84,7 @@
 
     if (!form) return;
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var ancho    = parseFloat(aEl.value);
-      var largo    = parseFloat(lEl.value);
-      var precio   = parseFloat(hpEl.value);
-      var qEl2     = form.querySelector('[name=quantity]');
-      var cantidad = qEl2 ? (parseInt(qEl2.value) || 1) : 1;
-
-      if (!ancho || !largo || !precio) return;
-
+    function proceedWithOrder(ancho, largo, precio, cantidad) {
       var spanEl = btn && btn.querySelector('span');
       var spinEl = btn && btn.querySelector('.loading-overlay__spinner');
 
@@ -102,7 +92,6 @@
       if (spanEl) spanEl.textContent = 'A\xF1adiendo…';
       if (spinEl) spinEl.classList.remove('hidden');
 
-      // Limpiar sessionStorage antiguo del banner
       sessionStorage.removeItem('jarapa_checkout_url');
       sessionStorage.removeItem('jarapa_draft_id');
       sessionStorage.removeItem('jarapa_worker_url');
@@ -140,10 +129,62 @@
             });
         })
         .catch(function () {
-          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
-          if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
-          if (spinEl) spinEl.classList.add('hidden');
+          var spanEl2 = btn && btn.querySelector('span');
+          var spinEl2 = btn && btn.querySelector('.loading-overlay__spinner');
+          if (btn)     { btn.disabled = false; btn.classList.remove('loading'); }
+          if (spanEl2) spanEl2.textContent = 'A\xF1adir al carrito';
+          if (spinEl2) spinEl2.classList.add('hidden');
           alert('Error al procesar el pedido. Por favor, int\xE9ntalo de nuevo.');
+        });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var ancho    = parseFloat(aEl.value);
+      var largo    = parseFloat(lEl.value);
+      var precio   = parseFloat(hpEl.value);
+      var qEl2     = form.querySelector('[name=quantity]');
+      var cantidad = qEl2 ? (parseInt(qEl2.value) || 1) : 1;
+
+      if (!ancho || !largo || !precio) return;
+
+      // Comprobar si el carrito tiene otros artículos
+      fetch('/cart.js')
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          if (cart.item_count > 0) {
+            // Mostrar aviso modal antes de continuar
+            var overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;';
+            var box = document.createElement('div');
+            box.style.cssText = 'background:#fff;border-radius:12px;padding:28px 32px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.2);font-family:inherit;';
+            var n = cart.item_count;
+            var label = n === 1 ? '1 art\xEDculo' : n + ' art\xEDculos';
+            box.innerHTML =
+              '<p style="font-size:1.1rem;font-weight:700;margin:0 0 12px;color:#3a2a1a;">Tienes ' + label + ' en el carrito</p>' +
+              '<p style="font-size:.95rem;color:#555;margin:0 0 24px;line-height:1.5;">La persiana personalizada se gestiona por separado. Al continuar, tu carrito actual se vaciará y te redirigiremos al pago de la persiana.<br><br>Puedes volver después para añadir el resto de productos.</p>' +
+              '<div style="display:flex;gap:12px;justify-content:flex-end;">' +
+                '<button id="jarapa-cancel" style="padding:10px 18px;border:1px solid #ccc;background:#fff;border-radius:6px;cursor:pointer;font-size:.9rem;">Cancelar</button>' +
+                '<button id="jarapa-confirm" style="padding:10px 18px;background:#3a2a1a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.9rem;font-weight:600;">Continuar con la persiana</button>' +
+              '</div>';
+            overlay.appendChild(box);
+            document.body.appendChild(overlay);
+
+            document.getElementById('jarapa-cancel').addEventListener('click', function () {
+              document.body.removeChild(overlay);
+            });
+            document.getElementById('jarapa-confirm').addEventListener('click', function () {
+              document.body.removeChild(overlay);
+              proceedWithOrder(ancho, largo, precio, cantidad);
+            });
+          } else {
+            proceedWithOrder(ancho, largo, precio, cantidad);
+          }
+        })
+        .catch(function () {
+          // Si falla la comprobación del carrito, proceder igualmente
+          proceedWithOrder(ancho, largo, precio, cantidad);
         });
     });
   }
