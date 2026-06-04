@@ -121,10 +121,22 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (!data.checkout_url) throw new Error('sin checkout_url');
-          // Vaciar el carrito normal antes de ir al checkout del Draft Order
+
+          if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
+          if (spanEl) spanEl.textContent = '✓ Persiana a\xF1adida — preparando tu pedido…';
+          if (spinEl) spinEl.classList.add('hidden');
+
+          // Mostrar toast de confirmación
+          var toast = document.createElement('div');
+          toast.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#3a2a1a;color:#fff;padding:14px 24px;border-radius:8px;font-size:1rem;font-weight:600;z-index:99998;box-shadow:0 4px 16px rgba(0,0,0,0.3);text-align:center;';
+          toast.textContent = '📦 Tu persiana est\xE1 lista — redirigiendo al pago…';
+          document.body.appendChild(toast);
+
           fetch('/cart/clear.js', { method: 'POST' })
             .finally(function () {
-              window.location.href = data.checkout_url;
+              setTimeout(function () {
+                window.location.href = data.checkout_url;
+              }, 1500);
             });
         })
         .catch(function () {
