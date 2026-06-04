@@ -125,19 +125,7 @@
           localStorage.setItem(STORAGE_KEY, data.draft_order_id);
           localStorage.setItem(CHECKOUT_KEY, data.checkout_url);
 
-          // Confirmación en el botón
-          if (btn)    { btn.classList.remove('loading'); btn.disabled = false; }
-          if (spanEl) spanEl.textContent = '✓ A\xF1adida al carrito';
-          if (spinEl) spinEl.classList.add('hidden');
-
-          // Resetear campos tras 2 s
-          setTimeout(function () {
-            aEl.value = '';
-            lEl.value = '';
-            if (qEl2) qEl2.value = '1';
-            update();
-            if (spanEl) spanEl.textContent = 'A\xF1adir al carrito';
-          }, 2000);
+          window.location.href = data.checkout_url;
         })
         .catch(function () {
           if (btn)    { btn.disabled = false; btn.classList.remove('loading'); }
