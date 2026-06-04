@@ -11,14 +11,55 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
         "color_scheme": "background-1"
       }
     },
+    "grid-fix-css": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<style>ul#product-grid{display:flex!important;flex-wrap:wrap!important;}ul#product-grid>.grid__item{flex:0 0 calc(25% - 20px)!important;width:calc(25% - 20px)!important;max-width:calc(25% - 20px)!important;margin:10px!important;overflow:hidden!important;box-sizing:border-box!important;}@media screen and (max-width:749px){ul#product-grid>.grid__item{flex:0 0 calc(50% - 20px)!important;width:calc(50% - 20px)!important;max-width:calc(50% - 20px)!important;}}</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "featured_collection_iHdBMV": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "title": "Persianas de esparto hechas a mano",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "persianas",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "disabled": true,
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
@@ -153,17 +194,12 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "grid-fix-css": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<style>ul#product-grid{display:flex!important;flex-wrap:wrap!important;}ul#product-grid>.grid__item{flex:0 0 calc(25% - 20px)!important;width:calc(25% - 20px)!important;max-width:calc(25% - 20px)!important;margin:10px!important;overflow:hidden!important;box-sizing:border-box!important;}@media screen and (max-width:749px){ul#product-grid>.grid__item{flex:0 0 calc(50% - 20px)!important;width:calc(50% - 20px)!important;max-width:calc(50% - 20px)!important;}}</style>"
-      }
     }
   },
   "order": [
     "banner",
     "grid-fix-css",
+    "featured_collection_iHdBMV",
     "product-grid",
     "rich_text_NbhYU6",
     "multicolumn_prbyXC",
