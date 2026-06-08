@@ -41,28 +41,6 @@
         "padding_bottom": 80
       }
     },
-    "pack-verano": {
-      "type": "pack-verano",
-      "settings": {
-        "product_image": "shopify://shop_images/Gemini_Generated_Image_e0b6v8e0b6v8e0b6.png",
-        "image_side": "right",
-        "fallback_color": "#f5ede3",
-        "overlay_opacity": 30,
-        "card_position": "left",
-        "card_opacity": 95,
-        "text_color": "#2b2118",
-        "badge": "Próximamente",
-        "heading": "Pack de Verano Jarapa",
-        "subheading": "Todo lo que necesitas para un verano con estilo natural",
-        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.</p><p>Sé el primero en enterarte cuando esté disponible.</p>",
-        "button_label": "Ver el pack",
-        "button_url": "shopify://products/caja-sorpresa",
-        "button2_label": "",
-        "button2_url": "",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
-    },
     "featured_collection_UkXHjr": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
@@ -136,6 +114,28 @@
         "body": "Todos nuestros productos están elaborados con materiales reciclados o de origen natural, siguiendo procesos tradicionales que minimizan el impacto ambiental.",
         "padding_top": 72,
         "padding_bottom": 72
+      }
+    },
+    "pack-verano": {
+      "type": "pack-verano",
+      "settings": {
+        "product_image": "shopify://shop_images/Gemini_Generated_Image_e0b6v8e0b6v8e0b6.png",
+        "image_side": "right",
+        "fallback_color": "#f5ede3",
+        "overlay_opacity": 30,
+        "card_position": "left",
+        "card_opacity": 95,
+        "text_color": "#2b2118",
+        "badge": "Próximamente",
+        "heading": "Pack de Verano Jarapa",
+        "subheading": "Todo lo que necesitas para un verano con estilo natural",
+        "body": "<p>Estamos preparando algo especial: una selección de productos de esparto y fibras naturales al mejor precio para que tu hogar respire este verano.</p><p>Sé el primero en enterarte cuando esté disponible.</p>",
+        "button_label": "Ver el pack",
+        "button_url": "shopify://products/caja-sorpresa",
+        "button2_label": "",
+        "button2_url": "",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "collection_list_keBbnQ": {
@@ -291,12 +291,12 @@
   "order": [
     "home-hero",
     "persianas-personalizadas",
-    "pack-verano",
     "featured_collection_UkXHjr",
     "home-categorias",
     "home-medio-ambiente",
     "collection_list_keBbnQ",
     "persiana-historia",
+    "pack-verano",
     "home-social"
   ]
 }
